@@ -57,5 +57,6 @@ ml-blog 是基于 Spring Boot + Mybatis 开发的一套开源博客系统。作�
 下载源码，执行 resources 目录下的 ml-blog.sql 文件，然后 application.properties 中连接数据库的用户名、密码以及 lucene 索引生成路径，运行项目即可。
 
 前端访问地址: <http://localhost:8080>
-后台访问地址：<http://localhost:8080/admin>
+
+后台访问地址：<http://localhost:8080/admin> 用户名：admin 密码：123456
 
