@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.extlight.mapper.PostMapper">
+
+    <!-- 通过分类ID获取文章列表 -->
+    <select id="queryPostByCategoryId" resultType="com.extlight.model.Post">
+        SELECT
+        p.id,
+        p.post_url,
+        p.title,
+        p.category_id,
+        p.category_name,
+        p.tags,
+        p.status,
+        p.img_url,
+        p.publish_date,
+        p.create_time
+        FROM
+        t_post p
+        <where>
+            <if test="categoryId != null and categoryId != 0">
+                AND p.category_id = #{categoryId}
+            </if>
+            <if test="status !=null">
+                AND  p.status = #{status}
+            </if>
+            <if test="title !=null">
+                AND p.title LIKE CONCAT('%',#{title},'%')
+            </if>
+        </where>
+        ORDER BY p.create_time DESC
+    </select>
+
+    <!-- 获取文章列表 -->
+    <select id="getList" parameterType="java.lang.Integer" resultType="com.extlight.model.Post">
+        SELECT
+            p.id,
+            p.post_url,
+            p.title,
+            p.sub_content,
+            p.category_id,
+            p.category_name,
+            p.tags,
+            p.img_url,
+            p.create_time
+        FROM
+            t_post p
+        <where>
+            <if test="status !=null">
+                p.status = #{status}
+            </if>
+        </where>
+        ORDER BY p.create_time DESC
+    </select>
+
+    <!-- 归档列表 -->
+    <select id="getArchiveList" resultType="com.extlight.model.Post">
+         SELECT
+            p.id,
+            p.post_url,
+            p.title,
+            p.year,
+            p.month,
+            p.publish_date
+        FROM
+            t_post p
+        WHERE
+            p.status = 1
+        ORDER BY p.publish_date DESC
+    </select>
+
+    <!-- 通过文章 URL 获取文章内容 -->
+    <select id="getByPostUrl" parameterType="java.lang.String" resultType="com.extlight.model.Post">
+        SELECT
+            p.id,
+            p.post_url,
+            p.title,
+            p.content,
+            p.category_name,
+            p.tags,
+            p.status,
+            p.publish_date
+        FROM
+            t_post p
+        WHERE
+            p.post_url = #{postUrl}
+        AND p.status = 1
+    </select>
+
+    <!-- 获取上一篇文章 -->
+    <select id="getPreviousInfo" parameterType="java.lang.Integer" resultType="com.extlight.model.Post">
+        SELECT
+            p.id,
+            p.post_url,
+            p.title,
+            p.img_url
+        FROM
+          t_post p
+        WHERE
+          p.status = 1
+        AND
+          p.id &lt; #{id}
+        ORDER BY
+          p.id DESC LIMIT 1
+    </select>
+
+    <!-- 获取下一篇文章 -->
+    <select id="getNextInfo" parameterType="java.lang.Integer" resultType="com.extlight.model.Post">
+        SELECT
+            p.id,
+            p.post_url,
+            p.title,
+            p.img_url
+        FROM
+          t_post p
+        WHERE
+          p.status = 1
+        AND
+          p.id &gt; #{id}
+        ORDER BY
+          p.id ASC LIMIT 1
+    </select>
+
+    <!-- 通过关键字搜索文章 -->
+    <select id="queryByKeyworld" parameterType="java.lang.String" resultType="com.extlight.model.Post">
+        SELECT
+            p.id,
+            p.post_url,
+            p.title,
+            p.category_name,
+            p.tags,
+            p.publish_date
+        FROM
+          t_post p
+        WHERE
+          p.`status` = 1
+        AND p.title LIKE CONCAT('%',#{keyword},'%')
+    </select>
+
+    <!-- 批量删除 -->
+    <delete id="deleteBatch">
+        DELETE FROM t_post WHERE id IN
+        <foreach collection="idList" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <insert id="insertBatch">
+        INSERT INTO t_post(title,keyword,sub_content,content,status,category_id,category_name,tags,img_url,year,month,day,post_url,publish_date,create_time,update_time)
+        VALUES
+        <foreach collection="postList" item="post" separator=",">
+            (#{post.title},#{post.keyword},#{post.subContent},#{post.content},#{post.status},#{post.categoryId},#{post.categoryName},#{post.tags},#{post.imgUrl},#{post.year},#{post.month},#{post.day},#{post.postUrl},#{post.publishDate},#{post.createTime},#{post.updateTime})
+        </foreach>
+    </insert>
+
+    <insert id="checkInsert" parameterType="com.extlight.model.Post" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_post(title,keyword,sub_content,content,status,category_id,category_name,tags,img_url,year,month,day,post_url,publish_date,create_time,update_time)
+        SELECT #{title},#{keyword},#{subContent},#{content},#{status},#{categoryId},#{categoryName},#{tags},#{imgUrl},#{year},#{month},#{day},#{postUrl},#{publishDate},#{createTime},#{updateTime}
+        FROM dual
+        WHERE NOT EXISTS(
+              SELECT id
+              FROM t_post
+              WHERE title = #{title}
+        )
+</insert>
+</mapper>

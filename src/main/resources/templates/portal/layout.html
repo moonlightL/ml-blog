@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title th:text="${#servletContext.getAttribute('paramMap')['blogName']}">个人博客</title>
+    <meta name="description" th:content="${#servletContext.getAttribute('paramMap')['description']}" />
+    <meta name="keywords" th:content="${#servletContext.getAttribute('paramMap')['keywords']}" />
+    <link th:href="@{/portal/css/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/portal/css/index.css}" media="all" />
+</head>
+
+<body class="home blog custom-background round-avatars" >
+
+<div th:fragment="topMain">
+    <div class="Yarn_Background" style="background-image: url(/portal/images/blog_bg.jpg);"></div>
+    <form class="js-search search-form search-form--modal" method="get" th:action="@{/search/}" role="search">
+        <div class="search-form__inner">
+            <div>
+                <div id="search-container" class="ajax_search">
+                    <div class="filter_container"><input type="text" value="" autocomplete="off" placeholder="输入完成后按回车键" name="keyword" id="search-input" />
+                        <ul id="search_filtered" class="search_filtered"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="navi" data-aos="fade-down">
+        <div class="bt-nav">
+            <div class="line line1"></div>
+            <div class="line line2"></div>
+            <div class="line line3"></div>
+        </div>
+        <div class="navbar animated fadeInRight">
+            <div class="inner">
+                <nav id="site-navigation" class="main-navigation">
+                    <div id="main-menu" class="main-menu-container">
+                        <div class="menu-menu-container">
+                            <ul id="primary-menu" class="menu">
+                                <li id="menu-item-17" th:class="${menu eq 'index' ? 'current_page_item current-menu-item' : ''}">
+                                    <a th:href="@{/}">首页</a>
+                                </li>
+                                <li id="menu-item-252" th:class="${menu eq 'archive' ? 'current_page_item current-menu-item' : ''}">
+                                    <a th:href="@{/archives/}">归档</a>
+                                </li>
+                                <li id="menu-item-78" th:class="${menu eq 'category' ? 'current_page_item current-menu-item' : ''}">
+                                    <a th:href="@{/categories/}">分类</a>
+                                </li>
+                                <li id="menu-item-57" th:class="${menu eq 'guestbook' ? 'current_page_item current-menu-item' : ''}">
+                                    <a th:href="@{/guestbook/}">留言</a>
+                                </li>
+                                <li id="menu-item-59" th:class="${menu eq 'aboutMe' ? 'current_page_item current-menu-item' : ''}">
+                                    <a th:href="@{/about/}">关于我</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!-- #site-navigation -->
+            </div>
+        </div>
+    </div>
+    <div class="hebin" data-aos="fade-down">
+        <i class=" js-toggle-search iconfont">&#xe60e;</i>
+    </div>
+    <header id="masthead" class="overlay animated from-bottom" itemprop="brand">
+        <div class="site-branding text-center">
+            <a href="">
+                <figure>
+                    <img class="custom-logo avatar" th:src="@{/portal/images/omikron.png}" />
+                </figure>
+            </a>
+            <h3 class="blog-description"><p>[[${#servletContext.getAttribute('paramMap')['author']}]]</p></h3>
+        </div>
+        <!-- .site-branding -->
+        <div class="decor-part">
+            <div id="particles-js"></div>
+        </div>
+        <div class="animation-header">
+            <div class="decor-wrapper">
+                <svg id="header-decor" class="decor bottom" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <path class="large left" d="M0 0 L50 50 L0 100" fill="rgba(255,255,255, .1)"></path>
+                    <path class="large right" d="M100 0 L50 50 L100 100" fill="rgba(255,255,255, .1)"></path>
+                    <path class="medium left" d="M0 100 L50 50 L0 33.3" fill="rgba(255,255,255, .3)"></path>
+                    <path class="medium right" d="M100 100 L50 50 L100 33.3" fill="rgba(255,255,255, .3)"></path>
+                    <path class="small left" d="M0 100 L50 50 L0 66.6" fill="rgba(255,255,255, .5)"></path>
+                    <path class="small right" d="M100 100 L50 50 L100 66.6" fill="rgba(255,255,255, .5)"></path>
+                    <path d="M0 99.9 L50 49.9 L100 99.9 L0 99.9" fill="rgba(255,255,255, 1)"></path>
+                    <path d="M48 52 L50 49 L52 52 L48 52" fill="rgba(255,255,255, 1)"></path>
+                </svg>
+            </div>
+        </div>
+    </header>
+</div>
+
+<div id="main" class="content" layout:fragment="content"></div>
+
+<footer id="footer" th:fragment="footer" class="overlay animated from-top">
+    <div class="decor-wrapper">
+        <svg id="footer-decor" class="decor top" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path class="large left" d="M0 0 L50 50 L0 100" fill="rgba(255,255,255, .1)"></path>
+            <path class="large right" d="M100 0 L50 50 L100 100" fill="rgba(255,255,255, .1)"></path>
+            <path class="medium left" d="M0 0 L50 50 L0 66.6" fill="rgba(255,255,255, .3)"></path>
+            <path class="medium right" d="M100 0 L50 50 L100 66.6" fill="rgba(255,255,255, .3)"></path>
+            <path class="small left" d="M0 0 L50 50 L0 33.3" fill="rgba(255,255,255, .5)"></path>
+            <path class="small right" d="M100 0 L50 50 L100 33.3" fill="rgba(255,255,255, .5)"></path>
+            <path d="M0 0 L50 50 L100 0 L0 0" fill="rgba(255,255,255, 1)"></path>
+            <path d="M48 48 L50 51 L52 48 L48 48" fill="rgba(255,255,255, 1)"></path>
+        </svg>
+    </div>
+    <div class="socialize" data-aos="zoom-in">
+        <li th:if="${#servletContext.getAttribute('paramMap')['wb'] != null && #servletContext.getAttribute('paramMap')['wb'] !=''}">
+            <a title="weibo" class="socialicon" th:href="${#servletContext.getAttribute('paramMap')['wb']}" target="_blank"><i class="fa fa-weibo" aria-hidden="true"></i></a>
+        </li>
+        <li class="wechat" th:if="${#servletContext.getAttribute('paramMap')['wx'] != null && #servletContext.getAttribute('paramMap')['wx'] != ''}">
+            <a th:title="${#servletContext.getAttribute('paramMap')['wx']}" class="socialicon" href="javascript:void(0)" target="_blank"><i class="fa fa-weixin" aria-hidden="true"></i></a>
+        </li>
+        <li th:if="${#servletContext.getAttribute('paramMap')['qq'] != null && #servletContext.getAttribute('paramMap')['qq'] != ''}">
+            <a th:title="${#servletContext.getAttribute('paramMap')['qq']}" class="socialicon" href="javascript:void(0)" target="_blank"><i class="fa fa-qq" aria-hidden="true"></i></a>
+        </li>
+        <li th:if="${#servletContext.getAttribute('paramMap')['github'] != null && #servletContext.getAttribute('paramMap')['github'] != ''}">
+            <a title="github" class="socialicon" th:href="@{${#servletContext.getAttribute('paramMap')['github']}}" target="_blank"><i class="fa fa-github-alt" aria-hidden="true"></i></a>
+        </li>
+    </div>
+    <div class="cr" th:if="${#servletContext.getAttribute('paramMap')['powerby'] != null && #servletContext.getAttribute('paramMap')['powerby'] != ''}" th:text="${#servletContext.getAttribute('paramMap')['powerby']}">
+    </div>
+    <br>
+    <div class="cr" th:if="${#servletContext.getAttribute('paramMap')['record'] != null && #servletContext.getAttribute('paramMap')['record'] != ''}">
+        <a href="http://www.miitbeian.gov.cn/" target="_blank" th:text="${#servletContext.getAttribute('paramMap')['record']}"></a>
+    </div>
+    <br>
+    <div class="cr">
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <span id="busuanzi_container_site_pv">
+            <i class="fa fa-user"></i> 本站访客数<span id="busuanzi_value_site_uv"></span>人次
+        </span>&nbsp;&nbsp;
+        <span id="busuanzi_container_site_uv">
+            <i class="fa fa-eye"></i> 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        </span>
+    </div>
+
+    <script type='text/javascript' th:src='@{/portal/js/jquery.min.js}'></script>
+    <script type='text/javascript' th:src='@{/portal/js/plugins.js}'></script>
+    <script type='text/javascript' th:src='@{/portal/js/script.js}'></script>
+    <script type='text/javascript' th:src='@{/portal/js/particles.js}'></script>
+    <script type='text/javascript' th:src='@{/portal/js/aos.js}'></script>
+</footer>
+
+</body>
+
+</html>

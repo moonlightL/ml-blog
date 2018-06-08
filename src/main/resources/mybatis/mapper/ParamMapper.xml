@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.extlight.mapper.ParamMapper">
+
+    <select id="getParamList" parameterType="java.lang.Integer" resultType="com.extlight.model.Param">
+        SELECT
+            p.id,
+            p.param_name,
+            p.param_value,
+            p.descr
+        FROM
+            t_param p
+        WHERE
+            p.type = #{type}
+        ORDER BY p.sort DESC
+    </select>
+
+    <update id="updateByParamName" parameterType="java.util.List">
+        <foreach collection="paramList" item="item" index="index" open="" close="" separator=";">
+            UPDATE t_param
+            <set>
+                param_value = #{item.paramValue}
+            </set>
+            WHERE param_name = #{item.paramName}
+        </foreach>
+    </update>
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.extlight.mapper.CategoryMapper">
+
+    <!-- 通过名称获取分类信息 -->
+    <select id="getByName" parameterType="java.lang.String" resultType="com.extlight.model.Category">
+        SELECT
+            c.id,
+            c.name,
+            c.sort,
+            c.descr,
+            c.img_url
+        FROM
+            t_category c
+        WHERE
+            c.name = #{categoryName}
+    </select>
+
+    <select id="getCategoryList" resultType="java.util.Map">
+        SELECT
+            c.name,
+            c.img_url AS imgUrl,
+            count(p.`status` = 1 or null) AS postCount
+        FROM
+            t_post p
+        INNER JOIN t_category c ON p.category_id = c.id
+        GROUP BY
+            p.category_id
+        ORDER BY
+            c.sort ASC
+    </select>
+</mapper>

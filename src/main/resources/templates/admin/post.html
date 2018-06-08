@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="个人博客">
+    <meta name="author" content="Coderthemes">
+
+    <link rel="shortcut icon" th:href="@{/admin/assets/images/favicon_1.ico}">
+
+    <title>MoonlightL 后台管理界面</title>
+
+    <link th:href="@{/admin/assets/plugins/sweetalert/dist/sweetalert.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/admin/assets/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/admin/assets/css/core.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/admin/assets/css/icons.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/admin/assets/css/components.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/admin/assets/css/pages.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/admin/assets/css/responsive.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/admin/assets/css/animate.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/admin/assets/plugins/waves/waves.min.css}" rel="stylesheet" >
+    <link th:href="@{/admin/assets/plugins/tagsinput/bootstrap-tagsinput.css}" rel="stylesheet">
+    <link th:href="@{/admin/assets/plugins/bootstrap-toggle/css/bootstrap-toggle.css}" rel="stylesheet">
+    <link th:href="@{/admin/assets/plugins/editormd/css/editormd.css}" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js} IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js} doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js}"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js}/1.3.0/respond.min.js}"></script>
+    <![endif]-->
+</head>
+<body>
+    <br>
+    <div class="container">
+        <div class="row animated fadeIn">
+
+            <!-- Left sidebar -->
+            <div class="col-lg-2 col-md-2">
+                <a href="javascript:void(0)" class="btn btn-primary waves-effect waves-light btn-block" id="showBtn">新建 <i class="fa fa-plus"></i></a>
+                <div class="panel panel-default p-0 m-t-20">
+                    <div class="panel-body p-0">
+                        <div class="list-group no-border" id="categoryType"> </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Left sidebar -->
+
+            <!-- Right Sidebar -->
+            <div class="col-lg-10 col-md-10">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="btn-toolbar" role="toolbar">
+                            <div class="btn-group">
+                                <a href="javascript:void(0)" class="btn btn-success waves-effect waves-light btn-block" id="importUIBtn">导入 <i class="fa  fa-download"></i></a>
+                            </div>
+                            <div class="btn-group">
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light btn-block" id="deletesBtn">删除 <i class="fa fa-trash-o"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <input type="text" id="query" class="form-control" name="query" placeholder="标题名(注意分类)">
+                            </div>
+                            <div class="col-md-3">
+                                <a href="javascript:void(0)" class="btn btn-default waves-effect waves-light btn-block" id="queryBtn">查询 <i class="fa  fa-search"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default m-t-20">
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover mails" id="postTable">
+                                <thead>
+                                    <tr>
+                                        <th><div class='checkbox checkbox-primary'><input id='checkboxAll' type='checkbox'><label for='checkboxAll'></label> </div></th>
+                                        <th>标题</th>
+                                        <th>分类</th>
+                                        <th>标签</th>
+                                        <th>状态</th>
+                                        <th>图片</th>
+                                        <th>发布日期</th>
+                                        <th>创建时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+
+                        <hr>
+
+                        <div class="row" id="pageBar"></div>
+
+                    </div> <!-- panel body -->
+                </div> <!-- panel -->
+            </div> <!-- end Col-9 -->
+
+        </div><!-- End row -->
+
+        <div class="row animated zoomIn" style="position: absolute;z-index: 10001;top:0px;left:0px;right:0px;bottom:0px;display: none;" id="saveUI">
+            <div class="col-lg-12">
+                <div class="portlet"><!-- /portlet heading -->
+                    <div class="portlet-heading">
+                        <h3 class="portlet-title text-dark text-uppercase">
+                            文章编辑界面
+                        </h3>
+                        <div class="portlet-widgets">
+                            <a href="javascript:void(0)" data-toggle="remove" data-dismiss="modal"><i class="ion-close-round"></i></a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div id="portlet2" class="panel-collapse collapse in">
+                        <div class="portlet-body">
+                            <div class="row">
+                                <form class="form-horizontal" role="form" id="postForm">
+                                <div class="col-md-12">
+                                    <input type="hidden" id="id" name="id">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="title" class="col-sm-3 control-label">* 标题</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" id="title" name="title" placeholder="标题">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="keyword" class="col-sm-3 control-label">关键字</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" id="keyword" name="keyword" placeholder="关键字">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="categoryId" class="col-sm-3 control-label">* 分类</label>
+                                                <div class="col-sm-6">
+                                                    <select id="categoryId" name="categoryId" class="form-control">
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="tags" class="col-sm-3 control-label">标签</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" id="tags" name="tags" placeholder="标签" data-role="tagsinput" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" id="editorContainer"></div>
+
+                                    <div class="row text-center m-t-30">
+                                        <div class="col-md-2">
+                                            <label class="control-label">是否显示</label>
+                                            <input id="showStatus" name="showStatus" type="checkbox" checked data-toggle="toggle" data-on="是" data-off="否" data-onstyle="success">
+                                        </div>
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-6 text-right">
+                                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">关闭</button>
+                                            <button type="button" class="btn btn-primary waves-effect waves-light" id="submitBtn">保存</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- /Portlet -->
+            </div> <!-- end col -->
+        </div>
+
+        <div id="importUI" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel2">导入界面</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label for="path" class="col-sm-2 control-label">* 文件目录</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" id="path" name="path"  placeholder="文件目录"><br>
+                                    <span>用于解析 hexo 的 md 文件</span>
+                                </div>
+                                <div class="col-sm-3">
+                                    <button type="button" class="btn btn-primary waves-effect waves-light" id="importBtn">导入</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </div>
+
+    <script th:src="@{/admin/assets/js/jquery.min.js}"></script>
+    <script th:src="@{/admin/assets/plugins/editormd/editormd.min.js}"></script>
+    <script th:src="@{/admin/assets/js/bootstrap.min.js}"></script>
+    <script th:src="@{/admin/assets/plugins/tagsinput/bootstrap-tagsinput.min.js}"></script>
+    <script th:src="@{/admin/assets/plugins/waves/waves.min.js}"></script>
+    <script th:src="@{/admin/assets/plugins/sweetalert/dist/sweetalert.min.js}"></script>
+    <script th:src="@{/admin/assets/plugins/bootstrap-toggle/js/bootstrap-toggle.js}"></script>
+    <script th:src='@{/portal/js/layer/layer.js}'></script>
+    <script th:src="@{/admin/js/util.js}"></script>
+    <script th:src="@{/admin/js/post.js}"></script>
+</body>
+</html>

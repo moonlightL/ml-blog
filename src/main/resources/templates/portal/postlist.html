@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorate="~{portal/layout}">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title th:text="${#servletContext.getAttribute('paramMap')['blogName']}">个人博客</title>
+		<meta name="description" th:content="${#servletContext.getAttribute('paramMap')['description']}" />
+		<meta name="keywords" th:content="${#servletContext.getAttribute('paramMap')['keywords']}" />
+	</head>
+
+	<body class="home blog custom-background round-avatars">
+
+		<div id="main" class="content" layout:fragment="content">
+			<div class="container">
+				<section class="post_content" itemscope itemtype="http://schema.org/Article">
+					<header class="post_header">
+						<h1 class="post_title">[[${name}]] (<small>分类</small>)</h1>
+					</header>
+					<div id="archives">
+						<div th:if="${#lists.size(pageInfo.list) > 0}">
+							<div class='archive-title'  th:each="post : ${pageInfo.list}">
+								<div class='archives archives-12'>
+									<div class="brick">
+										<a th:href="@{'/'+${post.postUrl}}"><span class="time">[[${#dates.format(post.createTime, 'yyyy-MM-dd')}]]</span>[[${post.title}]]</a>
+									</div>
+								</div>
+							</div>
+							<nav class="pagination js-pagination">
+								<span th:if="${pageInfo.hasPreviousPage}">
+									<a class="prev page-numbers" th:href="@{${pageInfo.pageNum-1} == 1 ? '/categories/' + ${name} + '/': '/categories/' + ${name} + '/page/' + ${pageInfo.pageNum-1}+'/'}" ><</a>
+								</span>
+								<span th:each="pageNum : ${pageInfo.navigatepageNums}">
+									<span th:if="${pageNum == pageInfo.pageNum}">
+										<a href="javascript:void(0)" th:text="${pageNum}" class="page-numbers current"></a>
+									</span>
+									<span th:if="${pageNum != pageInfo.pageNum}">
+										<a th:href="@{${pageNum} == 1 ? '/categories/' + ${name} + '/': '/categories/' + ${name} + '/page/' + ${pageNum}+'/'}" th:text="${pageNum}" class="page-numbers"></a>
+									</span>
+								</span>
+								<span th:if="${pageInfo.hasNextPage}">
+									<a class="next page-numbers" th:href="@{'/categories/' + ${name} + '/page/' +  ${pageInfo.pageNum+1}+'/'}" >></a>
+								</span>
+							</nav>
+						</div>
+						<div class='archive-title' th:if="${#lists.size(pageInfo.list) == 0}">
+							<div style="text-align:center;">
+								~~该分类还没有发布文章~~
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</body>
+
+</html>

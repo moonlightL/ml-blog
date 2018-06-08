@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.extlight.mapper.GuestbookMapper">
+
+    <select id="getList" parameterType="java.lang.Integer" resultType="com.extlight.model.Guestbook">
+        SELECT
+            g.id,
+            g.nickname,
+            g.img_url,
+            g.content,
+            g.create_time
+        FROM
+            t_guestbook g
+        WHERE
+            g.del_status = #{delStatus}
+        ORDER BY
+            g.create_time ASC
+    </select>
+</mapper>

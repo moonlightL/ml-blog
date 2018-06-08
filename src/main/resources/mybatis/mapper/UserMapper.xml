@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.extlight.mapper.UserMapper">
+
+    <select id="getByUsername" parameterType="java.lang.String" resultType="com.extlight.model.User">
+        SELECT
+            u.id,
+            u.username,
+            u.nickname,
+            u.`password`,
+            u.`status`
+        FROM
+            t_user u
+        WHERE
+            u.username = #{username}
+    </select>
+</mapper>

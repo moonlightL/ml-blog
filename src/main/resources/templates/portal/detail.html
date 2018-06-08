@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorate="~{portal/layout}">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title th:text="${post.title}">个人博客</title>
+		<meta name="description" th:content="${#servletContext.getAttribute('paramMap')['description']}" />
+		<meta name="keywords" th:content="${post.keyword}" />
+		<link th:href="@{/portal/js/highlight/styles/tomorrow.css}" rel="stylesheet" type="text/css">
+		<link th:href="@{/portal/js/toTop/toTop.css}" rel="stylesheet" type="text/css">
+		<link th:href="@{/admin/assets/plugins/editormd/css/editormd.css}" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" th:href="@{/portal/css/detail.css}" />
+		<link th:href="@{/portal/js/autoMenu/jquery.autoMenu.css}" rel="stylesheet" type="text/css">
+	</head>
+
+	<body class="home blog custom-background round-avatars" itemscope itemtype="http://schema.org/Organization">
+		<div id="main" class="content" layout:fragment="content">
+			<div class="container">
+				<article id="post-1202" class="js-gallery post-1202 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized tag-11 tag-22 tag-29">
+					<section class="post_content">
+						<header class="post_header" th:style="'text-align:center'">
+							<h1 class="post_title">[[${post.title}]]</h1>
+							<span th:id="${'/' + post.postUrl}" th:data-flag-title="${post.title}" class="leancloud_visitors" style="color:#6b6969"> <i class="fa fa-calendar-o"></i> 发表于 [[${#dates.format(post.publishDate,'yyyy-MM-dd')}]] &nbsp;|&nbsp; <i class="fa fa-folder-o"></i> 分类于 [[${post.categoryName}]] <span th:if="${#strings.isEmpty(#servletContext.getAttribute('paramMap')['leancloud_app_id']) eq false}">&nbsp;|&nbsp; <i class="fa fa-eye"></i> 阅读次数:<span class="leancloud-visitors-count"></span></span> </span>
+						</header>
+						<div class="markdown-body editormd-preview-container" th:utext="${md.md2html(post.content)}"></div>
+						<ul class="copyright-declare">
+							<li>
+								<strong>本文作者:</strong> [[${#servletContext.getAttribute('paramMap')['author']}]]
+							</li>
+							<li>
+								<strong>本文链接:</strong> <a th:href="@{${#servletContext.getAttribute('paramMap')['homePage']} + '/'+${post.postUrl}}" target="_blank" th:text="${#servletContext.getAttribute('paramMap')['homePage']+'/'+post.postUrl}"></a>
+							</li>
+							<li>
+								<strong>版权声明:</strong>  本博客所有文章除特别声明外均为原创，采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请在文章开头明显位置注明原文链接和作者等相关信息，明确指出修改（如有），并通过 E-mail 等方式告知，谢谢合作！
+							</li>
+						</ul>
+						<div class="meta split split--responsive cf">
+							<div class="split__title">
+								<time datetime="${#dates.format(post.createTime,'yyyy/MM/dd')}">[[${#dates.format(post.publishDate,'yyyy/MM/dd')}]]</time>
+								<span class=""><a href="" rel="tag">[[${post.tags}]]</a></span>
+							</div>
+
+							<div class="autoMenu" id="autoMenu" data-autoMenu> </div>
+
+							<!--<div id="social-share"><span class="entypo-share"><i class="iconfont">&#xe614;</i>分享</span></div>-->
+						</div>
+					</section>
+				</article>
+			</div>
+			<svg id="upTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
+				<path d="M0 0 L50 100 L100 0 Z"></path>
+			</svg>
+			<div id="social">
+				<ul>
+					<li>
+						<a href="" title="qzone" target="_blank"><i class="iconfont">&#xe67f;</i></a>
+					</li>
+					<li>
+						<a href="" title="weibo" target="_blank"><i class="iconfont">&#xe680;</i></a>
+					</li>
+					<li>
+						<a href="" title="douban" target="_blank"><i class="iconfont">&#xe681;</i></a>
+					</li>
+					<li>
+						<a href="" title="twitter" target="_blank"><i class="iconfont">&#xe683;</i></a>
+					</li>
+				</ul>
+			</div>
+			<div id="panel" th:if="${#strings.isEmpty(#servletContext.getAttribute('paramMap')['changyan_app_id']) eq false}">
+				<div class="comment-area">
+					<div id="cyEmoji" th:sid="${post.postUrl}" role="cylabs" data-use="emoji" style="width:60%"></div>
+					<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+					<script type="text/javascript" charset="utf-8" th:src="@{'https://changyan.sohu.com/js/changyan.labs.https.js?appid='+${#servletContext.getAttribute('paramMap')['changyan_app_id']}}"></script>
+					<div id="SOHUCS" th:sid="${post.postUrl}" style="width:60%"></div>
+					<script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
+					<script type="text/javascript" th:inline="javascript">
+						var appid = [[${#servletContext.getAttribute('paramMap')['changyan_app_id']}]];
+						var conf = [[${#servletContext.getAttribute('paramMap')['changyan_app_key']}]];
+                        window.changyan.api.config({appid: appid,conf: conf});
+					</script>
+				</div>
+			</div>
+			<svg id="dwTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
+				<path d="M0 0 L50 100 L100 0 Z"></path>
+			</svg>
+			<div class="wrapper">
+			</div>
+			<!--<div class="p-header">-->
+				<!--<figure class="p-image" th:style="'background-image:url('+ @{/portal/images/blog_bg.jpg}+');'"></figure>-->
+			<!--</div>-->
+			<div class="navpost-part">
+				<div id="NextPrevPosts">
+					<div class="prev" data-aos="slide-right" data-aos-delay="1.5s" th:if="${previous!=null}">
+						<div class="arrow"><i class="iconfont">&#xe625;</i></div>
+						<div class="preview">
+							<div class="pull-left featuredImg" th:style="'background-image:url(/portal/images/' + ${previous.imgUrl } + ');'"></div>
+							<a class="pull-left preview-content bold" th:href="${'/' + previous.postUrl}"><span>《[[${previous.title}]]》</span></a>
+						</div>
+					</div>
+					<div class="next" data-aos="slide-left" data-aos-delay="1.5s" th:if="${next!=null}">
+						<div class="arrow"><i class="iconfont">&#xe623;</i></div>
+						<div class="preview">
+							<div class="pull-right featuredImg" th:style="'background-image:url(/portal/images/' + ${next.imgUrl } +');'"></div>
+							<a class="pull-right preview-content bold" th:href="${'/' + next.postUrl}"><span>《[[${next.title}]]》</span></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<a href="#0" class="cd-top">返回顶部</a>
+			<script type="text/javascript">
+                window.onscroll = function() {
+                    var scrollTop = document.body.scrollTop;
+                    if(scrollTop >= 200) {
+                        document.getElementById("NextPrevPosts").style.display = "none"
+                    } else {
+                        document.getElementById("NextPrevPosts").style.display = "block"
+                    }
+                }
+			</script>
+			<script type='text/javascript' th:src="@{/portal/js/jquery.min.js}"></script>
+			<script type='text/javascript' th:src="@{/portal/js/autoMenu/jquery.autoMenu.js}"></script>
+			<script type='text/javascript' th:src="@{/portal/js/toTop/toTop.js}"></script>
+			<script type='text/javascript' th:src="@{/portal/js/highlight/highlight.pack.js}"></script>
+			<script>hljs.initHighlightingOnLoad();</script>
+			<div th:if="${#strings.isEmpty(#servletContext.getAttribute('paramMap')['leancloud_app_id']) eq false}">
+				<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+				<script th:inline="javascript">
+                    var appId = [[${#servletContext.getAttribute('paramMap')['leancloud_app_id']}]];
+                    var appKey = [[${#servletContext.getAttribute('paramMap')['leancloud_app_key']}]]
+                    AV.initialize(appId,appKey);
+				</script>
+				<script type='text/javascript' th:src="@{/portal/js/detail.js}"></script>
+			</div>
+		</div>
+
+	</body>
+
+</html>

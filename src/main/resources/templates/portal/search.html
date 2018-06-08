@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorate="~{portal/layout}">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title th:text="${#servletContext.getAttribute('paramMap')['blogName']}">个人博客</title>
+    <meta name="description" th:content="${#servletContext.getAttribute('paramMap')['description']}" />
+    <meta name="keywords" th:content="${#servletContext.getAttribute('paramMap')['keywords']}" />
+</head>
+
+<body class="home blog custom-background round-avatars">
+<div id="main" class="content" layout:fragment="content">
+
+    <div class="container">
+
+        <h1 class="page-title">以&ldquo;[[${keyword}]]&rdquo;为关键字</h1>
+
+        <p class="Searchmeta">查询共计 [[${#lists.size(postList)}]] 篇文章</p>
+
+        <div class="location">当前位置：
+            <a href="/">首页</a> &raquo; 搜索结果 :
+        </div>
+
+        <div class="posts-list js-posts">
+
+            <div class="archive-post" th:each="post : ${postList}">
+
+                <div class="type">
+                    <div class="mask"><i class="iconfont">&#xe603;</i></div>
+                </div>
+
+                <h2 class="archive-title">
+
+					<span>
+
+					<a th:href="@{'/'+${post.postUrl}}" th:utext="${post.title}"></a>
+
+					</span>
+
+                    <div class="post-time">[[${#dates.format(post.publishDate, 'yyyy/MM/dd')}]]</div>
+
+                </h2>
+
+                <div class="post-category">
+                    <a th:href="@{'/categories/'+${post.categoryName}+'/'}" rel="category tag">[[${post.categoryName}]]</a>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="mt+">
+            <div class="pagination js-pagination">
+
+                <div class="js-next pagination__load"></div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+
+</html>

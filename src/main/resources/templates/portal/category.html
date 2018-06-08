@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorate="~{portal/layout}">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title th:text="${#servletContext.getAttribute('paramMap')['blogName']}">个人博客</title>
+		<meta name="description" th:content="${#servletContext.getAttribute('paramMap')['description']}" />
+		<meta name="keywords" th:content="${#servletContext.getAttribute('paramMap')['keywords']}" />
+		<style>
+			body.custom-background {
+				background: #fff
+			}
+
+			.container {
+				padding: 10px 0px;
+			}
+		</style>
+	</head>
+
+	<body class="home blog custom-background round-avatars">
+		<div id="main" class="content" layout:fragment="content">
+			<div class="container">
+				<section class="post_content">
+					<header class="post_header">
+						<h1 class="post_title">分类</h1>
+					</header>
+					<div class="links">
+						<div class="catalog-description"></div>
+						<div class="catalog-share">[[${#lists.size(categoryList)}]]个分类</div>
+						<div class="userItems">
+							<div class="userItem" th:each="category: ${categoryList}">
+								<div class="userItem--inner">
+									<div class="userItem-content"><img alt='' th:src='${category.imgUrl}' class='avatar avatar-64 photo' height='64' width='64' />
+										<div class="userItem-name">
+											<a class="link link--primary" th:href="@{'/categories/'+${category.name}+'/'}" >[[${category.name}]]<span>([[${category.postCount}]])</span></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div th:if="${#lists.size(categoryList) == 0}" th:style="'text-align:center;'" th:text="'~~作者偷懒，没有创建分类栏目~~'"></div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</body>
+
+</html>

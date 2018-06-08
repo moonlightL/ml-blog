@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorate="~{portal/layout}">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title th:text="${#servletContext.getAttribute('paramMap')['blogName']}">个人博客</title>
+		<meta name="description" th:content="${#servletContext.getAttribute('paramMap')['description']}" />
+		<meta name="keywords" th:content="${#servletContext.getAttribute('paramMap')['keywords']}" />
+		<style>
+			body.custom-background {
+				background: #fff
+			}
+
+			.container {
+				padding: 10px 0px;
+			}
+		</style>
+	</head>
+
+	<body class="home blog custom-background round-avatars">
+		<div id="main" class="content" layout:fragment="content">
+			<div class="container">
+				<section class="post_content">
+					<header class="post_header">
+						<h1 class="post_title" style="text-align: center">错误</h1>
+					</header>
+					<div class="links">
+						<div class="catalog-description"></div>
+						<div style="text-align: center">
+							~~[[${msg}]]~~
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</body>
+
+</html>

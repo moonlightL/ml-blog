@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorate="~{portal/layout}">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>个人博客</title>
+		<meta name="description" th:content="${#servletContext.getAttribute('paramMap')['description']}" />
+		<meta name="keywords" th:content="${#servletContext.getAttribute('paramMap')['keywords']}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/portal/css/detail.css}" />
+	</head>
+
+	<body class="home blog custom-background round-avatars" itemscope itemtype="http://schema.org/Organization">
+		<div id="main" class="content" layout:fragment="content">
+			<div class="container">
+				<article id="post-1202" class="js-gallery post-1202 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized tag-11 tag-22 tag-29">
+					<section class="post_content">
+						<header class="post_header" th:style="'text-align:center'">
+							<h1 class="post_title">关于我</h1>
+						</header>
+						<div th:if="${#strings.isEmpty(aboutMe) eq false}" class="markdown-body editormd-preview-container" th:utext="${md.md2html(aboutMe.content)}"></div>
+						<div th:if="${#strings.isEmpty(aboutMe)}" th:style="'text-align:center;'" th:text="'~~作者偷懒，没有自我介绍~~'"></div>
+					</section>
+				</article>
+			</div>
+			<svg id="upTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
+				<path d="M0 0 L50 100 L100 0 Z"></path>
+			</svg>
+			<div id="social">
+				<ul>
+					<li>
+						<a href="" title="qzone" target="_blank"><i class="iconfont">&#xe67f;</i></a>
+					</li>
+					<li>
+						<a href="" title="weibo" target="_blank"><i class="iconfont">&#xe680;</i></a>
+					</li>
+					<li>
+						<a href="" title="douban" target="_blank"><i class="iconfont">&#xe681;</i></a>
+					</li>
+					<li>
+						<a href="" title="twitter" target="_blank"><i class="iconfont">&#xe683;</i></a>
+					</li>
+				</ul>
+			</div>
+			<div id="panel">
+				<div class="comment-area">
+
+				</div>
+			</div>
+			<svg id="dwTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
+				<path d="M0 0 L50 100 L100 0 Z"></path>
+			</svg>
+			<div class="wrapper">
+			</div>
+		</div>
+
+	</body>
+
+</html>

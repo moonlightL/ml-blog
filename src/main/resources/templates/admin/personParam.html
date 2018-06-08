@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="个人博客">
+    <meta name="author" content="Coderthemes">
+
+    <link rel="shortcut icon" th:href="@{/admin/assets/images/favicon_1.ico}">
+
+    <title>MoonlightL 后台管理界面</title>
+    <link th:href="@{/admin/assets/plugins/sweetalert/dist/sweetalert.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/admin/assets/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/admin/assets/css/core.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/admin/assets/css/components.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/admin/assets/css/responsive.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/admin/assets/css/animate.css}" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js} IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js} doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js}"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js}/1.3.0/respond.min.js}"></script>
+    <![endif]-->
+
+</head>
+<body>
+<br>
+<div class="container">
+    <div class="row animated fadeIn">
+        <div class="col-lg-6">
+            <form class="form-horizontal" role="form" id="characterForm">
+            <div class="panel panel-color panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">个性设置</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="qq">QQ</label>
+                            <div class="col-md-10">
+                                <input type="text" id="qq" name="qq" class="form-control" placeholder="QQ号码">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="wx">微信号</label>
+                            <div class="col-md-10">
+                                <input type="text" id="wx" name="wx" class="form-control" placeholder="微信号">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="email">邮箱地址</label>
+                            <div class="col-md-10">
+                                <input type="email" id="email" name="email" class="form-control" placeholder="邮箱地址">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="github">GitHub</label>
+                            <div class="col-md-10">
+                                <input type="text" id="github" name="github" class="form-control" placeholder="GitHub">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="wb">微博</label>
+                            <div class="col-md-10">
+                                <input type="text" id="wb" name="wb" class="form-control" placeholder="微博">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-default waves-effect">重置</button>
+                        <button type="button" class="btn btn-primary waves-effect waves-light submit">保存
+                        </button>
+                    </div>
+
+            </div>
+            </form>
+        </div>
+        <div class="col-lg-6">
+                <div class="panel panel-color panel-primary" id="fileForm">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">第三方工具</h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="nav nav-tabs navtab-bg">
+                            <li class="active">
+                                <a href="#qiniu" data-toggle="tab" aria-expanded="false">
+                                    <span class="visible-xs"><i class="fa fa-home"></i></span>
+                                    <span class="hidden-xs">七牛云(文件上传)</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#changyan" data-toggle="tab" aria-expanded="true">
+                                    <span class="visible-xs"><i class="fa fa-user"></i></span>
+                                    <span class="hidden-xs">畅言(评论)</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#geetest" data-toggle="tab" aria-expanded="true">
+                                    <span class="visible-xs"><i class="fa fa-user"></i></span>
+                                    <span class="hidden-xs">极验(人机验证)</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#leancloud" data-toggle="tab" aria-expanded="true">
+                                    <span class="visible-xs"><i class="fa fa-user"></i></span>
+                                    <span class="hidden-xs">Leancloud(统计)</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="qiniu">
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label" for="qn_domain">域名</label>
+                                        <div class="col-md-10">
+                                            <input type="text" id="qn_domain" name="qn_domain" class="form-control" placeholder="域名">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label" for="qn_accessKey">AccessKey</label>
+                                        <div class="col-md-10">
+                                            <input type="text" id="qn_accessKey" name="qn_accessKey" class="form-control"
+                                                   placeholder="AccessKey">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label" for="qn_secretKey">SecretKey</label>
+                                        <div class="col-md-10">
+                                            <input type="text" id="qn_secretKey" name="qn_secretKey" class="form-control"
+                                                   placeholder="SecretKey">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label" for="qn_bucket">bucket</label>
+                                        <div class="col-md-10">
+                                            <input type="email" id="qn_bucket" name="qn_bucket" class="form-control" placeholder="bucket">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="reset" class="btn btn-default waves-effect">重置</button>
+                                        <button type="button" class="btn btn-primary waves-effect waves-light submit">保存 </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="changyan">
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label" for="changyan_app_id">App Id</label>
+                                        <div class="col-md-10">
+                                            <input type="text" id="changyan_app_id" name="changyan_app_id" class="form-control" placeholder="App Id">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label" for="changyan_app_key">App Key</label>
+                                        <div class="col-md-10">
+                                            <input type="text" id="changyan_app_key" name="changyan_app_key" class="form-control" placeholder="App Key">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="reset" class="btn btn-default waves-effect">重置</button>
+                                        <button type="button" class="btn btn-primary waves-effect waves-light submit">保存 </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="geetest">
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label" for="geetest_id">Geetest Id</label>
+                                        <div class="col-md-10">
+                                            <input type="text" id="geetest_id" name="geetest_id" class="form-control" placeholder="Geetest Id">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label" for="geetest_key">Geetest Key</label>
+                                        <div class="col-md-10">
+                                            <input type="text" id="geetest_key" name="geetest_key" class="form-control" placeholder="Geetest Key">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="reset" class="btn btn-default waves-effect">重置</button>
+                                        <button type="button" class="btn btn-primary waves-effect waves-light submit">保存 </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="leancloud">
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label" for="leancloud_app_id">App Id</label>
+                                        <div class="col-md-10">
+                                            <input type="text" id="leancloud_app_id" name="leancloud_app_id" class="form-control" placeholder="App Id">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label" for="leancloud_app_key">App Key</label>
+                                        <div class="col-md-10">
+                                            <input type="text" id="leancloud_app_key" name="leancloud_app_key" class="form-control" placeholder="App Key">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="reset" class="btn btn-default waves-effect">重置</button>
+                                        <button type="button" class="btn btn-primary waves-effect waves-light submit">保存 </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/admin/assets/js/jquery.min.js}"></script>
+<script th:src="@{/admin/assets/js/bootstrap.min.js}"></script>
+<script th:src="@{/admin/assets/plugins/sweetalert/dist/sweetalert.min.js}"></script>
+<script th:src="@{/admin/js/util.js}"></script>
+<script th:src="@{/admin/js/personParam.js}"></script>
+</body>
+</html>

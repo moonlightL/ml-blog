@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta name="description" content="个人博客">
+        <meta name="author" content="Coderthemes">
+
+        <link rel="shortcut icon" th:href="@{/admin/assets/images/favicon_1.ico}">
+
+        <title>MoonlightL 后台管理界面</title>
+
+        <link th:href="@{/admin/assets/plugins/sweetalert/dist/sweetalert.css}" rel="stylesheet" type="text/css">
+
+        <link th:href="@{/admin/assets/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+        <link th:href="@{/admin/assets/css/core.css}" rel="stylesheet" type="text/css">
+        <link th:href="@{/admin/assets/css/icons.css}" rel="stylesheet" type="text/css">
+        <link th:href="@{/admin/assets/css/components.css}" rel="stylesheet" type="text/css">
+        <link th:href="@{/admin/assets/css/pages.css}" rel="stylesheet" type="text/css">
+        <link th:href="@{/admin/assets/css/menu.css}" rel="stylesheet" type="text/css">
+        <link th:href="@{/admin/assets/css/responsive.css}" rel="stylesheet" type="text/css">
+        <link th:href="@{/admin/css/index.css}" rel="stylesheet" type="text/css">
+        <link th:href="@{/admin/assets/plugins/waves/waves.min.css}" rel="stylesheet" >
+        <script th:src="@{/admin/assets/js/modernizr.min.js}"></script>
+
+        <!-- HTML5 Shim and Respond.js} IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js} doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js}"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js}/1.3.0/respond.min.js}"></script>
+        <![endif]-->
+        
+    </head>
+
+
+    <body class="fixed-left">
+        
+        <!-- Begin page -->
+        <div id="wrapper">
+        
+            <!-- Top Bar Start -->
+            <div class="topbar">
+                <!-- LOGO -->
+                <div class="topbar-left">
+                    <div class="text-center">
+                        <a href="javascript:void(0)" class="logo"><i class="md md-terrain"></i> <span> </span></a>
+                    </div>
+                </div>
+                <!-- Button mobile view to collapse sidebar menu -->
+                <div class="navbar navbar-default" role="navigation">
+                    <div class="container">
+                        <div class="">
+                            <div class="pull-left">
+                                <button class="button-menu-mobile open-left">
+                                    <i class="fa fa-bars"></i>
+                                </button>
+                                <span class="clearfix"></span>
+                            </div>
+
+                            <ul class="nav navbar-nav navbar-right pull-right">
+                                <li class="hidden-xs">
+                                    <a href="#" id="btn-fullscreen" class="waves-effect"><i class="md md-crop-free"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img th:src="@{/admin/assets/images/users/avatar-1.jpg}" alt="user-img" class="img-circle"> </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="javascript:void(0)"><i class="md md-face-unlock"></i> 基本资料</a></li>
+                                        <li><a href="javascript:void(0)" id="resetPwdBtn"><i class="md md-settings"></i> 修改密码</a></li>
+                                        <li><a href="javascript:void(0)" id="logoutBtn"><i class="md md-settings-power"></i> 注销</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--/.nav-collapse -->
+                    </div>
+                </div>
+            </div>
+            <!-- Top Bar End -->
+            <div id="saveUI" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title" id="myModalLabel">修改密码界面</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal" role="form" id="updateForm">
+                                <input type="hidden" id="id" name="id">
+                                <div class="form-group">
+                                    <label for="oldpwd" class="col-sm-3 control-label">* 旧密码</label>
+                                    <div class="col-sm-9">
+                                        <input type="password" class="form-control" id="oldpwd" name="oldpwd"  placeholder="旧密码">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newpwd" class="col-sm-3 control-label">* 新密码</label>
+                                    <div class="col-sm-9">
+                                        <input type="password" class="form-control" id="newpwd" name="newpwd"  placeholder="新密码">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirmpwd" class="col-sm-3 control-label">* 确认密码</label>
+                                    <div class="col-sm-9">
+                                        <input type="password" class="form-control" id="confirmpwd" name="confirmpwd"  placeholder="确认密码">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary waves-effect waves-light" id="submitBtn">保存</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+            <!-- ========== Left Sidebar Start ========== -->
+
+            <div class="left side-menu">
+                <div class="sidebar-inner slimscrollleft">
+                    <div class="user-details">
+                        <div class="pull-left">
+                            <img th:src="@{/admin/assets/images/users/avatar-1.jpg}" alt="" class="thumb-md img-circle">
+                        </div>
+                        <div class="user-info">
+                            <div class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" th:if="${#session.getAttribute('loginUser') != null}"> [[${#session.getAttribute('loginUser').username}]]</a>
+                            </div>
+                            
+                            <p class="text-muted m-0" th:if="${#session.getAttribute('loginUser') != null}">[[${#session.getAttribute('loginUser').nickname}]]</p>
+                        </div>
+                    </div>
+                    <!--- Divider -->
+                    <div id="sidebar-menu">
+                        <ul>
+                            <!--<li>-->
+                                <!--<a href="#iframe_home" class="waves-effect waves-light active"><i class="md md-home"></i><span> 首页 </span></a>-->
+                            <!--</li>-->
+
+                            <li class="has_sub">
+                                <a href="#" class="waves-effect waves-light"><i class="md md-mail"></i><span> 基础管理 </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a id="post" href="javascript:Tab.addTab('文章列表', '/admin/post','post');">文章列表</a></li>
+                                    <li><a id="category" href="javascript:Tab.addTab('分类列表', '/admin/category','category');">分类列表</a></li>
+                                    <li><a id="guestbook" href="javascript:Tab.addTab('留言列表', '/admin/guestbook','guestbook');">留言列表</a></li>
+                                    <li><a id="aboutMe" href="javascript:Tab.addTab('关于我', '/admin/aboutMe','aboutMe');">关于我</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="has_sub">
+                                <a href="#" class="waves-effect waves-light"><i class="md  md-settings"></i> <span> 参数管理 </span> <span class="pull-right"><i class="md md-add"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a id="commonParam" href="javascript:Tab.addTab('全局参数', '/admin/commonParam','commonParam');">全局参数</a></li>
+                                    <li><a id="personParam" href="javascript:Tab.addTab('个人参数', '/admin/personParam','personParam');">个人参数</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="has_sub">
+                                <a href="#" class="waves-effect waves-light"><i class="md  md-brightness-high"></i> <span> 系统管理 </span> <span class="pull-right"><i class="md md-add"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a id="druid" href="javascript:Tab.addTab('SQL监控', '/druid','druid');">SQL监控</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <!-- Left Sidebar End --> 
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->                      
+            <div class="content-page">
+                <!-- Start content -->
+                <div class="content">
+                    <div class="content_tab">
+                        <div class="tab_left">
+                            <a class="waves-effect waves-light" href="javascript:;"><i class="zmdi zmdi-chevron-left"></i></a>
+                        </div>
+                        <div class="tab_right">
+                            <a class="waves-effect waves-light" href="javascript:;"><i class="zmdi zmdi-chevron-right"></i></a>
+                        </div>
+                        <ul id="tabs" class="tabs">
+                            <li id="tab_home" data-index="home" data-closeable="false" class="cur">
+                                <a class="waves-effect waves-light">首页</a>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                    <div class="content_main" >
+                        <div id="iframe_home" class="iframe cur">
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-lg-3">
+                                    <div class="mini-stat clearfix bx-shadow bg-info">
+                                        <span class="mini-stat-icon"><i class="ion-document-text"></i></span>
+                                        <div class="mini-stat-info text-right">
+                                            <span class="counter" id="postCount">-</span>
+                                            发布文章数
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-lg-3">
+                                    <div class="mini-stat clearfix bg-purple bx-shadow">
+                                        <span class="mini-stat-icon"><i class="ion-folder"></i></span>
+                                        <div class="mini-stat-info text-right">
+                                            <span class="counter" id="categoryCount">-</span>
+                                            分类数
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6 col-lg-3">
+                                    <div class="mini-stat clearfix bg-success bx-shadow">
+                                        <span class="mini-stat-icon"><i class="ion-pricetags"></i></span>
+                                        <div class="mini-stat-info text-right">
+                                            <span class="counter" id="tagCount">-</span>
+                                            标签数
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6 col-lg-3">
+                                    <div class="mini-stat clearfix bg-primary bx-shadow">
+                                        <span class="mini-stat-icon"><i class="ion-ios7-chatboxes-outline"></i></span>
+                                        <div class="mini-stat-info text-right">
+                                            <span class="counter" id="guestbookCount">-</span>
+                                            留言数
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="portlet"><!-- /portlet heading -->
+                                        <div class="portlet-heading bg-primary">
+                                            <h3 class="portlet-title text-uppercase">
+                                                系统参数
+                                            </h3>
+                                            <div class="portlet-widgets">
+                                                <a data-toggle="collapse" data-parent="#accordion1" href="#portlet1"><i class="ion-minus-round"></i></a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div id="portlet1" class="panel-collapse collapse in">
+                                            <div class="portlet-body">
+                                                <div class="row">
+                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-hover" id="paramTable">
+                                                                <tbody></tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> <!-- /Portlet -->
+                                </div> <!-- end col -->
+
+                                <div class="col-lg-4">
+                                    <div class="portlet"><!-- /portlet heading -->
+                                        <div class="portlet-heading bg-purple">
+                                            <h3 class="portlet-title text-uppercase">
+                                                操作日志
+                                            </h3>
+                                            <div class="portlet-widgets">
+                                                <a data-toggle="collapse" data-parent="#accordion1" href="#portlet2"><i class="ion-minus-round"></i></a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div id="portlet2" class="panel-collapse collapse in">
+                                            <div class="portlet-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="inbox-widget nicescroll mx-box" id="logContainer"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> <!-- /Portlet -->
+                                </div> <!-- end col -->
+                            </div> <!-- End row -->
+
+                        </div>
+                    </div>
+
+                    </div>
+
+                </div> <!-- content -->
+
+            </div>
+            
+            <footer class="footer text-right">
+               [[${#servletContext.getAttribute('paramMap')['powerby']}]]
+            </footer>
+
+        </div>
+        <!-- END wrapper -->
+
+        <script>
+            var resizefunc = [];
+        </script>
+
+        <!-- jQuery  -->
+        <script th:src="@{/admin/assets/js/jquery.min.js}"></script>
+        <script th:src="@{/admin/assets/js/bootstrap.min.js}"></script>
+        <script th:src="@{/admin/assets/js/detect.js}"></script>
+        <script th:src="@{/admin/assets/js/fastclick.js}"></script>
+        <script th:src="@{/admin/assets/js/jquery.slimscroll.js}"></script>
+        <script th:src="@{/admin/assets/js/jquery.blockUI.js}"></script>
+        <script th:src="@{/admin/assets/js/wow.min.js}"></script>
+        <script th:src="@{/admin/assets/js/jquery.nicescroll.js}"></script>
+        <script th:src="@{/admin/assets/js/jquery.scrollTo.min.js}"></script>
+        <script th:src="@{/admin/assets/js/jquery.app.js}"></script>
+        <script th:src="@{/admin/assets/plugins/waves/waves.min.js}"></script>
+        <script th:src="@{/admin/assets/plugins/sweetalert/dist/sweetalert.min.js}"></script>
+        <script th:src="@{/admin/assets/plugins/BootstrapMenu.min.js}"></script>
+        <script th:src="@{/admin/js/common.js}"></script>
+        <script th:src="@{/admin/js/util.js}"></script>
+        <script th:src="@{/admin/js/index.js}"></script>
+    
+    </body>
+</html>
