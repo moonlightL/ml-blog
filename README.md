@@ -1,5 +1,5 @@
 # ml-blog
-ml-blog 是基于 Spring Boot + Mybatis 开发的一套开源博客系统。作者之前使用 hexo 搭建博客网址，但是没有后台管理界面，管理文章比较麻烦，因此 ml-blog 就诞生了。
+ml-blog 是基于 Spring Boot + Mybatis + Mysql 开发的一套开源博客系统。作者之前使用 hexo 搭建博客网址，但是没有后台管理界面，管理文章比较麻烦，因此 ml-blog 就诞生了。
 
 演示站点：<https://www.extlight.com>
 
@@ -29,7 +29,7 @@ ml-blog 是基于 Spring Boot + Mybatis 开发的一套开源博客系统。作�
 * 代码修饰：highlight
 * 统计访问：不蒜子
 
-# 第三方
+## 第三方
 
 * 七牛云（文件上传）
 * Geetest（人机验证）
