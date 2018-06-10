@@ -32,7 +32,7 @@ public class CategoryController {
     public Result list(@PathVariable Integer pageNum) {
         try {
             List<Category> list = this.categoryService.getPyPage(pageNum, PageConstant.PAGE_SIZE);
-            return Result.success(new PageInfo<>(list));
+            return Result.success(new PageInfo<>(list,10));
         } catch (Exception e) {
             throw  new GlobalException(500,e.getMessage());
         }

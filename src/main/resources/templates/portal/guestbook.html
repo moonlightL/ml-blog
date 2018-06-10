@@ -30,31 +30,12 @@
             </section>
         </article>
     </div>
-    <svg id="upTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
-        <path d="M0 0 L50 100 L100 0 Z"></path>
-    </svg>
-    <div id="social">
-        <ul>
-            <li>
-                <a href="" title="qzone" target="_blank"><i class="iconfont">&#xe67f;</i></a>
-            </li>
-            <li>
-                <a href="" title="weibo" target="_blank"><i class="iconfont">&#xe680;</i></a>
-            </li>
-            <li>
-                <a href="" title="douban" target="_blank"><i class="iconfont">&#xe681;</i></a>
-            </li>
-            <li>
-                <a href="" title="twitter" target="_blank"><i class="iconfont">&#xe683;</i></a>
-            </li>
-        </ul>
-    </div>
     <div id="panel">
         <div class="comment-area">
             <section class="comments">
                 <div class="comments-main">
                     <div id="comments-list-title">
-                        <span>[[${#lists.size(pageInfo.list)}]]</span> 条评论
+                        <span>[[${pageInfo.total}]]</span> 条评论
                         <span style="float: right"><input type="button" class="button" id="guestbookBtn" value="留言" /></span>
                     </div>
                     <div id="loading-comments">
@@ -89,11 +70,11 @@
                                 </div>
                             </div>
                         </li>
-                        <li th:if="${#lists.size(pageInfo.list) == 0}" th:style="'text-align:center;'" th:text="'~~暂无数据，抢先留言吧~~'"></li>
+                        <li th:if="${pageInfo.size == 0}" th:style="'text-align:center;'" th:text="'~~暂无数据，抢先留言吧~~'"></li>
                     </ul>
-                    <div class="pagination">
+                    <div class="pagination" th:if="${pageInfo.size > 0}">
                         <span th:if="${pageInfo.hasPreviousPage}">
-							<a class="prev page-numbers" th:href="@{${pageInfo.pageNum-1} == 1? '/guestbook/' : '/guestbook/page/' + ${pageInfo.pageNum-1}+'/'}" ><strong><</strong></a>
+							<a class="prev page-numbers" th:href="@{${pageInfo.pageNum-1} == 1? '/guestbook/' : '/guestbook/page/' + ${pageInfo.pageNum-1}+'/'}" ><strong>←</strong></a>
 						</span>
                         <span th:each="pageNum : ${pageInfo.navigatepageNums}">
 							<span th:if="${pageNum == pageInfo.pageNum}">
@@ -104,16 +85,13 @@
 							</span>
 						</span>
                         <span th:if="${pageInfo.hasNextPage}">
-							<a class="next page-numbers" th:href="@{'/guestbook/page/' + ${pageInfo.pageNum+1}+'/'}" ><strong>></strong></a>
+							<a class="next page-numbers" th:href="@{'/guestbook/page/' + ${pageInfo.pageNum+1}+'/'}" ><strong>→</strong></a>
 						</span>
                     </div>
                 </div>
             </section>
         </div>
     </div>
-    <svg id="dwTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
-        <path d="M0 0 L50 100 L100 0 Z"></path>
-    </svg>
     <div class="wrapper">
     </div>
     <script type='text/javascript' th:src='@{/portal/js/jquery.min.js}'></script>

@@ -27,7 +27,7 @@ var postManager = {
                         htmlArr.push("<td>"+post.categoryName+"</td>");
                         htmlArr.push("<td>"+(post.tags || '')+"</td>");
                         htmlArr.push("<td>"+(post.status == 1 ? '显示' : '隐藏')+"</td>");
-                        htmlArr.push("<td><img src='/portal/images/"+post.imgUrl+"' width='30' height='30' alt=''></td> ");
+                        htmlArr.push("<td><img src='/portal/images/random/"+post.imgUrl+"' width='30' height='30' alt=''></td> ");
                         htmlArr.push("<td>"+(post.publishDate || '')+"</td>");
                         htmlArr.push("<td>"+post.createTime+"</td>");
                         htmlArr.push("<td class='actions'><button type='button' class='btn btn-info waves-effect m-b-5 edit' data-id='"+post.id+"'>编辑</button>");

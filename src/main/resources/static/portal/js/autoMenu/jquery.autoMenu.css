@@ -25,8 +25,8 @@ a:focus{outline:none;}
 /*-------main---------*/
 .autoMenu{
 	position: fixed;
-	bottom: 3%;
-	right: 5%;
+	bottom: 80px;
+	left: 42px;
 	z-index: 3;
 	text-align: left;
 }
@@ -54,7 +54,9 @@ a:focus{outline:none;}
     width: 40px;
     height: 40px;
     text-decoration: none;
-    position: relative;
+	position: fixed;
+	bottom: 30px;
+	left: 35px;
 }
 .icon-plus-sign{
 	display: inline-block;

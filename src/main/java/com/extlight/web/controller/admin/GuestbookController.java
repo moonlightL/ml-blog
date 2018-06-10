@@ -28,7 +28,7 @@ public class GuestbookController {
 
         try {
             List<Guestbook> list = this.guestbookService.getPyPage(pageNum, PageConstant.PAGE_SIZE);
-            return Result.success(new PageInfo<>(list));
+            return Result.success(new PageInfo<>(list,10));
         } catch (Exception e) {
             throw new GlobalException(500,e.getMessage());
         }

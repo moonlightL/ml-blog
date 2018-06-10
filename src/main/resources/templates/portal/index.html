@@ -12,18 +12,13 @@
 	<body class="home blog custom-background round-avatars" >
 		<div id="main" class="content" layout:fragment="content">
 			<div class="container">
-				<article itemscope="itemscope">
+				<article itemscope="itemscope" th:if="${pageInfo.size > 0}">
 					<div class="posts-list js-posts">
 						<div class="post post-layout-list" data-aos="fade-up" th:each="post : ${pageInfo.list}">
 							<div class="postnormal review leancloud_visitors" th:id="'/' + ${post.postUrl}">
 								<div class="post-container review-item">
 									<div class="row review-item-wrapper">
-										<div class="col-sm-3">
-											<a rel="nofollow" href="#">
-												<div class="review-item-img" th:style="'background-image: url(/portal/images/'+${post.imgUrl}+');'"></div>
-											</a>
-										</div>
-										<div class="col-sm-9 flex-xs-middle">
+										<div class="col-sm-12 flex-xs-middle">
 											<div class="review-item-title">
 												<a th:href="@{'/' + ${post.postUrl}}"  rel="bookmark">[[${post.title}]]</a>
 											</div>
@@ -32,24 +27,22 @@
 										</div>
 									</div>
 									<div class="review-bg-wrapper">
-										<div class="bg-blur" th:style="'background-image: url(/portal/images/'+${post.imgUrl}+');'"></div>
+										<div class="bg-blur" th:style="'background-image: url(/portal/images/random/'+${post.imgUrl}+');'"></div>
 									</div>
 								</div>
 								<div class="post-container">
 									<div class="entry-content">[[${post.subContent}]]</div>
 									<div class="post-footer">
 										<a class="gaz-btn primary" th:href="@{'/' + ${post.postUrl}}">阅读全文</a>
-										<span class="total-comments-on-post pull-right"><a th:href="@{'/categories/'+ ${post.categoryName}+'/'}" style="color:#d3dae2;"> [[${post.categoryName}]]</a></span>
+										<span class="total-comments-on-post pull-right"><a th:href="@{'/categories/'+ ${post.categoryName}+'/'}" style="color:#b7c6d7;"> [[${post.categoryName}]]</a></span>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<!-- post-formats end Infinite Scroll star -->
-					<!-- post-formats -->
 					<nav class="pagination js-pagination">
 						<span th:if="${pageInfo.hasPreviousPage}">
-							<a class="prev page-numbers" th:href="@{${pageInfo.pageNum-1} == 1 ? '/' : '/page/' + ${pageInfo.pageNum-1}+'/'}" ><strong><</strong></a>
+							<a class="prev page-numbers" th:href="@{${pageInfo.pageNum-1} == 1 ? '/' : '/page/' + ${pageInfo.pageNum-1}+'/'}" ><strong>←</strong></a>
 						</span>
 						<span th:each="pageNum : ${pageInfo.navigatepageNums}">
 							<span th:if="${pageNum == pageInfo.pageNum}">
@@ -60,10 +53,11 @@
 							</span>
 						</span>
 						<span th:if="${pageInfo.hasNextPage}">
-							<a class="next page-numbers" th:href="@{'/page/' + ${pageInfo.pageNum+1}+'/'}" ><strong>></strong></a>
+							<a class="next page-numbers" th:href="@{'/page/' + ${pageInfo.pageNum+1}+'/'}" ><strong>→</strong></a>
 						</span>
 					</nav>
 				</article>
+				<div th:if="${pageInfo.size == 0}" th:style="'text-align:center;'" th:text="'~~找不到数据~~'"></div>
 			</div>
 			<div th:if="${#strings.isEmpty(#servletContext.getAttribute('paramMap')['leancloud_app_id']) eq false}">
 				<script type='text/javascript' th:src="@{/portal/js/jquery.min.js}"></script>

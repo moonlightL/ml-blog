@@ -91,7 +91,17 @@ var guestbook = {
             if (resp.code == 200) {
                 window.location.reload(true);
             } else {
-                swal("留言失败", resp.msg,"error");
+                swal({
+                    title: "留言失败",
+                    text: resp.msg,
+                    type: "error",
+                    showCancelButton: false,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                },
+                function(){
+                    window.location.reload(true);
+                });
             }
         });
     },

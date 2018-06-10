@@ -1281,7 +1281,7 @@ input[type="search"]::-webkit-search-decoration {
 
 .container {
 	position: relative;
-	background: #fff;
+	background: #fafafa;
 	padding: 60px 0 20px
 }
 
@@ -1583,13 +1583,14 @@ input[type="search"]::-webkit-search-decoration {
 
 .postnormal.review {
 	border-radius: 0 0 6px 6px;
-	box-shadow: 1px 1px 58px 1px #eee;
+	box-shadow: 1px 1px 58px 1px #e1dede;
 }
 
 .postnormal.review:hover {
 	box-shadow: 1px 1px 40px 1px #ccc;
-	transition: all .5s;
+        transition: all 1s;
 }
+
 
 .postnormal.review .review-item {
 	position: relative;
@@ -1615,7 +1616,8 @@ input[type="search"]::-webkit-search-decoration {
 .postnormal.review .review-item .review-item-wrapper {
 	position: relative;
 	z-index: 1;
-	color: white
+	color: #fff;
+	padding: 20px 20px 0px 20px;
 }
 
 .row {
@@ -1641,7 +1643,7 @@ input[type="search"]::-webkit-search-decoration {
 }
 
 .review-item-title {
-	font-size: 20px;
+	font-size: 26px;
 	font-weight: 700;
 	text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1)
 }
@@ -1678,8 +1680,8 @@ input[type="search"]::-webkit-search-decoration {
 	z-index: 0;
 	background-size: cover;
 	border-radius: 6px;
-	-webkit-filter: blur(5px);
-	filter: blur(5px);
+	/*-webkit-filter: blur(5px);
+	filter: blur(5px);*/
 	-webkit-transform: scale(1.2);
 	transform: scale(1.2);
 	-o-object-fit: cover;
@@ -1687,17 +1689,17 @@ input[type="search"]::-webkit-search-decoration {
 	pointer-events: none
 }
 
-.bg-blur:after {
-	content: "";
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	z-index: 1;
-	top: 0;
-	left: 0;
-	background: -webkit-linear-gradient(top, rgba(105, 105, 105, 0.1) 0%, #fff 85%);
-	background: linear-gradient(to bottom, rgba(105, 105, 105, 0.1) 0%, #fff 85%)
-}
+/*.bg-blur:after {*/
+	/*content: "";*/
+	/*position: absolute;*/
+	/*width: 100%;*/
+	/*height: 100%;*/
+	/*z-index: 1;*/
+	/*top: 0;*/
+	/*left: 0;*/
+	/*background: -webkit-linear-gradient(top, rgba(105, 105, 105, 0.1) 0%, #fff 85%);*/
+	/*background: linear-gradient(to bottom, rgba(105, 105, 105, 0.1) 0%, #fff 85%)*/
+/*}*/
 
 .bg {
 	width: 100%;
@@ -2199,6 +2201,10 @@ h1.post_title {
 	max-width: 800px;
 }
 
+.location a {
+	color: #000;
+}
+
 .type i {
 	position: absolute;
 	border-radius: 50%;
@@ -2272,7 +2278,7 @@ h2.archive-title span:after {
 	position: absolute;
 	top: 0;
 	right: 0;
-	background-color: #fff;
+	background-color: #fafafa;
 	padding-left: 10px
 }
 
@@ -2339,7 +2345,7 @@ h2.archive-title span:after {
 	position: relative;
 	display: block;
 	text-align: center;
-	/*width: 300px;*/
+	width: 800px;
 	margin: 0 auto
 }
 
@@ -2363,16 +2369,19 @@ h2.archive-title span:after {
 
 .page-numbers {
 	display: inline-block;
-	padding: 0 10px;
+	padding: 0 5px;
 	color: #666
 }
 
 .pagination a {
-	margin: 5px;
+	margin: 0px 5px;
+	min-width: 30px;
+	height: 30px;
+	line-height: 30px;
 }
 
 .pagination a:hover {
-	background: rgba(0, 0, 0, 0.6);
+	background: #8d9cac;
 	color: #fff;
 	border-radius: 50%;
 	min-width: 30px;
@@ -2382,7 +2391,7 @@ h2.archive-title span:after {
 
 .page-numbers.current {
 	border-radius: 50%;
-	background: #EBEBEB;
+	background: #8d9cac;
 	min-width: 30px;
 	height: 30px;
 	line-height: 30px;
@@ -3136,13 +3145,13 @@ nav#comments-navi {
 	padding: 0;
 	margin-right: 20px;
 	/*text-transform: uppercase;*/
-	color: #888;
-	background: #eee;
+	color: #fff;
+	background: #b7c6d7;
 	border-radius: 4px
 }
 
 .comment-respond input[type=button]:hover {
-	background: rgba(0, 0, 0, 0.6);
+	background: #8d9cac;
 	color: #fff
 }
 
@@ -4216,8 +4225,8 @@ nav#comments-navi {
 }
 
 .userItem-content:hover {
-	box-shadow: 1px 1px 10px 1px #ccc;
-	transition: .5s all;
+	box-shadow: 0px 1px 10px 1px #ccc;
+        transition: .5s all;
 }
 
 .userItem-content .avatar {
@@ -6116,13 +6125,13 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
 .statusicon,
 .red .mediain,
 .gaz-btn.primary {
-	background: #e1e7ec;
+	background: #b7c6d7;
 }
 
 .statusicon,
 .red .mediain,
 .gaz-btn.primary:hover {
-	background: #d3dae2;
+	background: #8d9cac;
 }
 
 .red .pointyTip,
@@ -6133,10 +6142,13 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
 a,
 #error,
 .navbar ul li.current-menu-ancestor>a,
-.navbar ul li.current-menu-item>a,
 .pagination i,
 .page-numbers.current {
-	color: #7c92ad;
+	color: #fff;
+}
+
+.navbar ul li.current-menu-item>a {
+	color: #8d9cac;
 }
 
 .posts-list a:hover,
@@ -6325,14 +6337,14 @@ input[type=button] {
 	height: 40px;
 	line-height: 20px;
 	padding: 0;
-	color: #888;
-	background: #eee;
+	color: #fff;
+	background: #b7c6d7;
 	border-radius: 4px;
 	font-size: 16px;
 	cursor: pointer;
 }
 
 input[type=button]:hover {
-	background: rgba(0, 0, 0, 0.6);
+	background: #8d9cac;
 	color: #fff;
 }

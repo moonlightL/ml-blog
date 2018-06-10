@@ -25,6 +25,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
+
 @CacheConfig(cacheNames = "postCache")
 @Service
 public class PostServiceImpl extends BaseServiceImpl<Post> implements PostService {
@@ -49,7 +50,7 @@ public class PostServiceImpl extends BaseServiceImpl<Post> implements PostServic
 
         Category category = this.categoryService.getById(post.getCategoryId());
         if (category == null) {
-            throw new GlobalException(400,"该分类不存在");
+            throw new GlobalException(400, "该分类不存在");
         }
 
         Date now = new Date();
@@ -57,17 +58,18 @@ public class PostServiceImpl extends BaseServiceImpl<Post> implements PostServic
         String[] dates = dateStr.split("-");
 
         post.setPublishDate(now)
-            .setImgUrl((new Random().nextInt(5)+1) + ".jpg")
-            .setYear(dates[0])
-            .setMonth(dates[1])
-            .setDay(dates[2])
-            .setCategoryName(category.getName())
-            .setPostUrl(post.getYear() + "/" + post.getMonth() + "/" + post.getDay() + "/" + post.getTitle().replace(" ","-") + "/");
+                .setImgUrl("material-" + (new Random().nextInt(30) + 1) + ".jpg")
+                .setYear(dates[0])
+                .setMonth(dates[1])
+                .setDay(dates[2])
+                .setCategoryName(category.getName())
+                .setPostUrl(post.getYear() + "/" + post.getMonth() + "/" + post.getDay() + "/" + post.getTitle().replace(" ", "-") + "/");
 
         this.postMapper.insert(post);
 
         // 加索引
         this.luceneService.add(post);
+        // 清理缓存
         CacheUtil.deleteAll();
     }
 
@@ -76,20 +78,21 @@ public class PostServiceImpl extends BaseServiceImpl<Post> implements PostServic
     public void update(Post post) throws GlobalException {
         Category category = this.categoryService.getById(post.getCategoryId());
         if (category == null) {
-            throw new GlobalException(400,"该分类不存在");
+            throw new GlobalException(400, "该分类不存在");
         }
 
         Post dbPost = this.postMapper.selectByPrimaryKey(post.getId());
 
         // 修改名字同时必须修改 postUrl
-        post.setPostUrl(dbPost.getYear() + "/" + dbPost.getMonth() + "/" + dbPost.getDay() + "/" + post.getTitle().replace(" ","-") + "/")
-            .setCategoryName(category.getName())
-            .setPublishDate(dbPost.getPublishDate());
+        post.setPostUrl(dbPost.getYear() + "/" + dbPost.getMonth() + "/" + dbPost.getDay() + "/" + post.getTitle().replace(" ", "-") + "/")
+                .setCategoryName(category.getName())
+                .setPublishDate(dbPost.getPublishDate());
 
         this.postMapper.updateByPrimaryKeySelective(post);
 
         // 修改索引
         this.luceneService.update(post);
+        // 清理缓存
         CacheUtil.deleteAll();
     }
 
@@ -100,58 +103,31 @@ public class PostServiceImpl extends BaseServiceImpl<Post> implements PostServic
 
         // 删除索引
         this.luceneService.delete(id);
+        // 清理缓存
         CacheUtil.deleteAll();
     }
 
 
     @Override
     public List<Post> getPyCategoryId(Integer categoryId, Integer pageNum, Integer pageSize, String title) throws GlobalException {
-        PageHelper.startPage(pageNum,pageSize);
-        List<Post> list = this.postMapper.queryPostByCategoryId(categoryId,null, title);
+        PageHelper.startPage(pageNum, pageSize);
+        List<Post> list = this.postMapper.queryPostByCategoryId(categoryId, null, title);
         return list;
     }
 
     @Cacheable(key = "'page:' + #pageNum")
     @Override
-    public List<Post> getListPyPage(Integer status,Integer pageNum, Integer pageSize) throws GlobalException{
-        PageHelper.startPage(pageNum,pageSize);
+    public List<Post> getListPyPage(Integer status, Integer pageNum, Integer pageSize) throws GlobalException {
+        PageHelper.startPage(pageNum, pageSize);
         return this.postMapper.getList(status);
     }
 
     @Cacheable(key = "'archive:list'")
     @Override
-    public Map<String, Object> getArchiveList() throws GlobalException {
-
-        Map<String,Object> result = new HashMap<>(2);
-
+    public List<Post> getArchiveList() throws GlobalException {
         // 获取显示状态的文章
         List<Post> postList = this.postMapper.getArchiveList();
-        // 通过日期分组
-        Map<String, List<PostVo>> map = new LinkedHashMap<>();
-        PostVo postVo;
-        for (Post post : postList) {
-            postVo = new PostVo();
-            postVo.setId(post.getId())
-                  .setTitle(post.getTitle())
-                  .setPublishDate(post.getPublishDate())
-                  .setPostUrl(post.getPostUrl());
-
-            String key = post.getYear() + "-" + post.getMonth();
-
-            if (map.containsKey(key)) {
-                map.get(key).add(postVo);
-            } else {
-                List<PostVo> list = new ArrayList<>();
-                list.add(postVo);
-                map.put(key,list);
-            }
-
-        }
-
-        result.put("archiveMap",map);
-        result.put("count",postList.size());
-
-        return result;
+        return postList;
     }
 
     @Cacheable(key = "'post:list' + #categoryName + ':' + #pageNum")
@@ -163,8 +139,8 @@ public class PostServiceImpl extends BaseServiceImpl<Post> implements PostServic
             return null;
         }
 
-        PageHelper.startPage(pageNum,pageSize);
-        List<Post> list = this.postMapper.queryPostByCategoryId(category.getId(),1, null);
+        PageHelper.startPage(pageNum, pageSize);
+        List<Post> list = this.postMapper.queryPostByCategoryId(category.getId(), 1, null);
 
         return list;
     }
@@ -227,22 +203,23 @@ public class PostServiceImpl extends BaseServiceImpl<Post> implements PostServic
         }
         // 批量删除
         this.postMapper.deleteBatch(idList);
-
+        // 清理缓存
+        CacheUtil.deleteAll();
     }
 
     @Override
     public void importFiles(String path) throws GlobalException {
         File dir = new File(path);
         if (!dir.isDirectory()) {
-            throw new GlobalException(400,"不是文件目录");
+            throw new GlobalException(400, "不是文件目录");
         }
 
         File[] files = dir.listFiles(pathname -> pathname.getName().endsWith("md"));
-        
-        if(files.length == 0) {
-            throw new GlobalException(400,"没有可导入的 Markdown 文件");
+
+        if (files.length == 0) {
+            throw new GlobalException(400, "没有可导入的 Markdown 文件");
         }
-        
+
         List<Post> postList = packageToList(files);
 
 //        this.postMapper.insertBatch(postList);
@@ -253,7 +230,8 @@ public class PostServiceImpl extends BaseServiceImpl<Post> implements PostServic
             // 加索引
             this.luceneService.add(post);
         }
-
+        // 清理缓存
+        CacheUtil.deleteAll();
     }
 
     private List<Post> packageToList(File[] files) {
@@ -272,13 +250,13 @@ public class PostServiceImpl extends BaseServiceImpl<Post> implements PostServic
 
                 StringBuilder sb = new StringBuilder();
                 String content;
-                while((content = br.readLine()) != null) {
+                while ((content = br.readLine()) != null) {
                     sb.append(content).append("\r\n");
                 }
 
                 post = new Post();
                 post.setTitle(titleStr.substring(titleStr.indexOf(":") + 1).trim())
-                    .setContent(sb.toString());
+                        .setContent(sb.toString());
 
                 String categoryName = categoryNameStr.substring(categoryNameStr.indexOf(":") + 1).trim();
                 if (StringUtils.isEmpty(categoryName)) {
@@ -299,23 +277,23 @@ public class PostServiceImpl extends BaseServiceImpl<Post> implements PostServic
 
                 String tags = tagsStr.substring(tagsStr.indexOf(":") + 1).trim();
                 if (!StringUtils.isEmpty(tags)) {
-                    tags = tags.replace("[","").replace("]","");
+                    tags = tags.replace("[", "").replace("]", "");
                 }
                 post.setStatus(1)
-                    .setImgUrl((new Random().nextInt(5) + 1) + ".jpg")
-                    .setTags(tags);
+                        .setImgUrl("material-" + (new Random().nextInt(30) + 1) + ".jpg")
+                        .setTags(tags);
 
                 Date date = DateUtil.parseToDate(createTimeStr.substring(createTimeStr.indexOf(":") + 1).trim(), "yyyy-MM-dd HH:mm:ss");
                 post.setPublishDate(date)
-                    .setCreateTime(date)
-                    .setUpdateTime(date);
+                        .setCreateTime(date)
+                        .setUpdateTime(date);
 
                 String dateStr = DateUtil.formateToStr(date, "yyyy-MM-dd");
                 String[] dates = dateStr.split("-");
                 post.setYear(dates[0])
-                    .setMonth(dates[1])
-                    .setDay(dates[2])
-                    .setPostUrl(post.getYear() + "/" + post.getMonth() + "/" + post.getDay() + "/" + post.getTitle().replace(" ","-") + "/");
+                        .setMonth(dates[1])
+                        .setDay(dates[2])
+                        .setPostUrl(post.getYear() + "/" + post.getMonth() + "/" + post.getDay() + "/" + post.getTitle().replace(" ", "-") + "/");
 
                 postList.add(post);
             } catch (Exception e) {

@@ -46,7 +46,7 @@
                 var height = typeof opts.height === 'number' && opts.height;
                 var padding = typeof opts.padding === 'number' && opts.padding;
                 that.$element.width(width+padding*2);
-                var html = '<ul style="height: '+ height +'px;padding:' + padding + 'px">';
+                var html = '<ul style="height: '+ height +'px;padding:' + padding + 'px;display: none">';
                 var num = 0;
                 $('*').each(function(){
                     var _this = $(this);
@@ -63,7 +63,7 @@
                     }
                 })
                 html += '</ul><a href="javascript:void(0);" class="btn-box">'
-                            +'<span class="icon-minus-sign"></span>'
+                            +'<span class="icon-plus-sign"></span>'
                         +'</a>';
                 return html;
             },
@@ -113,7 +113,6 @@
                         $(this).find('span').removeClass('icon-plus-sign').addClass('icon-minus-sign');
                         _this.$element.find('ul').fadeIn();
                     }
-
                 })
             }
 

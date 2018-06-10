@@ -5,7 +5,6 @@ import com.extlight.model.Post;
 import com.extlight.web.exception.GlobalException;
 
 import java.util.List;
-import java.util.Map;
 
 public interface PostService extends BaseService<Post> {
 
@@ -33,7 +32,7 @@ public interface PostService extends BaseService<Post> {
      * 归档列表
      * @return
      */
-    Map<String,Object> getArchiveList() throws GlobalException;
+    List<Post> getArchiveList() throws GlobalException;
 
     /**
      * 通过分类获取文章列表
@@ -96,4 +95,5 @@ public interface PostService extends BaseService<Post> {
      * @param path 文件目录
      */
     void importFiles(String path) throws GlobalException;
+
 }

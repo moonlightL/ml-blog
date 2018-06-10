@@ -1,12 +1,13 @@
 <!doctype html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorate="~{portal/layout}">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="~{portal/layout}">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title th:text="${#servletContext.getAttribute('paramMap')['blogName']}">个人博客</title>
-    <meta name="description" th:content="${#servletContext.getAttribute('paramMap')['description']}" />
-    <meta name="keywords" th:content="${#servletContext.getAttribute('paramMap')['keywords']}" />
+    <meta name="description" th:content="${#servletContext.getAttribute('paramMap')['description']}"/>
+    <meta name="keywords" th:content="${#servletContext.getAttribute('paramMap')['keywords']}"/>
 </head>
 
 <body class="home blog custom-background round-avatars">
@@ -16,44 +17,50 @@
 
         <h1 class="page-title">以&ldquo;[[${keyword}]]&rdquo;为关键字</h1>
 
-        <p class="Searchmeta">查询共计 [[${#lists.size(postList)}]] 篇文章</p>
+        <p class="Searchmeta">查询共计 [[${pageInfo.total}]] 篇文章</p>
 
         <div class="location">当前位置：
             <a href="/">首页</a> &raquo; 搜索结果 :
         </div>
 
-        <div class="posts-list js-posts">
-
-            <div class="archive-post" th:each="post : ${postList}">
-
+        <div class="posts-list js-posts" th:if="${#lists.isEmpty(pageInfo.data) eq false}">
+            <div class="archive-post" th:each="post : ${pageInfo.data}">
                 <div class="type">
-                    <div class="mask"><i class="iconfont">&#xe603;</i></div>
+                    <div class="mask"><i class="fa fa-file-text-o"></i></div>
                 </div>
-
                 <h2 class="archive-title">
-
 					<span>
-
-					<a th:href="@{'/'+${post.postUrl}}" th:utext="${post.title}"></a>
-
+					    <a th:href="@{'/'+${post.postUrl}}" th:utext="${post.title}"></a>
 					</span>
-
                     <div class="post-time">[[${#dates.format(post.publishDate, 'yyyy/MM/dd')}]]</div>
-
                 </h2>
-
                 <div class="post-category">
                     <a th:href="@{'/categories/'+${post.categoryName}+'/'}" rel="category tag">[[${post.categoryName}]]</a>
                 </div>
-
             </div>
-
+            <br>
+            <nav class="pagination js-pagination" th:if="${#lists.isEmpty(pageInfo.data) eq false}">
+                <span th:if="${pageInfo.hasPreviousPage}">
+                    <a class="prev page-numbers" th:href="@{${pageInfo.pageNum-1} == 1 ? '/search/?keyword='+ ${keyword} : '/search/page/' + ${pageInfo.pageNum-1}+'/?keyword='+${keyword}}" ><strong>←</strong></a>
+                </span>
+                <span th:each="pageNum : ${pageInfo.navigatepageNums}">
+                    <span th:if="${pageNum == pageInfo.pageNum}">
+                        <a href="javascript:void(0)" th:text="${pageNum}" class="page-numbers current"></a>
+                    </span>
+                    <span th:if="${pageNum != pageInfo.pageNum}">
+                        <a th:href="@{${pageNum} == 1 ? '/search/?keyword='+ ${keyword} : '/search/page/' + ${pageNum}+'/?keyword='+ ${keyword}}" th:text="${pageNum}" class="page-numbers"></a>
+                    </span>
+                </span>
+                <span th:if="${pageInfo.hasNextPage}">
+                    <a class="next page-numbers" th:href="@{'/search/page/' + ${pageInfo.pageNum+1}+'/?keyword='+ ${keyword}}" ><strong>→</strong></a>
+                </span>
+            </nav>
         </div>
+        <br>
+        <div th:if="${#lists.isEmpty(pageInfo.data)}" th:style="'text-align:center;'">~~找不到数据~~</div>
         <div class="mt+">
             <div class="pagination js-pagination">
-
                 <div class="js-next pagination__load"></div>
-
             </div>
         </div>
 

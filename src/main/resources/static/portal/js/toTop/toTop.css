@@ -17,6 +17,7 @@
     -moz-transition: opacity .3s 0s, visibility 0s .3s;
     transition: opacity .3s 0s, visibility 0s .3s;
     z-index: 9999;
+    border-radius: 50%;
 }
 
 .cd-top:hover {
@@ -57,6 +58,6 @@
         height: 60px;
         width: 60px;
         right: 30px;
-        bottom: 5px;
+        bottom: 30px;
     }
 }

@@ -2,6 +2,7 @@ package com.extlight.component;
 
 import com.chenlb.mmseg4j.analysis.ComplexAnalyzer;
 import com.extlight.common.utils.DateUtil;
+import com.extlight.common.vo.PageVo;
 import com.extlight.model.Post;
 import com.extlight.web.exception.GlobalException;
 import org.apache.lucene.analysis.Analyzer;
@@ -177,6 +178,56 @@ public class LuceneService {
                 }
             }
             return list;
+        } catch (Exception e) {
+            throw new GlobalException(500, e.toString());
+        }
+    }
+
+    public PageVo queryByPage(String keyword, int pageNum, int pageSize) throws GlobalException {
+
+        try {
+            IndexSearcher searcher = this.getIndexSearcher();
+            Analyzer analyzer = new ComplexAnalyzer();
+
+            String[] fields = {"title"};// 使用多域查询，便于以后扩展
+            MultiFieldQueryParser multiFieldQueryParser = new MultiFieldQueryParser(fields, analyzer);
+            Query query = multiFieldQueryParser.parse(keyword);
+
+            TopDocs topDocs = searcher.search(query, 100);
+
+            // 1.格式化对象，设置前缀和后缀
+            Formatter formatter = new SimpleHTMLFormatter("<font color='red'>","</font>");
+            // 2.关键词对象
+            Scorer scorer = new QueryScorer(query);
+            // 3. 高亮对象
+            Highlighter highlighter = new Highlighter(formatter, scorer);
+
+            List<Post> list = new ArrayList<>();
+            Post post;
+            ScoreDoc[] scoreDocs = topDocs.scoreDocs;
+
+            if (scoreDocs.length == 0) {
+                return new PageVo(pageNum,pageSize,scoreDocs.length,null);
+            }
+
+            int start = (pageNum - 1) * pageSize;
+            int end = (int) Math.min(start + pageSize,topDocs.totalHits);
+
+            for(int i=start; i<end; i++) {
+                Document document = searcher.doc(scoreDocs[i].doc);
+                if (Integer.parseInt(document.get("status")) == 1) {
+                    post = new Post();
+                    String titleHighLight  = highlighter.getBestFragment(analyzer,"title",document.get("title"));
+                    post.setId(Integer.parseInt(document.get("postId")))
+                            .setTitle(titleHighLight)
+                            .setPostUrl(document.get("postUrl"))
+                            .setCategoryName(document.get("categoryName"))
+                            .setPublishDate(DateUtil.parseToDate(document.get("publishDate"), "yyyy-MM-dd"));
+                    list.add(post);
+                }
+            }
+
+            return new PageVo(pageNum,pageSize,scoreDocs.length,list);
         } catch (Exception e) {
             throw new GlobalException(500, e.toString());
         }

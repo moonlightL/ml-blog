@@ -23,7 +23,7 @@
 							<h1 class="post_title">[[${post.title}]]</h1>
 							<span th:id="${'/' + post.postUrl}" th:data-flag-title="${post.title}" class="leancloud_visitors" style="color:#6b6969"> <i class="fa fa-calendar-o"></i> 发表于 [[${#dates.format(post.publishDate,'yyyy-MM-dd')}]] &nbsp;|&nbsp; <i class="fa fa-folder-o"></i> 分类于 [[${post.categoryName}]] <span th:if="${#strings.isEmpty(#servletContext.getAttribute('paramMap')['leancloud_app_id']) eq false}">&nbsp;|&nbsp; <i class="fa fa-eye"></i> 阅读次数:<span class="leancloud-visitors-count"></span></span> </span>
 						</header>
-						<div class="markdown-body editormd-preview-container" th:utext="${md.md2html(post.content)}"></div>
+						<div class="markdown-body editormd-preview-container" th:utext="${md.md2html(post.content)}" style="background: #fafafa"></div>
 						<ul class="copyright-declare">
 							<li>
 								<strong>本文作者:</strong> [[${#servletContext.getAttribute('paramMap')['author']}]]
@@ -48,27 +48,8 @@
 					</section>
 				</article>
 			</div>
-			<svg id="upTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
-				<path d="M0 0 L50 100 L100 0 Z"></path>
-			</svg>
-			<div id="social">
-				<ul>
-					<li>
-						<a href="" title="qzone" target="_blank"><i class="iconfont">&#xe67f;</i></a>
-					</li>
-					<li>
-						<a href="" title="weibo" target="_blank"><i class="iconfont">&#xe680;</i></a>
-					</li>
-					<li>
-						<a href="" title="douban" target="_blank"><i class="iconfont">&#xe681;</i></a>
-					</li>
-					<li>
-						<a href="" title="twitter" target="_blank"><i class="iconfont">&#xe683;</i></a>
-					</li>
-				</ul>
-			</div>
 			<div id="panel" th:if="${#strings.isEmpty(#servletContext.getAttribute('paramMap')['changyan_app_id']) eq false}">
-				<div class="comment-area">
+				<div class="comment-area" style="background: #fafafa">
 					<div id="cyEmoji" th:sid="${post.postUrl}" role="cylabs" data-use="emoji" style="width:60%"></div>
 					<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
 					<script type="text/javascript" charset="utf-8" th:src="@{'https://changyan.sohu.com/js/changyan.labs.https.js?appid='+${#servletContext.getAttribute('paramMap')['changyan_app_id']}}"></script>
@@ -81,9 +62,6 @@
 					</script>
 				</div>
 			</div>
-			<svg id="dwTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
-				<path d="M0 0 L50 100 L100 0 Z"></path>
-			</svg>
 			<div class="wrapper">
 			</div>
 			<!--<div class="p-header">-->

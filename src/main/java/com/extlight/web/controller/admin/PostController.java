@@ -29,7 +29,7 @@ public class PostController {
     public Result list(@PathVariable Integer categoryId,@PathVariable Integer pageNum, String title) {
         try {
             List<Post> list = this.postService.getPyCategoryId(categoryId,pageNum, PageConstant.PAGE_SIZE, title);
-            return Result.success(new PageInfo<>(list));
+            return Result.success(new PageInfo<>(list,10));
         } catch (Exception e) {
             throw  new GlobalException(500,e.getMessage());
         }

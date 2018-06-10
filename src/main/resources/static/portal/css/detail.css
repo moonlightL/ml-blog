@@ -747,7 +747,7 @@ input[type="search"]::-webkit-search-decoration {
 
 .container {
 	position: relative;
-	background: #fff;
+	background: #fafafa;
 	padding: 60px 0 20px
 }
 
@@ -789,7 +789,8 @@ input[type="search"]::-webkit-search-decoration {
 	position: relative;
 	width: 100%;
 	display: block;
-	z-index: 2
+	z-index: 1;
+	margin-top: -10px;
 }
 
 #footer .container {
@@ -6359,6 +6360,7 @@ ol li {
 .copyright-declare {
 	border-left: 3px solid red;
 	padding-left: 8px;
+	margin-left: 12px;
 }
 
 .markdown-body table {

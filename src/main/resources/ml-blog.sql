@@ -162,7 +162,7 @@ CREATE TABLE IF NOT EXISTS `t_post` (
 -- 正在导出表  ml-blog.t_post 的数据：~1 rows (大约)
 /*!40000 ALTER TABLE `t_post` DISABLE KEYS */;
 INSERT INTO `t_post` (`id`, `title`, `keyword`, `sub_content`, `content`, `status`, `category_id`, `category_name`, `tags`, `img_url`, `year`, `month`, `day`, `post_url`, `publish_date`, `create_time`, `update_time`) VALUES
-	(1, 'Hello World', 'hello world', NULL, '## 第一个 Demo\n\n```java\npublic class Test {\n	public static void main(String[] args) {\n		System.out.println("Hello World");\n	}\n}\n```\n\n## 第二个 Demo\n```javascript\nconsole.log("Hello World")\n```', '1', 1, '默认', '', '5.jpg', '2018', '06', '05', '2018/06/05/Hello-World/', '2018-06-05', '2018-06-05 19:55:03', '2018-06-05 19:55:03');
+	(1, 'Hello World', 'hello world', NULL, '## 第一个 Demo\n\n```java\npublic class Test {\n	public static void main(String[] args) {\n		System.out.println("Hello World");\n	}\n}\n```\n\n## 第二个 Demo\n```javascript\nconsole.log("Hello World")\n```', '1', 1, '默认', '', 'material-5.jpg', '2018', '06', '05', '2018/06/05/Hello-World/', '2018-06-05', '2018-06-05 19:55:03', '2018-06-05 19:55:03');
 /*!40000 ALTER TABLE `t_post` ENABLE KEYS */;
 
 

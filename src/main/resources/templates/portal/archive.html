@@ -15,21 +15,39 @@
 		<div class="container">
 			<section class="post_content" itemscope itemtype="http://schema.org/Article">
 				<header class="post_header">
-					<h1 class="post_title">归档([[${count}]])</h1>
+					<h1 class="post_title">归档([[${pageInfo.total}]])</h1>
 				</header>
 				<div class="post-Archive">
 					<div id="archives">
-						<div class='archive-title' th:id="'arti-'+${map.key}" th:each="map : ${archiveMap}">
-							<h3>[[${map.key}]]</h3>
-							<div class='archives archives-12'>
-								<div class="brick" th:each="vo : ${map.value}">
-									<a th:href="@{'/'+${vo.postUrl}}"><span class="time">[[${#dates.format(vo.publishDate, 'MM-dd')}]]</span>[[${vo.title}]]</a>
+						<div th:if="${pageInfo.total > 0}">
+							<div class='archive-title' th:id="'arti-'+${map.key}" th:each="map : ${pageInfo.data}">
+								<h3>[[${map.key}]]</h3>
+								<div class='archives archives-12'>
+									<div class="brick" th:each="vo : ${map.value}">
+										<a th:href="@{'/'+${vo.postUrl}}"><span class="time">[[${#dates.format(vo.publishDate, 'MM-dd')}]]</span>[[${vo.title}]]</a>
+									</div>
 								</div>
 							</div>
+							<nav class="pagination js-pagination" th:if="${#maps.isEmpty(pageInfo.data) eq false}">
+								<span th:if="${pageInfo.hasPreviousPage}">
+									<a class="prev page-numbers" th:href="@{${pageInfo.pageNum-1} == 1 ? '/archives/' : '/archives/page/' + ${pageInfo.pageNum-1}+'/'}" ><strong>←</strong></a>
+								</span>
+								<span th:each="pageNum : ${pageInfo.navigatepageNums}">
+									<span th:if="${pageNum == pageInfo.pageNum}">
+										<a href="javascript:void(0)" th:text="${pageNum}" class="page-numbers current"></a>
+									</span>
+									<span th:if="${pageNum != pageInfo.pageNum}">
+										<a th:href="@{${pageNum} == 1 ? '/archives/' : '/archives/page/' + ${pageNum}+'/'}" th:text="${pageNum}" class="page-numbers"></a>
+									</span>
+								</span>
+								<span th:if="${pageInfo.hasNextPage}">
+									<a class="next page-numbers" th:href="@{'/archives/page/' + ${pageInfo.pageNum+1}+'/'}" ><strong>→</strong></a>
+								</span>
+							</nav>
 						</div>
-						<div class='archive-title' th:if="${count == 0}">
+						<div class='archive-title' th:if="${pageInfo.total == 0}">
 							<div style="text-align:center;">
-								~~作者偷懒，没有发表文章~~
+								~~找不到数据~~
 							</div>
 						</div>
 					</div>
