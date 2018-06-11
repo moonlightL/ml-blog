@@ -72,14 +72,14 @@
 					<div class="prev" data-aos="slide-right" data-aos-delay="1.5s" th:if="${previous!=null}">
 						<div class="arrow"><i class="iconfont">&#xe625;</i></div>
 						<div class="preview">
-							<div class="pull-left featuredImg" th:style="'background-image:url(/portal/images/' + ${previous.imgUrl } + ');'"></div>
+							<div class="pull-left featuredImg" th:style="'background-image:url(/portal/images/random/' + ${previous.imgUrl } + ');'"></div>
 							<a class="pull-left preview-content bold" th:href="${'/' + previous.postUrl}"><span>《[[${previous.title}]]》</span></a>
 						</div>
 					</div>
 					<div class="next" data-aos="slide-left" data-aos-delay="1.5s" th:if="${next!=null}">
 						<div class="arrow"><i class="iconfont">&#xe623;</i></div>
 						<div class="preview">
-							<div class="pull-right featuredImg" th:style="'background-image:url(/portal/images/' + ${next.imgUrl } +');'"></div>
+							<div class="pull-right featuredImg" th:style="'background-image:url(/portal/images/random/' + ${next.imgUrl } +');'"></div>
 							<a class="pull-right preview-content bold" th:href="${'/' + next.postUrl}"><span>《[[${next.title}]]》</span></a>
 						</div>
 					</div>

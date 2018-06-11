@@ -94,15 +94,23 @@
             p.id,
             p.post_url,
             p.title,
-            p.img_url
+            p.img_url,
+            p.create_time
         FROM
           t_post p
         WHERE
-          p.status = 1
-        AND
-          p.id &lt; #{id}
+          p. STATUS = 1
+        AND p.create_time &lt; (
+            SELECT
+              create_time
+            FROM
+              t_post
+            WHERE
+              id = #{id}
+            )
         ORDER BY
-          p.id DESC LIMIT 1
+          p.create_time DESC
+        LIMIT 1
     </select>
 
     <!-- 获取下一篇文章 -->
@@ -111,15 +119,23 @@
             p.id,
             p.post_url,
             p.title,
-            p.img_url
+            p.img_url,
+            p.create_time
         FROM
-          t_post p
+            t_post p
         WHERE
-          p.status = 1
-        AND
-          p.id &gt; #{id}
+            p. STATUS = 1
+        AND p.create_time &gt; (
+            SELECT
+                create_time
+            FROM
+                t_post
+            WHERE
+                id = #{id}
+        )
         ORDER BY
-          p.id ASC LIMIT 1
+            p.create_time ASC
+        LIMIT 1
     </select>
 
     <!-- 通过关键字搜索文章 -->
