@@ -63,7 +63,7 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category> implements Ca
         }
 
         this.categoryMapper.insert(category);
-        CacheUtil.delete("categoryCache");
+        CacheUtil.deleteByName("categoryCache");
     }
 
     @Transactional
@@ -79,14 +79,14 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category> implements Ca
         }
 
         this.categoryMapper.updateByPrimaryKeySelective(category);
-        CacheUtil.delete("categoryCache");
+        CacheUtil.deleteByName("categoryCache");
     }
 
     @Transactional
     @Override
     public void delete(Integer id) throws GlobalException {
         this.categoryMapper.deleteByPrimaryKey(id);
-        CacheUtil.delete("categoryCache");
+        CacheUtil.deleteByName("categoryCache");
     }
 
     @Override

@@ -7,7 +7,7 @@ import net.sf.ehcache.CacheManager;
 
 public class CacheUtil {
 
-    public static void delete(String cacheName) {
+    public static void deleteByName(String cacheName) {
         CacheManager cacheManager = SpringContext.getBeanByType(CacheManager.class);
         Cache cache = cacheManager.getCache(cacheName);
         cache.removeAll();

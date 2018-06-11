@@ -23,10 +23,10 @@
             c.img_url AS imgUrl,
             count(p.`status` = 1 or null) AS postCount
         FROM
-            t_post p
-        INNER JOIN t_category c ON p.category_id = c.id
+            t_category c
+        LEFT JOIN t_post p ON p.category_id = c.id
         GROUP BY
-            p.category_id
+            c.id
         ORDER BY
             c.sort ASC
     </select>

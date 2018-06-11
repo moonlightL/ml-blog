@@ -278,7 +278,7 @@ var postManager = {
         $("#editorContainer").html("<div class='col-lg-12' id='my-editormd'></div>");
         postManager.myEditor = editormd("my-editormd", {
             width   : "100%",
-            height  :  $("#saveUI").height() - 350,
+            height  :  document.documentElement.clientHeight - 260,
             syncScrolling : "single",
             path    : "/admin/assets/plugins/editormd/lib/",
             placeholder: "写点内容吧(配置七牛云后可在该编辑器上实现图片上传)~~",
