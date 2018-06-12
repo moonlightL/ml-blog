@@ -4,7 +4,7 @@ ml-blog 是基于 Spring Boot + Mybatis + Mysql 开发的一套开源博客系�
 
 演示站点：<https://www.extlight.com>
 
-![](https://img.shields.io/badge/license-MIT-brightgreen.svg)
+[![](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/moonlightL/ml-blog/blob/master/LICENSE)
 
 # 适用对象
 
