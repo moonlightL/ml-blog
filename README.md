@@ -4,6 +4,9 @@ ml-blog 是基于 Spring Boot + Mybatis + Mysql 开发的一套开源博客系�
 
 演示站点：<https://www.extlight.com>
 
+
+![CocoaPods](https://img.shields.io/cocoapods/l/AFNetworking.svg)
+
 # 适用对象
 
 * Spring Boot 初学者。该博客系统综合运用了作者发表的 《Spring Boot 入门》 系列的文章提及的知识内容，初学者可以阅读文章以及结合该项目学习。
