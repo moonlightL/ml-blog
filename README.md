@@ -69,3 +69,7 @@ ml-blog 是基于 Spring Boot + Mybatis + Mysql 开发的一套开源博客系�
 
 后台访问地址：<http://localhost:8080/admin> 用户名：admin 密码：123456
 
+# 更新日志
+
+2018-06-08 发布
+2018-06-12 添加文章分享功能
