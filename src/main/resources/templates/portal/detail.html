@@ -29,7 +29,7 @@
 								<strong>本文作者:</strong> [[${#servletContext.getAttribute('paramMap')['author']}]]
 							</li>
 							<li>
-								<strong>本文链接:</strong> <a th:href="@{${#servletContext.getAttribute('paramMap')['homePage']} + '/'+${post.postUrl}}" target="_blank" th:text="${#servletContext.getAttribute('paramMap')['homePage']+'/'+post.postUrl}"></a>
+								<strong>本文链接:</strong> <a id="shareUrl" th:href="@{${#servletContext.getAttribute('paramMap')['homePage']} + '/'+${post.postUrl}}" target="_blank" th:text="${#servletContext.getAttribute('paramMap')['homePage']+'/'+post.postUrl}"></a>
 							</li>
 							<li>
 								<strong>版权声明:</strong>  本博客所有文章除特别声明外均为原创，采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请在文章开头明显位置注明原文链接和作者等相关信息，明确指出修改（如有），并通过 E-mail 等方式告知，谢谢合作！
@@ -43,7 +43,27 @@
 
 							<div class="autoMenu" id="autoMenu" data-autoMenu> </div>
 
-							<!--<div id="social-share"><span class="entypo-share"><i class="iconfont">&#xe614;</i>分享</span></div>-->
+							<div id="social-share"><span class="entypo-share"><i class="iconfont">&#xe614;</i>分享</span></div>
+							<div id="social" class="bdsharebuttonbox">
+								<ul>
+									<li>
+										<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+									</li>
+									<li>
+										<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+									</li>
+									<li>
+										<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+									</li>
+									<li>
+										<a href="#" class="bds_more" data-cmd="more"></a>
+									</li>
+								</ul>
+							</div>
+							<script th:inline="javascript">
+                                window._bd_share_config = { "common": { "bdText": [[${post.title}]], "bdUrl": encodeURI(document.getElementById("shareUrl").innerHTML), "bdMini": "2", "bdMiniList": false, "bdPic": "", "bdStyle": "2", "bdSize": "24"}, "share": {}, "image": { "viewList": ["qzone", "tsina", "tqq", "renren"], "viewText": "分享到：", "viewSize": "16"}, "selectShare": {"bdContainerClass": null, "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren"]}};
+                                document.getElementsByTagName('head')[0].appendChild(document.createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)
+							</script>
 						</div>
 					</section>
 				</article>
@@ -62,11 +82,6 @@
 					</script>
 				</div>
 			</div>
-			<div class="wrapper">
-			</div>
-			<!--<div class="p-header">-->
-				<!--<figure class="p-image" th:style="'background-image:url('+ @{/portal/images/blog_bg.jpg}+');'"></figure>-->
-			<!--</div>-->
 			<div class="navpost-part">
 				<div id="NextPrevPosts">
 					<div class="prev" data-aos="slide-right" data-aos-delay="1.5s" th:if="${previous!=null}">
@@ -87,14 +102,7 @@
 			</div>
 			<a href="#0" class="cd-top">返回顶部</a>
 			<script type="text/javascript">
-                window.onscroll = function() {
-                    var scrollTop = document.body.scrollTop;
-                    if(scrollTop >= 200) {
-                        document.getElementById("NextPrevPosts").style.display = "none"
-                    } else {
-                        document.getElementById("NextPrevPosts").style.display = "block"
-                    }
-                }
+                window.onscroll = function() { var scrollTop = document.body.scrollTop; if (scrollTop >= 200) { document.getElementById("NextPrevPosts").style.display = "none" } else { document.getElementById("NextPrevPosts").style.display = "block" } }
 			</script>
 			<script type='text/javascript' th:src="@{/portal/js/jquery.min.js}"></script>
 			<script type='text/javascript' th:src="@{/portal/js/autoMenu/jquery.autoMenu.js}"></script>
@@ -104,9 +112,7 @@
 			<div th:if="${#strings.isEmpty(#servletContext.getAttribute('paramMap')['leancloud_app_id']) eq false}">
 				<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
 				<script th:inline="javascript">
-                    var appId = [[${#servletContext.getAttribute('paramMap')['leancloud_app_id']}]];
-                    var appKey = [[${#servletContext.getAttribute('paramMap')['leancloud_app_key']}]]
-                    AV.initialize(appId,appKey);
+                    var appId = [[${#servletContext.getAttribute('paramMap')['leancloud_app_id']}]]; var appKey = [[${#servletContext.getAttribute('paramMap')['leancloud_app_key']}]]; AV.initialize(appId,appKey);
 				</script>
 				<script type='text/javascript' th:src="@{/portal/js/detail.js}"></script>
 			</div>

@@ -2345,7 +2345,7 @@ h2.archive-title span:after {
 	position: relative;
 	display: block;
 	text-align: center;
-	width: 800px;
+	/*width: 800px;*/
 	margin: 0 auto
 }
 
