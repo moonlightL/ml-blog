@@ -37,7 +37,7 @@ public class LoginController {
     @Autowired
     private Producer captchaProducer;
 
-    @GetMapping("captcha.jpg")
+    @GetMapping(value = {"/captcha","/captcha.do"})
     public void getKaptchaImage(HttpServletResponse response, HttpSession session) throws Exception {
         response.setDateHeader("Expires", 0);
         response.setHeader("Pragma", "no-cache");

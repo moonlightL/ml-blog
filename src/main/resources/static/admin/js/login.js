@@ -21,7 +21,7 @@ var loginManager = {
 
         // 切换验证码
         $("#changeBtn").on("click",function () {
-            $(this).attr("src","/admin/captcha.jpg");
+            $(this).attr("src","/admin/captcha.do");
         });
     },
     login: function () {
@@ -50,7 +50,7 @@ var loginManager = {
             } else if (resp.code == 400) {
                 swal("登录失败", resp.msg,"error");
             }else {
-                $("#changeBtn").attr("src","/admin/captcha.jpg");
+                $("#changeBtn").attr("src","/admin/captcha.do");
                 swal("登录失败", resp.msg,"error");
             }
         },"json");

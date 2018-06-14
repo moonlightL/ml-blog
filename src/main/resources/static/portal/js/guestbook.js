@@ -45,7 +45,7 @@ var guestbook = {
             "</p>"+
             "</div>"+
             "<div style='padding-top: 70px;'>"+
-            "<span id='c1' style='display: inline-block;padding-left: 65px;'><input type='text' placeholder='* 验证码' id='captcha'> &nbsp;<img src='/admin/captcha.jpg' onclick='guestbook.changeCapche(this)' style='cursor:pointer' /></span>"+
+            "<span id='c1' style='display: inline-block;padding-left: 65px;'><input type='text' placeholder='* 验证码' id='captcha'> &nbsp;<img src='/admin/captcha.do' onclick='guestbook.changeCapche(this)' style='cursor:pointer' /></span>"+
             "<input type='button' class='button' id='submit' tabindex='5' value='发送' onclick='guestbook.submitClick()'/>"+
             "</div>"+
             "</form>"+
@@ -106,7 +106,7 @@ var guestbook = {
         });
     },
     changeCapche: function (obj) {
-        $(obj).attr("src","/admin/captcha.jpg");
+        $(obj).attr("src","/admin/captcha.do");
     },
     checkSafe: function (str) {
         if(!str) {

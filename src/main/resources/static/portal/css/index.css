@@ -9,6 +9,7 @@
 
 html {
 	text-shadow: .01em .01em .01em #999!important;
+	font-family: "Microsoft YaHei";
 }
 
 .hermit {
@@ -6100,13 +6101,13 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
 }
 
 .post [rel="gallery"]:after {
-	background: #1abc9c;
+	background: #ddd;
 	background: -moz-linear-gradient(top, #bebbaa 0%, #1abc9c 100%);
 	background: -webkit-gradient(linear, top center, bottom center, color-stop(0%, #bebbaa), color-stop(100%, #1abc9c));
-	background: -webkit-linear-gradient(top, #bebbaa 0%, #1abc9c 100%);
+	background: -webkit-linear-gradient(top, #ccc 0%, #ccc 100%);
 	background: -o-linear-gradient(top, #bebbaa 0%, #1abc9c 100%);
 	background: -ms-linear-gradient(top, #bebbaa 0%, #1abc9c 100%);
-	background: linear-gradient(to bottom, #bebbaa 0%, #1abc9c 100%);
+	background: linear-gradient(to bottom, #ccc 0%, #ccc 100%);
 }
 
 .wpcf7-text:focus,

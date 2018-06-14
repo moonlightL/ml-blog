@@ -44,7 +44,7 @@ public class SpringmvcConfiguration implements WebMvcConfigurer {
                         "/admin",
                         "/admin/login",
                         "/admin/logout",
-                        "/admin/captcha.jpg",
+                        "/admin/captcha**",
                         "/admin/assets/**",
                         "/admin/css/**",
                         "/admin/image/**",

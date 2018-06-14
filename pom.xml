@@ -27,11 +27,25 @@
 	</properties>
 
 	<dependencies>
+		<!-- Servlet API -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
 
 		<!-- web 相关 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<!-- 打 war 包时，排除内置 tomcat，需要放开下边的注释 -->
+			<!--<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>-->
 		</dependency>
 
 		<dependency>
@@ -240,7 +254,19 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<resources>
+			<!-- 如果使用 nginx 实现动静分离，放开下边的注释，打包忽略静态文件 -->
+			<!--<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+				<excludes>
+					<exclude>**/static/**</exclude>
+				</excludes>
+			</resource>-->
+		</resources>
 	</build>
-
 
 </project>

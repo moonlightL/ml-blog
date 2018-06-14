@@ -3877,7 +3877,7 @@
   padding: 0;
 }
 .editormd-preview-container pre, .editormd-preview-container code, .editormd-preview-container kbd, .editormd-html-preview pre, .editormd-html-preview code, .editormd-html-preview kbd {
-  font-family: "YaHei Consolas Hybrid", Consolas, "Meiryo UI", "Malgun Gothic", "Segoe UI", "Trebuchet MS", Helvetica, monospace, monospace;
+  font-family: "Microsoft YaHei";
 }
 .editormd-preview-container table thead tr, .editormd-html-preview table thead tr {
   background-color: #F8F8F8;
