@@ -4,10 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="个人博客">
-    <meta name="author" content="Coderthemes">
-    <link rel="shortcut icon" th:href="@{/portal/images/favicon.ico}">
-    <link rel="shortcut icon" th:href="@{/portal/images/favicon.ico}">
-    <link rel="shortcut icon" th:href="@{/portal/images/favicon.ico}">
+    <link rel="shortcut icon" th:href="@{/admin/assets/images/favicon.ico}">
+
     <title>MoonlightL 后台管理界面</title>
 
     <link th:href="@{/admin/assets/plugins/sweetalert/dist/sweetalert.css}" rel="stylesheet" type="text/css">
@@ -22,7 +20,7 @@
     <link th:href="@{/admin/assets/plugins/tagsinput/bootstrap-tagsinput.css}" rel="stylesheet">
     <link th:href="@{/admin/assets/plugins/bootstrap-toggle/css/bootstrap-toggle.css}" rel="stylesheet">
     <link th:href="@{/admin/assets/plugins/editormd/css/editormd.css}" rel="stylesheet" type="text/css">
-
+    <link th:href="@{/admin/assets/plugins/dropzone/dropzone.min.css}" rel="stylesheet" >
     <!-- HTML5 Shim and Respond.js} IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js} doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -102,7 +100,7 @@
 
         </div><!-- End row -->
 
-        <div class="row animated zoomIn" style="position: absolute;z-index: 10001;top:1px;left:1px;right:1px;bottom:1px;display: none;" id="saveUI">
+        <div class="row animated zoomIn" style="position:absolute;z-index: 10001;top:1px;left:1px;right:1px;bottom:1px;display: none;" id="saveUI">
             <div class="col-lg-12">
                 <div class="portlet"><!-- /portlet heading -->
                     <div class="portlet-heading">
@@ -118,66 +116,90 @@
                         <div class="portlet-body">
                             <div class="row">
                                 <form class="form-horizontal" role="form" id="postForm">
-                                <div class="col-md-12">
-                                    <input type="hidden" id="id" name="id">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="title" class="col-sm-3 control-label">* 标题</label>
-                                                <div class="col-sm-6">
-                                                    <input type="text" class="form-control" id="title" name="title" placeholder="标题">
+                                    <div class="col-md-12">
+                                        <input type="hidden" id="id" name="id">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="title" class="col-sm-3 control-label">* 标题</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" id="title" name="title" placeholder="标题">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="keyword" class="col-sm-3 control-label">关键字</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" id="keyword" name="keyword" placeholder="关键字">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="keyword" class="col-sm-3 control-label">关键字</label>
-                                                <div class="col-sm-6">
-                                                    <input type="text" class="form-control" id="keyword" name="keyword" placeholder="关键字">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="categoryId" class="col-sm-3 control-label">* 分类</label>
-                                                <div class="col-sm-6">
-                                                    <select id="categoryId" name="categoryId" class="form-control">
+                                            <div class="col-md-4">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="categoryId" class="col-sm-3 control-label">* 分类</label>
+                                                            <div class="col-sm-9">
+                                                                <select id="categoryId" name="categoryId" class="form-control">
 
-                                                    </select>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="tags" class="col-sm-3 control-label">标签</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" id="tags" name="tags" placeholder="标签" data-role="tagsinput" >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label" id="btnContainer"></label>
+                                                            <input type="hidden" name="imgUrl" id="imgUrl"/>
+                                                            <div class="col-sm-9">
+                                                                <div id="fileContainer" style="border:1px solid #eee;height:80px;background-color: #fafafa"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="tags" class="col-sm-3 control-label">标签</label>
-                                                <div class="col-sm-6">
-                                                    <input type="text" class="form-control" id="tags" name="tags" placeholder="标签" data-role="tagsinput" >
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row" id="editorContainer"></div>
 
-                                    <div class="row text-center m-t-30">
-                                        <div class="col-md-2">
-                                            <label class="control-label">是否显示</label>
-                                            <input id="showStatus" name="showStatus" type="checkbox" checked data-toggle="toggle" data-on="是" data-off="否" data-onstyle="success">
-                                        </div>
-                                        <div class="col-md-4"></div>
-                                        <div class="col-md-6 text-right">
-                                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">关闭</button>
-                                            <button type="button" class="btn btn-primary waves-effect waves-light" id="submitBtn">保存</button>
+                                        <div class="row" id="editorContainer"></div>
+
+                                        <div class="row text-center m-t-30">
+                                            <div class="col-md-2">
+                                                <label class="control-label">是否显示</label>
+                                                <input id="showStatus" name="showStatus" type="checkbox" checked data-toggle="toggle" data-on="是" data-off="否" data-onstyle="success">
+                                            </div>
+                                            <div class="col-md-4"></div>
+                                            <div class="col-md-6 text-right">
+                                                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">关闭</button>
+                                                <button type="button" class="btn btn-primary waves-effect waves-light" id="submitBtn">保存</button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div> <!-- /Portlet -->
-            </div> <!-- end col -->
+            </div>
         </div>
 
         <div id="importUI" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
@@ -193,13 +215,27 @@
                                 <label for="path" class="col-sm-2 control-label">* 文件目录</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" id="path" name="path"  placeholder="文件目录"><br>
-                                    <span>用于解析 hexo 的 md 文件</span>
+                                    <span>用于解析 hexo 的 md 文件</span>&nbsp;&nbsp;
+                                    <span><a href="javascript:void(0)" id="showExample">查看文件格式样例</a></span>
                                 </div>
                                 <div class="col-sm-3">
                                     <button type="button" class="btn btn-primary waves-effect waves-light" id="importBtn">导入</button>
                                 </div>
                             </div>
                         </form>
+                        <div id="mdExample" style="display: none">
+                            <div style="width:240px;height: 240px; margin: 0 auto;">
+                                <p> ---</p>
+                                <p> title: XX入门</p>
+                                <p> date: 2018-06-14 09:46:40</p>
+                                <p> tags: 前端</p>
+                                <p> categories: 前端</p>
+                                <p> ---</p>
+                                <p> ## 一、基本</p>
+                                <p> ## 二、进阶</p>
+                                <p> ......</p>
+                            </div>
+                        </div>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -213,6 +249,7 @@
     <script th:src="@{/admin/assets/plugins/waves/waves.min.js}"></script>
     <script th:src="@{/admin/assets/plugins/sweetalert/dist/sweetalert.min.js}"></script>
     <script th:src="@{/admin/assets/plugins/bootstrap-toggle/js/bootstrap-toggle.js}"></script>
+    <script th:src="@{/admin/assets/plugins/dropzone/dropzone.min.js}"></script>
     <script th:src='@{/portal/js/layer/layer.js}'></script>
     <script th:src="@{/admin/js/util.js}"></script>
     <script th:src="@{/admin/js/post.js}"></script>

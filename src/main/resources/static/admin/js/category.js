@@ -141,7 +141,7 @@ var categoryManager = {
             url: "/admin/uploadfile", //上传地址
             method: "POST", //方式
             addRemoveLinks: true,
-            maxFiles: 1,
+            maxFiles: 10,
             maxFilesize: 5,
             uploadMultiple: false,
             parallelUploads: 100,

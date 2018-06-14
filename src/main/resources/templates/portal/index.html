@@ -27,7 +27,12 @@
 										</div>
 									</div>
 									<div class="review-bg-wrapper">
-										<div class="bg-blur" th:style="'background-image: url(/portal/images/random/'+${post.imgUrl}+');'"></div>
+										<div th:if="${#strings.startsWith(post.imgUrl,'material')}">
+											<div class="bg-blur" th:style="'background-image: url(/portal/images/random/'+${post.imgUrl}+');'"></div>
+										</div>
+										<div th:if="${#strings.startsWith(post.imgUrl,'material') eq false}">
+											<div class="bg-blur" th:style="'background-image: url('+${post.imgUrl}+');'"></div>
+										</div>
 									</div>
 								</div>
 								<div class="post-container">

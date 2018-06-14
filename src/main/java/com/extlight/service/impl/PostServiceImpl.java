@@ -53,12 +53,15 @@ public class PostServiceImpl extends BaseServiceImpl<Post> implements PostServic
             throw new GlobalException(400, "该分类不存在");
         }
 
+        if(StringUtils.isEmpty(post.getImgUrl())) {
+            post.setImgUrl("material-" + (new Random().nextInt(30) + 1) + ".jpg");
+        }
+
         Date now = new Date();
         String dateStr = DateUtil.formateToStr(now, "yyyy-MM-dd");
         String[] dates = dateStr.split("-");
 
         post.setPublishDate(now)
-                .setImgUrl("material-" + (new Random().nextInt(30) + 1) + ".jpg")
                 .setYear(dates[0])
                 .setMonth(dates[1])
                 .setDay(dates[2])

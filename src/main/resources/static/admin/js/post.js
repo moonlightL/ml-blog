@@ -11,6 +11,9 @@ var postManager = {
         postManager.getList();
         postManager.getCategoryList();
         postManager.registerEvent();
+        $("#showExample").on("click",function() {
+           $("#mdExample").fadeToggle("fast","linear");
+        });
     },
     getList: function (pageNum) {
         $.getJSON("/admin/post/list/"+postManager.categoryId+"/"+ (pageNum || 1),{"title":postManager.title},function (resp) {
@@ -27,7 +30,11 @@ var postManager = {
                         htmlArr.push("<td>"+post.categoryName+"</td>");
                         htmlArr.push("<td>"+(post.tags || '')+"</td>");
                         htmlArr.push("<td>"+(post.status == 1 ? '显示' : '隐藏')+"</td>");
-                        htmlArr.push("<td><img src='/portal/images/random/"+post.imgUrl+"' width='30' height='30' alt=''></td> ");
+                        if (post.imgUrl.indexOf("material") > -1) {
+                            htmlArr.push("<td><img src='/portal/images/random/"+post.imgUrl+"' width='30' height='30' alt=''></td> ");
+                        } else {
+                            htmlArr.push("<td><img src='"+post.imgUrl+"' width='30' height='30' alt=''></td> ");
+                        }
                         htmlArr.push("<td>"+(post.publishDate || '')+"</td>");
                         htmlArr.push("<td>"+post.createTime+"</td>");
                         htmlArr.push("<td class='actions'><button type='button' class='btn btn-info waves-effect m-b-5 edit' data-id='"+post.id+"'>编辑</button>");
@@ -97,6 +104,8 @@ var postManager = {
                         }
                         postManager.myEditor.setMarkdown(post.content);
                     });
+
+                    postManager.createFileComponent();
 
                     $("#saveUI").modal("show");
                 } else {
@@ -179,6 +188,8 @@ var postManager = {
                 $("#tags").tagsinput('removeAll');
                 $("input[type='hidden']").val("");
             });
+
+            postManager.createFileComponent();
         });
 
         $("#submitBtn").on("click",function () {
@@ -189,6 +200,7 @@ var postManager = {
                 "categoryId": $("#categoryId").val(),
                 "tags": $("#tags").val(),
                 "status": ($("#showStatus").prop("checked") ? 1: 0 ),
+                "imgUrl": $("#imgUrl").val(),
                 "content": postManager.myEditor.getMarkdown()
             };
 
@@ -291,6 +303,31 @@ var postManager = {
             imageUploadURL : "/admin/mdUploadfile",
             onload: function () {
                 callback();
+            }
+        });
+    },
+    createFileComponent: function () {
+        $("#fileContainer").html("<div style='text-align: center;line-height: 80px;'>需要配置七牛云参数</div>");
+        $("#btnContainer").html("预览图<br><br><span id='uploadBtn' style='cursor: pointer;color: #6e8cd7;'>点击上传</span>");
+        $("#uploadBtn").dropzone({
+            url: "/admin/uploadfile", //上传地址
+            method: "POST", //方式
+            addRemoveLinks: true,
+            maxFiles: 10,
+            maxFilesize: 5,
+            uploadMultiple: false,
+            parallelUploads: 100,
+            previewsContainer: false,
+            acceptedFiles: ".jpg, .jpeg,.png",
+            success: function(file, resp, e) {
+                if (resp.code == 200) {
+                    $("#fileContainer").html("<img src='"+resp.data+"' style='width:100%;height:80px'/>");
+                    $("#imgUrl").val(resp.data);
+                } else {
+                    swal("文件上传失败", resp.msg,"error");
+                    // 重新创建，否则需要刷新页面才能继续上传文件
+                    postManager.createFileComponent();
+                }
             }
         });
     }
