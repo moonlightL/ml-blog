@@ -10,6 +10,7 @@ var indexManger = {
         indexManger.sysLogData();
         indexManger.registerUpdatePwd();
         indexManger.registerLogout();
+        indexManger.registerLog();
     },
     indexData: function () {
         $.getJSON("/admin/index/indexData",function (resp) {
@@ -53,7 +54,7 @@ var indexManger = {
                         htmlArr.push("<div class='inbox-item'>");
                         htmlArr.push(" <div class='inbox-item-img'><img src='assets/images/users/avatar-1.jpg' class='img-circle' alt=''></div>");
                         htmlArr.push("<p class='inbox-item-author'>"+log.operator+"</p>");
-                        htmlArr.push("<p class='inbox-item-text'>"+ log.method + "(" + log.descr+")</p>");
+                        htmlArr.push("<p class='inbox-item-text'>"+ log.method + " (" + log.descr+")</p>");
                         htmlArr.push("<p class='inbox-item-date'>"+log.createTime+"</p>");
                         htmlArr.push("</div>");
                         htmlArr.push("</a>");
@@ -116,6 +117,30 @@ var indexManger = {
                    swal("修改密码失败", resp.msg,"error");
                }
            },"json");
+        });
+    },
+    registerLog: function () {
+        $("#clearBtn").on("click",function () {
+            swal({
+                title: "确定要清空日志吗？",
+                text: "",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                closeOnConfirm: false
+            },
+            function(){
+
+                $.post("/admin/index/clearLogData",null,function(resp) {
+                    if (resp.code == 200) {
+                        window.location.reload(true);
+                    } else {
+                        swal("清空失败", resp.msg,"error");
+                    }
+                },"json");
+            });
         });
     }
 }

@@ -28,4 +28,9 @@ public class LogServiceImpl extends BaseServiceImpl<Log> implements LogService {
 
         return this.logMapper.selectByExample(example);
     }
+
+    @Override
+    public void deleteAll() {
+        this.logMapper.deleteAll();
+    }
 }

@@ -9,6 +9,7 @@ import com.extlight.service.*;
 import com.extlight.web.exception.GlobalException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -99,6 +100,21 @@ public class IndexController {
             List<Log> list = this.logService.getList();
             return Result.success(list);
         } catch (Exception e) {
+            throw new GlobalException(500,e.getMessage());
+        }
+    }
+
+    /**
+     * 清空日志
+     * @return
+     */
+    @PostMapping("/clearLogData")
+    public Result clearLogData() {
+        try {
+            this.logService.deleteAll();
+            return Result.success();
+        } catch (Exception e) {
+            e.printStackTrace();
             throw new GlobalException(500,e.getMessage());
         }
     }
