@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="个人博客">
-    <meta name="author" content="Coderthemes">
     <link rel="shortcut icon" th:href="@{/portal/images/favicon.ico}">
     <link rel="shortcut icon" th:href="@{/portal/images/favicon.ico}">
     <link rel="shortcut icon" th:href="@{/portal/images/favicon.ico}">
@@ -106,6 +105,12 @@
                                     <span class="hidden-xs">Leancloud(统计)</span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="#baidupush" data-toggle="tab" aria-expanded="true">
+                                    <span class="visible-xs"><i class="fa fa-user"></i></span>
+                                    <span class="hidden-xs">百度推送</span>
+                                </a>
+                            </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="qiniu">
@@ -194,6 +199,20 @@
                                         <label class="col-md-2 control-label" for="leancloud_app_key">App Key</label>
                                         <div class="col-md-10">
                                             <input type="text" id="leancloud_app_key" name="leancloud_app_key" class="form-control" placeholder="App Key">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="reset" class="btn btn-default waves-effect">重置</button>
+                                        <button type="button" class="btn btn-primary waves-effect waves-light submit">保存 </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="baidupush">
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label" for="baidu_push_token">Push Token</label>
+                                        <div class="col-md-10">
+                                            <input type="text" id="baidu_push_token" name="baidu_push_token" class="form-control" placeholder="Push Token">
                                         </div>
                                     </div>
                                     <div class="modal-footer">

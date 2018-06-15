@@ -3,6 +3,7 @@ package com.extlight.service.impl;
 import com.extlight.common.utils.CacheUtil;
 import com.extlight.common.utils.DateUtil;
 import com.extlight.common.vo.PostVo;
+import com.extlight.component.AsyncService;
 import com.extlight.component.LuceneService;
 import com.extlight.mapper.BaseMapper;
 import com.extlight.mapper.PostMapper;
@@ -39,6 +40,9 @@ public class PostServiceImpl extends BaseServiceImpl<Post> implements PostServic
     @Autowired
     private LuceneService luceneService;
 
+    @Autowired
+    private AsyncService asyncService;
+
     @Override
     public BaseMapper<Post> getBaseMapper() {
         return this.postMapper;
@@ -74,6 +78,8 @@ public class PostServiceImpl extends BaseServiceImpl<Post> implements PostServic
         this.luceneService.add(post);
         // 清理缓存
         CacheUtil.deleteAll();
+        // 把文章 url 推送给百度
+        this.asyncService.push2Baidu(post.getPostUrl());
     }
 
     @Transactional
@@ -97,6 +103,8 @@ public class PostServiceImpl extends BaseServiceImpl<Post> implements PostServic
         this.luceneService.update(post);
         // 清理缓存
         CacheUtil.deleteAll();
+        // 把文章 url 推送给百度
+        this.asyncService.push2Baidu(post.getPostUrl());
     }
 
     @Transactional

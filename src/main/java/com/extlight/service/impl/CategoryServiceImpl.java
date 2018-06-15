@@ -62,6 +62,10 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category> implements Ca
             category.setColor(COLORS[new Random().nextInt(COLORS.length)]);
         }
 
+        if (StringUtils.isEmpty(category.getSort())) {
+            category.setSort(99);
+        }
+
         this.categoryMapper.insert(category);
         CacheUtil.deleteByName("categoryCache");
     }
@@ -76,6 +80,10 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category> implements Ca
 
         if (StringUtils.isEmpty(category.getColor())) {
             category.setColor(COLORS[new Random().nextInt(COLORS.length)]);
+        }
+
+        if (StringUtils.isEmpty(category.getSort())) {
+            category.setSort(99);
         }
 
         this.categoryMapper.updateByPrimaryKeySelective(category);

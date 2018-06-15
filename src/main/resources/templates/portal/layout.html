@@ -4,10 +4,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="shortcut icon" th:href="@{/portal/images/favicon.ico}">
+    <meta name="author" th:content="${#servletContext.getAttribute('paramMap')['author']}">
     <title th:text="${#servletContext.getAttribute('paramMap')['blogName']}">个人博客</title>
     <meta name="description" th:content="${#servletContext.getAttribute('paramMap')['description']}" />
     <meta name="keywords" th:content="${#servletContext.getAttribute('paramMap')['keywords']}" />
+    <link rel="shortcut icon" th:href="@{/portal/images/favicon.ico}">
     <link th:href="@{/portal/css/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" th:href="@{/portal/css/index.css}" media="all" />
 </head>
@@ -134,10 +135,10 @@
     <div class="cr">
         <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
         <span id="busuanzi_container_site_pv">
-            <i class="fa fa-user"></i> 本站访客数<span id="busuanzi_value_site_uv"></span>人次
+            <i class="fa fa-user"></i> 本站访客数&nbsp;<span id="busuanzi_value_site_uv"></span>&nbsp;人次
         </span>&nbsp;&nbsp;
         <span id="busuanzi_container_site_uv">
-            <i class="fa fa-eye"></i> 本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            <i class="fa fa-eye"></i> 本站总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;次
         </span>
     </div>
 
@@ -146,6 +147,7 @@
     <script type='text/javascript' th:src='@{/portal/js/script.js}'></script>
     <script type='text/javascript' th:src='@{/portal/js/particles.js}'></script>
     <script type='text/javascript' th:src='@{/portal/js/aos.js}'></script>
+    <script type='text/javascript' th:src='@{/portal/js/baidu-push.js}'></script>
 </footer>
 
 </body>
