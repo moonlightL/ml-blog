@@ -37,6 +37,7 @@ ml-blog 是基于 Spring Boot + Mybatis + Mysql 开发的一套开源博客系�
 * 点击效果：wave
 * 代码修饰：highlight
 * 统计访问：不蒜子
+* 分享插件：百度分享
 
 ## 第三方
 
@@ -44,6 +45,7 @@ ml-blog 是基于 Spring Boot + Mybatis + Mysql 开发的一套开源博客系�
 * Geetest（人机验证）
 * 畅言（评论系统）
 * Leancloud（统计）
+* 百度链接提交（优化网站的搜索）
 
 # 预览效果
 
@@ -77,4 +79,4 @@ ml-blog 是基于 Spring Boot + Mybatis + Mysql 开发的一套开源博客系�
 
 2018-06-14 添加文章自定义背景图片入口
 
-2018-06-15 添加百度推送功能（主动推送和自动推送）
+2018-06-15 添加百度链接提交（主动推送和自动推送）
