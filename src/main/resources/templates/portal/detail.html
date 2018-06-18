@@ -22,7 +22,12 @@
 					<section class="post_content">
 						<header class="post_header" th:style="'text-align:center'">
 							<h1 class="post_title">[[${post.title}]]</h1>
-							<span th:id="${'/' + post.postUrl}" th:data-flag-title="${post.title}" class="leancloud_visitors" style="color:#6b6969"> <i class="fa fa-calendar-o"></i> 发表于 [[${#dates.format(post.publishDate,'yyyy-MM-dd')}]] &nbsp;|&nbsp; <i class="fa fa-folder-o"></i> 分类于 [[${post.categoryName}]] <span th:if="${#strings.isEmpty(#servletContext.getAttribute('paramMap')['leancloud_app_id']) eq false}">&nbsp;|&nbsp; <i class="fa fa-eye"></i> 阅读次数:<span class="leancloud-visitors-count"></span></span> </span>
+							<span th:id="${'/' + post.postUrl}" th:data-flag-title="${post.title}" class="leancloud_visitors" style="color:#6b6969">
+								<i class="fa fa-calendar-o"></i> 发表于 [[${#dates.format(post.publishDate,'yyyy-MM-dd')}]] &nbsp;
+								|&nbsp; <i class="fa fa-folder-o"></i> 分类于 [[${post.categoryName}]] <span th:if="${#strings.isEmpty(#servletContext.getAttribute('paramMap')['leancloud_app_id']) eq false}">&nbsp;
+								|&nbsp; <i class="fa fa-eye"></i> 阅读数: <span class="leancloud-visitors-count"></span></span>
+								|&nbsp; <i class="fa fa-commenting-o"></i> 评论数: <a th:href="${post.postUrl + '#SOHUCS'}"><span id="changyan_count_unit"></span></a>
+							</span>
 						</header>
 						<div class="markdown-body editormd-preview-container" th:utext="${md.md2html(post.content)}" style="background: #fafafa"></div>
 						<ul class="copyright-declare">
@@ -76,6 +81,7 @@
 					<script type="text/javascript" charset="utf-8" th:src="@{'https://changyan.sohu.com/js/changyan.labs.https.js?appid='+${#servletContext.getAttribute('paramMap')['changyan_app_id']}}"></script>
 					<div id="SOHUCS" th:sid="${post.postUrl}" style="width:60%"></div>
 					<script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
+					<script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
 					<script type="text/javascript" th:inline="javascript">
 						var appid = [[${#servletContext.getAttribute('paramMap')['changyan_app_id']}]];
 						var conf = [[${#servletContext.getAttribute('paramMap')['changyan_app_key']}]];

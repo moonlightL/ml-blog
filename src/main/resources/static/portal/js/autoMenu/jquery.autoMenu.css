@@ -11,7 +11,7 @@ body, div, ul, p, h1, h2, h3, h4, ol, dl, dd, dt, form, input, textarea, select,
     box-sizing: content-box
 }
 
-a {
+#primary-menu a {
     text-decoration: none;
     font-size: 14px;
 }
