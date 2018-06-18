@@ -251,6 +251,7 @@
 	</dependencies>
 
 	<build>
+
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -260,7 +261,20 @@
 					<fork>true</fork>
 				</configuration>
 			</plugin>
+			<!-- 打包部署 -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<url>http://www.extlight.com/manager/text</url>
+					<server>tomcat8</server>
+					<update>true</update>
+					<path>/ROOT</path>
+				</configuration>
+			</plugin>
 		</plugins>
+
 		<resources>
 			<!-- 如果使用 nginx 实现动静分离，放开下边的注释，打包忽略静态文件 -->
 			<!--<resource>
@@ -274,6 +288,7 @@
 				</excludes>
 			</resource>-->
 		</resources>
+
 	</build>
 
 </project>
