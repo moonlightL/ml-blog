@@ -6376,3 +6376,6 @@ article p {
 	font-size: 15px;
 	/*text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);*/
 }
+.module-hot-topic {
+	display: none;
+}

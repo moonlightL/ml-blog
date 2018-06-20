@@ -7,24 +7,27 @@ import java.util.Map;
 
 public class IPUtil {
 
-    private static final String OPEN_URL = "http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=";
+    private static final String OPEN_URL = "http://ip.taobao.com/service/getIpInfo.php?ip=";
 
     /**
      * 通过 ip 获取地理位置详情
      * @param ip
      * @return
      */
-    public static Map<String,String> getLocationInfo(String ip){
+    public static Map<String,Object> getIPInfo(String ip){
         String url = OPEN_URL + ip;
-
-        String result = HttpClientUtil.sendGet(url);
+        String resultStr = HttpClientUtil.sendGet(url);
 
         try {
-            Map<String,String> map = JsonUtil.string2Obj(result, Map.class);
-            return map;
+            Map<String,Object> result = JsonUtil.string2Obj(resultStr,Map.class);
+
+            if ("0".equals(result.get("code").toString())) {
+                return (Map<String, Object>) result.get("data");
+            }
         } catch (Exception e) {
             return null;
         }
+        return null;
     }
 
     /**
@@ -33,9 +36,9 @@ public class IPUtil {
      * @return
      */
     public static String getContry(String ip) {
-        Map<String, String> locationInfo = getLocationInfo(ip);
-        if ( locationInfo != null ) {
-            return locationInfo.get("country");
+        Map<String,Object> info = getIPInfo(ip);
+        if ( info != null ) {
+            return info.get("country").toString();
         }
         return null;
     }
@@ -45,9 +48,9 @@ public class IPUtil {
      * @return
      */
     public static String getProvince(String ip) {
-        Map<String, String> locationInfo = getLocationInfo(ip);
-        if ( locationInfo != null ) {
-            return locationInfo.get("province") + "省";
+        Map<String,Object> info = getIPInfo(ip);
+        if ( info != null ) {
+            return info.get("region").toString() + "省";
         }
         return null;
     }
@@ -58,9 +61,9 @@ public class IPUtil {
      * @return
      */
     public static String getCity(String ip) {
-        Map<String, String> locationInfo = getLocationInfo(ip);
-        if ( locationInfo != null ) {
-            return locationInfo.get("city") + "市";
+        Map<String,Object> info = getIPInfo(ip);
+        if ( info != null ) {
+            return info.get("city").toString() + "市";
         }
         return null;
     }
