@@ -233,7 +233,7 @@ public class PortalController {
      * @param guestbook
      * @return
      */
-    @PostMapping("/guestbook/")
+    @PostMapping("/guestbook")
     @ResponseBody
     public Result saveGuestbook(@Valid Guestbook guestbook, String captcha, HttpServletRequest request) throws Exception {
 
