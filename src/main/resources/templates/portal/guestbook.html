@@ -22,10 +22,8 @@
                 </header>
 
                 <div class="meta split split--responsive cf" style="display: block;">
-
-                    <!--<div id="social-share"><span class="entypo-share"><i class="iconfont">&#xe614;</i>分享</span></div>-->
                     <div class="slide">
-                        <a class="btn-slide" title="switch down"><i class="iconfont">&#xe615;</i>折叠评论区</a>
+                        <a class="btn-slide" title="switch down"><i class="iconfont">&#xe615;</i>折叠留言区</a>
                     </div>
                 </div>
             </section>
@@ -36,7 +34,7 @@
             <section class="comments">
                 <div class="comments-main">
                     <div id="comments-list-title">
-                        <span>[[${pageInfo.total}]]</span> 条评论
+                        <span>[[${totalCount}]]</span> 条留言/回复
                         <span style="float: right"><input type="button" class="button" id="guestbookBtn" value="留言" /></span>
                     </div>
                     <div id="loading-comments">
@@ -49,15 +47,15 @@
                     <hr>
                     <ul class="commentwrap">
                         <li class="comment even thread-even depth-1" id="li-comment-" th:each="guestbook : ${pageInfo.list}">
-                            <div id="comment-936" class="comment_body contents">
+                            <div class="comment_body contents">
                                 <div class="profile">
                                     <a href="javascript:void(0)"><img th:src="${guestbook.imgUrl}" class="gravatar" th:alt="${guestbook.nickname}"></a>
                                 </div>
-                                <div class="main shadow">
+                                <div class="main shadow" style="border-bottom: 1px solid #eee">
                                     <div class="commentinfo">
                                         <section class="commeta">
                                             <div class="shang">
-                                                <h4 class="author"><a href="" target="_blank"><img th:src="${guestbook.imgUrl}" class="gravatarsmall" th:alt="${guestbook.nickname}">[[${guestbook.nickname}]]</a></h4>
+                                                <h4 class="author"><a th:href="'#' +${guestbook.nickname}" th:id="${guestbook.nickname}"><img th:src="${guestbook.imgUrl}" class="gravatarsmall" th:alt="${guestbook.nickname}">[[${guestbook.nickname}]] :</a></h4>
                                             </div>
                                         </section>
                                     </div>
@@ -66,9 +64,10 @@
                                     </div>
                                     <div class="xia info">
                                         <span><time >[[${#dates.format(guestbook.createTime, 'yyyy年MM月dd日 HH:mm:ss')}]]</time></span>
-                                        <!--<span><a rel='nofollow' class='comment-reply-link' href='javascript:void(0)' aria-label='回复'>回复</a></span>-->
+                                        <span><a rel='nofollow' th:data-guestbookid="${guestbook.id}" class='comment-reply-link replyBtn' href='javascript:void(0)' aria-label='回复'>回复([[${#lists.size(guestbook.replyList)}]])</a> <a th:if="${#lists.size(guestbook.replyList) > 0}" href="javascript:void(0)" th:data-id="${guestbook.id}" style="cursor: pointer;color: #A1A1A1" class="showbtn">折叠回复</a></span>
                                     </div>
                                 </div>
+                                <div th:replace="portal/common :: reply(${guestbook.replyList},${guestbook.nickname},${guestbook.id})"></div>
                             </div>
                         </li>
                         <li th:if="${pageInfo.size == 0}" th:style="'text-align:center;'" th:text="'~~暂无数据，抢先留言吧~~'"></li>

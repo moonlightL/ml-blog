@@ -106,7 +106,7 @@ var categoryManager = {
                 } else {
                     swal("查询失败", resp.msg,"error");
                 }
-            })
+            });
         });
 
         $(".delete").on("click",function () {

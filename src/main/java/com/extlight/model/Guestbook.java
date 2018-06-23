@@ -9,8 +9,11 @@ import lombok.ToString;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,6 +28,8 @@ public class Guestbook {
     @NotEmpty(message = "昵称不能为空")
     private String nickname;
 
+    @NotEmpty(message = "邮箱不能为空")
+    @Email(message = "邮箱格式不正确")
     private String email;
 
     private String homeUrl;
@@ -45,7 +50,19 @@ public class Guestbook {
     // 1：删除 0：未删除
     private Integer delStatus;
 
+    // 1:留言 2：回复
+    private Integer type;
+
+    // 被回复者ID
+    private Integer guestbookId;
+
     @CreateTime
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
+
+    @Transient
+    private Guestbook guestbook;
+
+    @Transient
+    private List<Guestbook> replyList;
 }

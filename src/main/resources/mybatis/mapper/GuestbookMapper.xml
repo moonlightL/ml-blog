@@ -3,18 +3,78 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.extlight.mapper.GuestbookMapper">
 
-    <select id="getList" parameterType="java.lang.Integer" resultType="com.extlight.model.Guestbook">
+    <resultMap id="GuestbookMap" type="com.extlight.model.Guestbook">
+        <id column="id" property="id"/>
+        <result column="nickname" property="nickname"/>
+        <result column="img_url" property="imgUrl"/>
+        <result column="content" property="content"/>
+        <result column="create_time" property="createTime"/>
+        <collection property="replyList" column="id" select="com.extlight.mapper.GuestbookMapper.getByGuestbookId"/>
+    </resultMap>
+
+    <select id="getList"  resultMap="GuestbookMap">
         SELECT
             g.id,
             g.nickname,
+            g.email,
             g.img_url,
             g.content,
+            g.guestbook_id,
+            g.type,
+            g.ip,
+            g.ip_addr,
             g.create_time
         FROM
             t_guestbook g
         WHERE
             g.del_status = #{delStatus}
+        <if test="type != null">
+            AND
+            g.type = #{type}
+        </if>
         ORDER BY
             g.create_time ASC
+    </select>
+
+    <select id="getByGuestbookId"  parameterType="java.lang.Integer" resultMap="GuestbookMap">
+        SELECT
+            g.id,
+            g.nickname,
+            g.email,
+            g.img_url,
+            g.content,
+            g.guestbook_id,
+            g.type,
+            g.ip,
+            g.ip_addr,
+            g.create_time
+        FROM
+            t_guestbook g
+        WHERE
+            g.guestbook_id = #{guestbookId}
+        AND
+            g.del_status = 0
+    </select>
+
+    <select id="getTotalCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT count(*) FROM t_guestbook WHERE del_status = #{delStatus}
+    </select>
+
+    <select id="getByNickname" parameterType="java.lang.String" resultType="com.extlight.model.Guestbook">
+        SELECT
+            g.id,
+            g.nickname,
+            g.email,
+            g.img_url,
+            g.content,
+            g.guestbook_id,
+            g.type,
+            g.ip,
+            g.ip_addr,
+            g.create_time
+        FROM
+            t_guestbook g
+        WHERE
+            g.nickname = #{nickname}
     </select>
 </mapper>

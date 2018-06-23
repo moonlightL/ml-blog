@@ -11,29 +11,28 @@ var guestbook = {
     bindClick: function () {
         // 打开留言框
         $("#guestbookBtn").on("click",function () {
-            layer.open({
-                title: "留言",
-                type: 1,
-                area: ['680px', '300px'],
-                resize: false,
-                zIndex: 2,
-                content: guestbook.createUI(),
-                cancel: function(index, layero){
-                    $("#respond").hide();
-                    layer.close(index);
-                    return true;
-                }
-            });
+            guestbook.createUI("");
         });
+
+        $(".replyBtn").on("click",function () {
+            var guestbookId = $(this).data("guestbookid");
+            guestbook.createUI(guestbookId);
+        });
+
+        $(".showbtn").on("click",function () {
+            $("#replylist_"+$(this).data("id")).fadeToggle("fast","linear");
+        });
+
     },
-    createUI: function () {
+    createUI: function (guestbookId) {
         guestbook.imgUrl = "/portal/images/guestbook_" + (Math.floor(Math.random() * 5) + 1) + ".jpg";
         var html = "<div id='respond' class='comment-respond'>"+
             "<form id='guestbookForm' class='clearfix'>"+
             "<div class='clearfix'></div>"+
             "<div class='author-info'>"+
+            "<input type='hidden' name='guestbookId' id='guestbookId' value='"+guestbookId+"'/>"+
             "<input type='text' name='nickname' id='nickname' placeholder='* 昵  称 : ' value='' tabindex='1' title='Name (required)'/>"+
-            "<input type='text' name='email' id='email' placeholder='邮  箱 : ' value='' tabindex='2' title='E-mail(will not be published)'/>"+
+            "<input type='text' name='email' id='email' placeholder='* 邮  箱 : ' value='' tabindex='2' title='E-mail(will not be published)'/>"+
             "<input type='text' name='homeUrl' id='url' placeholder='主  页 : ' value='' tabindex='3' title='Website'/>"+
             "</div>"+
             "<div class='clearfix'></div>"+
@@ -45,12 +44,25 @@ var guestbook = {
             "</p>"+
             "</div>"+
             "<div style='padding-top: 70px;'>"+
-            "<span id='c1' style='display: inline-block;padding-left: 65px;'><input type='text' placeholder='* 验证码' id='captcha'> &nbsp;<img src='/admin/captcha.do' onclick='guestbook.changeCapche(this)' style='cursor:pointer' /></span>"+
+            "<span id='c1' style='display: inline-block;padding-left: 65px;'><input type='text' placeholder='* 验证码' id='captcha'> &nbsp;<img src='/admin/captcha.do' id='captchaImg' onclick='guestbook.changeCapche(this)' style='cursor:pointer' /></span>"+
             "<input type='button' class='button' id='submit' tabindex='5' value='发送' onclick='guestbook.submitClick()'/>"+
             "</div>"+
             "</form>"+
             "</div>";
-        return html;
+
+        layer.open({
+            title: "留言",
+            type: 1,
+            area: ['680px', '300px'],
+            resize: false,
+            zIndex: 2,
+            content: html,
+            cancel: function(index, layero){
+                $("#respond").hide();
+                layer.close(index);
+                return true;
+            }
+        });
     },
     submitClick: function () {
         var nickname = $("#nickname").val();
@@ -76,12 +88,15 @@ var guestbook = {
             return;
         }
 
+        var guestbookId = $("#guestbookForm").find("input[type='hidden']").val();
+
         var parameter = {
             "nickname": guestbook.checkSafe(nickname),
             "content": guestbook.checkSafe(content),
             "email": guestbook.checkSafe($("#email").val()),
             "homeUrl": guestbook.checkSafe($("#homeUrl").val()),
             "captcha": captcha,
+            "guestbookId": guestbookId || null,
             "imgUrl": guestbook.imgUrl
         };
 
@@ -90,6 +105,9 @@ var guestbook = {
             layer.close(index);
             if (resp.code == 200) {
                 window.location.reload(true);
+            }else if(resp.code == 400) {
+                sweetAlert("留言失败", resp.msg,"error");
+                guestbook.changeCapche($("#captchaImg").get(0));
             } else {
                 swal({
                     title: "留言失败",

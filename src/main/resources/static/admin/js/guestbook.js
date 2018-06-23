@@ -3,11 +3,36 @@ $(function () {
 });
 
 var guestbookManager = {
+    delStatus : 0,
     init: function () {
         guestbookManager.getList();
+
+        $("#replyBtn").on("click",function () {
+            var parameter = {
+                "content": $("#replyContent").val(),
+                "guestbookId": $("#id").val(),
+                "imgUrl": "/portal/images/guestbook_author.jpg"
+            }
+            var index = layer.load(1);
+            $.post("/admin/guestbook/save",parameter,function (resp) {
+                layer.close(index);
+                if (resp.code == 200) {
+                    $("#replyUI").modal("hide");
+                    swal("保存成功", "","success");
+                    guestbookManager.getList();
+                } else {
+                    swal("保存失败", resp.msg,"error");
+                }
+            },"json");
+        });
+
+        $(".delStatus").on("click",function () {
+            guestbookManager.delStatus = $(this).val();
+            guestbookManager.getList(1);
+        });
     },
     getList: function (pageNum) {
-        $.getJSON("/admin/guestbook/list/"+(pageNum || 1),function (resp) {
+        $.getJSON("/admin/guestbook/list/"+(pageNum || 1) + "/" + guestbookManager.delStatus,function (resp) {
 
             if (resp.code == 200) {
                 var pageInfo = resp.data;
@@ -17,15 +42,15 @@ var guestbookManager = {
                         var guestbook = pageInfo.list[i];
                         htmlArr.push("<tr>");
                         htmlArr.push("<td>"+(i+1)+"</td>");
-                        htmlArr.push("<td>"+guestbook.nickname+"</td>");
+                        htmlArr.push("<td><a href='/guestbook/#"+guestbook.nickname+"' target='_blank'>"+guestbook.nickname+"</a></td>");
                         htmlArr.push("<td>"+(guestbook.email || '')+"</td>");
-                        htmlArr.push("<td>"+(guestbook.homeUrl || '')+"</td>");
                         htmlArr.push("<td><img src='"+guestbook.imgUrl+"' alt='' width='32' height='32'></td>");
-                        htmlArr.push("<td>"+guestbook.content+"</td>");
-                        htmlArr.push("<td>"+guestbook.ip+"</td>");
-                        htmlArr.push("<td>"+guestbook.ipAddr+"</td>");
-                        htmlArr.push("<td>"+(guestbook.delStatus == 1 ? '是': '否')+"</td>");
-                        htmlArr.push("<td class='actions'><button type='button' class='btn btn-danger waves-effect m-b-5 delete' data-id='"+guestbook.id+"'>删除</button></td>");
+                        htmlArr.push("<td style='white-space: nowrap;text-overflow: ellipsis;overflow: hidden;'><p style='width: 400px;'>"+guestbook.content+"</p></td>");
+                        htmlArr.push("<td>"+(guestbook.type == 1 ? '留言' : '回复')+"</td>");
+                        htmlArr.push("<td><a title='"+guestbook.ip+"'>"+guestbook.ipAddr+"</a></td>");
+                        htmlArr.push("<td>"+guestbook.createTime+"</td>")
+                        htmlArr.push("<td class='actions'><button type='button' class='btn btn-info waves-effect m-b-5 reply' data-id='"+guestbook.id+"'>回复</button>");
+                        htmlArr.push(" <button type='button' class='btn btn-danger waves-effect m-b-5 delete' data-id='"+guestbook.id+"'>删除</button></td>");
                         htmlArr.push("</tr>");
                     }
                     $("#guestbookTable").find("tbody").html(htmlArr.join(""));
@@ -66,6 +91,24 @@ var guestbookManager = {
         });
     },
     bindClick: function () {
+
+        $(".reply").on("click",function () {
+            var id = $(this).data("id");
+            $.getJSON("/admin/guestbook/get/"+id,function (resp) {
+                if (resp.code == 200) {
+
+                    for(var key in resp.data) {
+                        $("#" + key).val(resp.data[key]);
+                    }
+
+                    $("#replyUI").modal("show");
+
+                } else {
+                    swal("查询失败", resp.msg,"error");
+                }
+            });
+        });
+
         $(".delete").on("click",function () {
             var that = this;
             swal({

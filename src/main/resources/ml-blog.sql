@@ -64,6 +64,8 @@ CREATE TABLE IF NOT EXISTS `t_guestbook` (
   `ip_addr` varchar(50) NOT NULL COMMENT 'IP 归属地',
   `status` tinyint(4) NOT NULL COMMENT '读取状态 0:未读 1:已读',
   `del_status` tinyint(4) NOT NULL COMMENT '删除状态 0：未删除 1：删除 ',
+  `type` TINYINT(4) NOT NULL COMMENT '留言类型 1:留言 2:回复',
+  `guestbook_id` INT(11) NULL DEFAULT NULL COMMENT '被回复者ID',
   `create_time` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

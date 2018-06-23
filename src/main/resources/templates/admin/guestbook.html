@@ -34,19 +34,25 @@
         <div class="row  animated fadeIn">
             <div class="panel panel-default m-t-20">
                 <div class="panel-body">
+                    <div class="row">
+                        <div class="btn-group m-b-10">
+                            <button type="button" class="btn btn-default waves-effect delStatus" value="0">正常状态</button>
+                            <button type="button" class="btn btn-danger waves-effect delStatus" value="1">删除状态</button>
+                        </div>
+                    </div>
+                    <br>
                     <div class="table-responsive">
-                        <table class="table table-hover mails" id="guestbookTable">
+                        <table style="table-layout: fixed;" class="table table-hover mails" id="guestbookTable">
                             <thead>
                             <tr>
-                                <th>#</th>
-                                <th>昵称</th>
-                                <th>邮箱</th>
-                                <th>主页</th>
-                                <th>图片</th>
+                                <th width="50px">#</th>
+                                <th width="100px">昵称</th>
+                                <th width="200px">邮箱</th>
+                                <th width="50px">图片</th>
                                 <th>内容</th>
-                                <th>IP</th>
-                                <th>归属地</th>
-                                <th>删除状态</th>
+                                <th width="100px">留言类型</th>
+                                <th width="100px">归属地</th>
+                                <th>留言日期</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -61,12 +67,55 @@
                 </div> <!-- panel body -->
             </div> <!-- panel -->
         </div>
-
+        <div id="replyUI" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">回复界面</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form" id="replyForm">
+                            <input type="hidden" id="id" name="id">
+                            <div class="form-group">
+                                <label for="nickname" class="col-sm-3 control-label">昵称</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="nickname" name="nickname" readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="col-sm-3 control-label">邮箱地址</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="email" name="email" readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="content" class="col-sm-3 control-label">留言</label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control"  style='resize:none' rows='3' cols='80' name='content' id='content' tabindex='4' readonly="readonly"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="replyContent" class="col-sm-3 control-label">回复</label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control"  style='resize:none' rows='3' cols='80' name='replyContent' id='replyContent' tabindex='4'></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary waves-effect waves-light" id="replyBtn">回复</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
     </div>
     <script th:src="@{/admin/assets/js/jquery.min.js}"></script>
     <script th:src="@{/admin/assets/js/bootstrap.min.js}"></script>
     <script th:src="@{/admin/assets/plugins/waves/waves.min.js}"></script>
     <script th:src="@{/admin/assets/plugins/sweetalert/dist/sweetalert.min.js}"></script>
+    <script th:src='@{/portal/js/layer/layer.js}'></script>
     <script th:src="@{/admin/js/util.js}"></script>
     <script th:src="@{/admin/js/guestbook.js}"></script>
 </body>

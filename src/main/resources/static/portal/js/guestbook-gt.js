@@ -12,22 +12,20 @@ var guestbook = {
         // 打开留言框
         $("#guestbookBtn").on("click",function () {
 
-            layer.open({
-                title: "留言",
-                type: 1,
-                area: ['680px', '300px'],
-                resize: false,
-                zIndex: 2,
-                content: guestbook.createUI(),
-                cancel: function(index, layero){
-                    $("#respond").hide();
-                    layer.close(index);
-                    return true;
-                }
-            });
-
+            guestbook.createUI("");
             // 获取验证码
             guestbook.getCapcha();
+        });
+
+        $(".replyBtn").on("click",function () {
+            var guestbookId = $(this).data("guestbookid");
+            guestbook.createUI(guestbookId);
+            // 获取验证码
+            guestbook.getCapcha();
+        });
+
+        $(".showbtn").on("click",function () {
+            $("#replylist_"+$(this).data("id")).fadeToggle("fast","linear");
         });
     },
     getCapcha: function () {
@@ -36,7 +34,6 @@ var guestbook = {
             type: "get",
             dataType: "json",
             success: function (resp) {
-                console.log(resp);
                 initGeetest({
                     gt: resp.data.gt,
                     challenge: resp.data.challenge,
@@ -55,14 +52,15 @@ var guestbook = {
             }
         });
     },
-    createUI: function () {
+    createUI: function (guestbookId) {
         guestbook.imgUrl = "/portal/images/guestbook_" + (Math.floor(Math.random() * 5) + 1) + ".jpg";
         var html = "<div id='respond' class='comment-respond'>"+
             "<form id='guestbookForm' class='clearfix'>"+
             "<div class='clearfix'></div>"+
             "<div class='author-info'>"+
+            "<input type='hidden' name='guestbookId' id='guestbookId' value='"+guestbookId+"'/>"+
             "<input type='text' name='nickname' id='nickname' placeholder='* 昵  称 : ' value='' tabindex='1' title='Name (required)'/>"+
-            "<input type='text' name='email' id='email' placeholder='邮  箱 : ' value='' tabindex='2' title='E-mail(will not be published)'/>"+
+            "<input type='text' name='email' id='email' placeholder='* 邮  箱 : ' value='' tabindex='2' title='E-mail(will not be published)'/>"+
             "<input type='text' name='homeUrl' id='url' placeholder='主  页 : ' value='' tabindex='3' title='Website'/>"+
             "</div>"+
             "<div class='clearfix'></div>"+
@@ -79,7 +77,20 @@ var guestbook = {
             "</div>"+
             "</form>"+
             "</div>";
-        return html;
+
+        layer.open({
+            title: "留言",
+            type: 1,
+            area: ['680px', '300px'],
+            resize: false,
+            zIndex: 2,
+            content: html,
+            cancel: function(index, layero){
+                $("#respond").hide();
+                layer.close(index);
+                return true;
+            }
+        });
     },
     submitClick: function () {
         var nickname = $("#nickname").val();
@@ -105,15 +116,15 @@ var guestbook = {
         }
 
         var paramArr = $("#guestbookForm").serializeArray();
-
         var parameter = {
             "nickname": guestbook.checkSafe(nickname),
             "content": guestbook.checkSafe(content),
             "email": guestbook.checkSafe($("#email").val()),
             "homeUrl": guestbook.checkSafe($("#homeUrl").val()),
-            "geetest_challenge": paramArr[4].value,
-            "geetest_validate": paramArr[5].value,
-            "geetest_seccode": paramArr[6].value,
+            "guestbookId": paramArr[0].value || "",
+            "geetest_challenge": paramArr[5].value,
+            "geetest_validate": paramArr[6].value,
+            "geetest_seccode": paramArr[7].value,
             "imgUrl": guestbook.imgUrl
         };
 
@@ -122,6 +133,9 @@ var guestbook = {
             layer.close(index);
             if (resp.code == 200) {
                 window.location.reload(true);
+            } else if(resp.code == 400) {
+                sweetAlert("留言失败", resp.msg,"error");
+                guestbook.captchaObj.reset();
             } else {
                 swal({
                     title: "留言失败",

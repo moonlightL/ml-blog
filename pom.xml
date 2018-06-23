@@ -55,6 +55,11 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
@@ -267,7 +272,7 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
-					<url>http://www.extlight.com/manager/text</url>
+					<url>https://www.extlight.com/manager/text</url>
 					<server>tomcat8</server>
 					<update>true</update>
 					<path>/ROOT</path>

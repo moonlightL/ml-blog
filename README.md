@@ -66,7 +66,7 @@ ml-blog 是基于 Spring Boot + Mybatis + Mysql 开发的一套开源博客系�
 
 # 安装
 
-下载源码，执行 resources 目录下的 ml-blog.sql 文件，然后修改 application.properties 中连接数据库的用户名、密码以及 lucene 索引生成路径，运行项目即可。
+下载源码，执行 resources 目录下的 ml-blog.sql 文件，然后修改 application.properties 中连接数据库的用户名、密码、 lucene 索引生成路径和邮件配置，运行项目即可。
 
 前端访问地址: <http://localhost:8080>
 
@@ -81,3 +81,5 @@ ml-blog 是基于 Spring Boot + Mybatis + Mysql 开发的一套开源博客系�
 2018-06-14 添加文章自定义背景图片入口
 
 2018-06-15 添加百度链接提交（主动推送和自动推送）
+
+2018-06-23 添加留言回复以及回复发送邮件通知功能（t_guestbook 表新增 type 和 guestbook_id 字段）

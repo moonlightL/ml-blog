@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div th:fragment="reply(replyList,nickname,id)" style="display: none" th:id="'replylist_'+${id}">
+        <div class="comment_body contents replylist" style="margin-left: 20px;margin-bottom: 10px; padding-left: 10px; " th:each="reply : ${replyList}">
+            <div class="profile">
+                <a href="javascript:void(0)"><img th:src="${reply.imgUrl}" class="gravatar" th:alt="${reply.nickname}"></a>
+            </div>
+            <div class="main shadow" style="border-bottom: 1px solid #eee">
+                <div class="commentinfo">
+                    <section class="commeta">
+                        <div class="shang">
+                            <h4 class="author"><a th:href="'#' +${reply.nickname}" th:id="${reply.nickname}"><img th:src="${reply.imgUrl}" class="gravatarsmall" th:alt="${reply.nickname}">[[${reply.nickname}]]</a> : @[[${nickname}]]</h4>
+                        </div>
+                    </section>
+                </div>
+                <div class="body">
+                    <p style="padding: 10px 5px;">[[${reply.content}]]</p>
+                </div>
+                <div class="xia info">
+                    <span><time >[[${#dates.format(reply.createTime, 'yyyy年MM月dd日 HH:mm:ss')}]]</time></span>
+                    <span><a rel='nofollow' th:data-guestbookid="${reply.id}" class='comment-reply-link replyBtn' href='javascript:void(0)' aria-label='回复'>回复([[${#lists.size(reply.replyList)}]])</a> <a th:if="${#lists.size(reply.replyList) > 0}" href="javascript:void(0)" th:data-id="${reply.id}" style="cursor: pointer;color: #A1A1A1" class="showbtn">折叠回复</a></span>
+                </div>
+            </div>
+            <div th:unless="${#lists.isEmpty(${reply.replyList})}" th:replace="this :: reply(${reply.replyList},${reply.nickname},${reply.id})"></div>
+        </div>
+    </div>
+</body>
+</html>
