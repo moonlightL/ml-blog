@@ -6976,7 +6976,7 @@ article p {
 	border-radius: 3px;
 }
 .editormd-preview-container pre code, .editormd-html-preview pre code {
-	padding: 12px;
+	padding: 6px;
 }
 .editormd-preview-container pre, .editormd-preview-container code, .editormd-preview-container kbd, .editormd-html-preview pre, .editormd-html-preview code, .editormd-html-preview kbd {
 	font-family: "Microsoft YaHei";
@@ -7005,4 +7005,28 @@ article p {
 .editormd-preview-container .sequence-diagram text, .editormd-preview-container .flowchart text, .editormd-html-preview .sequence-diagram text, .editormd-html-preview .flowchart text {
 	font-size: 15px !important;
 	font-family: "YaHei Consolas Hybrid", Consolas, "Microsoft YaHei", "Malgun Gothic", "Segoe UI", Helvetica, Arial !important;
+}
+
+.hljs {
+	border: 0;
+	font-size: 12px;
+	display: block;
+	padding: 1px;
+	margin: 0;
+	width: 100%;
+	white-space: pre-wrap
+}
+.hljs ul {
+	list-style: decimal;
+	margin: 0px 0px 0 40px !important;
+	padding: 0px;
+}
+.hljs ul li {
+	list-style: decimal-leading-zero;
+	border-left: 1px solid #ddd !important;
+	padding: 5px!important;
+	margin: 0 !important;
+	line-height: 14px;
+	word-break: break-all;
+	word-wrap: break-word;
 }
