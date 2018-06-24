@@ -7026,7 +7026,5 @@ article p {
 	border-left: 1px solid #ddd !important;
 	padding: 5px!important;
 	margin: 0 !important;
-	line-height: 14px;
-	word-break: break-all;
-	word-wrap: break-word;
+	white-space: pre;
 }
