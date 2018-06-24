@@ -6323,7 +6323,7 @@ screen and (max-height:300px) {
 }
 ol {
 	font-size:0;
-	list-style-type: decimal!important;
+	list-style-type: decimal-leading-zero!important;
 }
 ol li {
 	font-size:14px;
@@ -7016,12 +7016,12 @@ article p {
 	width: 100%;
 	white-space: pre-wrap
 }
-.hljs ul {
+.hljs ol {
 	list-style: decimal;
 	margin: 0px 0px 0 40px !important;
 	padding: 0px;
 }
-.hljs ul li {
+.hljs ol li {
 	list-style: decimal-leading-zero;
 	border-left: 1px solid #ddd !important;
 	padding: 5px!important;

@@ -2,6 +2,7 @@ package com.extlight.common.utils;
 
 import org.commonmark.Extension;
 import org.commonmark.ext.gfm.tables.TablesExtension;
+import org.commonmark.node.FencedCodeBlock;
 import org.commonmark.node.Image;
 import org.commonmark.node.ListItem;
 import org.commonmark.node.Node;
@@ -9,6 +10,7 @@ import org.commonmark.parser.Parser;
 import org.commonmark.renderer.NodeRenderer;
 import org.commonmark.renderer.html.HtmlRenderer;
 import org.commonmark.renderer.html.HtmlWriter;
+import org.springframework.util.StringUtils;
 
 import java.util.*;
 
@@ -17,8 +19,7 @@ public abstract class MarkdownUtil {
     public static List<Extension> extensions = Arrays.asList(TablesExtension.create());
     private static final Parser parser = Parser.builder().extensions(extensions).build();
     private static final HtmlRenderer renderer = HtmlRenderer.builder().extensions(extensions)
-           // 以下代码会影响前端代码高亮效果，故将其注释掉
-          /*  .nodeRendererFactory(context -> new NodeRenderer() {
+            .nodeRendererFactory(context -> new NodeRenderer() {
 
                 @Override
                 public Set<Class<? extends Node>> getNodeTypes() {
@@ -30,15 +31,19 @@ public abstract class MarkdownUtil {
 
                     HtmlWriter html = context.getWriter();
                     FencedCodeBlock codeBlock = (FencedCodeBlock) node;
+                    Map<String,String> attrs = new HashMap<>();
+                    if (!StringUtils.isEmpty(codeBlock.getInfo())) {
+                        attrs.put("class","language-" + codeBlock.getInfo());
+                    }
                     html.line();
                     html.tag("pre");
-                    html.tag("code");
+                    html.tag("code",attrs);
                     html.tag("ol");
                     String data = codeBlock.getLiteral();
                     String[] split = data.split("\n");
                     for (String s : split) {
                         html.tag("li");
-                        html.text(s);
+                        html.text(s + "\n");
                         html.tag("/li");
                     }
                     html.tag("/ol");
@@ -47,7 +52,7 @@ public abstract class MarkdownUtil {
                     html.line();
 
                 }
-            })*/.nodeRendererFactory(context -> new NodeRenderer() {
+            }).nodeRendererFactory(context -> new NodeRenderer() {
                 @Override
                 public Set<Class<? extends Node>> getNodeTypes() {
                     return Collections.singleton(Image.class);
