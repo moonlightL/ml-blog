@@ -4293,6 +4293,10 @@ nav#comments-navi {
 	font-style: normal
 }
 
+.archives a:hover{
+	color: #8d9cac;
+}
+
 .time {
 	color: #888;
 	padding-right: 35px

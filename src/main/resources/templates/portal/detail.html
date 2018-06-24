@@ -8,28 +8,27 @@
 		<title th:text="${post.title}">个人博客</title>
 		<meta name="description" th:content="${#servletContext.getAttribute('paramMap')['description']}" />
 		<meta name="keywords" th:content="${post.keyword}" />
-		<link th:href="@{/portal/js/highlight/styles/tomorrow.css}" rel="stylesheet" type="text/css">
+		<link th:href="@{/portal/js/highlight/styles/github.css}" rel="stylesheet" type="text/css">
 		<link th:href="@{/portal/js/toTop/toTop.css}" rel="stylesheet" type="text/css">
-		<link th:href="@{/admin/assets/plugins/editormd/css/editormd.css}" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" type="text/css" th:href="@{/portal/css/detail.css}" />
 		<link th:href="@{/portal/js/autoMenu/jquery.autoMenu.css}" rel="stylesheet" type="text/css">
 	</head>
 
 	<body class="home blog custom-background round-avatars" itemscope itemtype="http://schema.org/Organization">
 		<div id="main" class="content" layout:fragment="content">
-			<div class="container">
-				<article id="post-1202" class="js-gallery post-1202 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized tag-11 tag-22 tag-29">
+			<div class="container" style="margin: 0 auto;width: 100%;">
+				<article id="post-1202" class="post detail-boby editormd-preview-container js-gallery post-1202 type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized tag-11 tag-22 tag-29">
 					<section class="post_content">
-						<header class="post_header" th:style="'text-align:center'">
+						<header class="post_header">
 							<h1 class="post_title">[[${post.title}]]</h1>
 							<span th:id="${'/' + post.postUrl}" th:data-flag-title="${post.title}" class="leancloud_visitors" style="color:#6b6969">
 								<i class="fa fa-calendar-o"></i> 发表于 [[${#dates.format(post.publishDate,'yyyy-MM-dd')}]] &nbsp;
 								|&nbsp; <i class="fa fa-folder-o"></i> 分类于 [[${post.categoryName}]] <span th:if="${#strings.isEmpty(#servletContext.getAttribute('paramMap')['leancloud_app_id']) eq false}">&nbsp;
-								|&nbsp; <i class="fa fa-eye"></i> 阅读数: <span class="leancloud-visitors-count"></span></span>
-								|&nbsp; <i class="fa fa-commenting-o"></i> 评论数: <a th:href="${post.postUrl + '#SOHUCS'}"><span id="changyan_count_unit"></span></a>
+								|&nbsp; <i class="fa fa-eye"></i> 阅读数: <span class="leancloud-visitors-count"></span></span>&nbsp;
+								|&nbsp; <i class="fa fa-commenting-o"></i> 评论数: <a th:href="${post.postUrl + '#SOHUCS'}"><span id="changyan_count_unit" style="color: #6b6969"></span></a>
 							</span>
 						</header>
-						<div class="markdown-body editormd-preview-container" th:utext="${md.md2html(post.content)}" style="background: #fafafa"></div>
+						<div class="" th:utext="${md.md2html(post.content)}" ></div>
 						<ul class="copyright-declare">
 							<li>
 								<strong>本文作者:</strong> [[${#servletContext.getAttribute('paramMap')['author']}]]

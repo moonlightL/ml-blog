@@ -63,7 +63,7 @@ a:focus{outline:none;}
 	width: 26px;
 	height: 26px;
 	border-radius: 50%;
-	border:4px solid #91ba61;
+	border:1px solid #91ba61;
 	background: #91ba61;
 	position: absolute;
 	top:3px;
@@ -88,7 +88,7 @@ a:focus{outline:none;}
 	width: 26px;
 	height: 26px;
 	border-radius: 50%;
-	border:4px solid #ff5370;
+	border:1px solid #ff5370;
 	background: #ff5370;
 	position: absolute;
 	top:3px;
