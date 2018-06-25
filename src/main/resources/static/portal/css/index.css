@@ -2347,7 +2347,7 @@ h2.archive-title span:after {
 	display: block;
 	text-align: center;
 	/*width: 800px;*/
-	margin: 0 auto
+	margin: 10px auto;
 }
 
 .pagination i {
@@ -2375,7 +2375,7 @@ h2.archive-title span:after {
 }
 
 .pagination a {
-	margin: 0px 5px;
+	margin: 10px 5px;
 	min-width: 30px;
 	height: 30px;
 	line-height: 30px;
@@ -2398,7 +2398,8 @@ h2.archive-title span:after {
 	line-height: 30px;
 	text-align: center;
 	color: #fff;
-	font-size: 15px
+	font-size: 15px;
+	box-shadow: 1px 1px 25px 1px #8d9cac;
 }
 
 .black {
@@ -2849,7 +2850,7 @@ section.right .bub {
 }
 
 .comments-main {
-	max-width: 800px;
+	max-width: 818px;
 	margin: 0 auto;
 }
 
@@ -4281,7 +4282,7 @@ nav#comments-navi {
 }
 
 .archive-title {
-	padding-bottom: 40px
+	padding-bottom: 40px;
 }
 
 .archives a {
@@ -6162,7 +6163,7 @@ a,
 .comment h4 a:hover,
 .comment .comment-reply-link:hover,
 .welcome span:hover {
-	color: #d3dae2;
+	color: #8d9cac;
 }
 
 .color {
@@ -6347,9 +6348,48 @@ input[type=button] {
 	border-radius: 4px;
 	font-size: 16px;
 	cursor: pointer;
+	box-shadow: 1px 1px 25px 1px #b7c6d7;
 }
 
 input[type=button]:hover {
 	background: #8d9cac;
 	color: #fff;
+}
+
+.post-list {
+	padding: 0 50px;
+}
+
+.post-list::before {
+	content: "";
+	width: 20px;
+	height: 20px;
+	border: 5px solid #fff;
+	border-radius: 50%;
+	background: #EEE;
+	position: absolute;
+	left: 16px;
+}
+
+.post-list::after {
+	content: "";
+	width: 13px;
+	height: 13px;
+	border-radius: 50%;
+	background: #EEE;
+	position: absolute;
+	left: 20px;
+	bottom: 35px;
+}
+
+.post-list-container::before {
+	position: absolute;
+	left: 25px;
+	top: 90px;
+	bottom: 40px;
+	display: block;
+	width: 2px;
+	background: #cecece;
+	content: "";
+	z-index: 0;
 }

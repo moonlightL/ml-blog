@@ -7024,7 +7024,7 @@ article p {
 .hljs ol li {
 	list-style: decimal-leading-zero;
 	border-left: 1px solid #ddd !important;
-	padding: 5px!important;
+	padding: 3px 10px !important;
 	margin: 0 !important;
 	white-space: pre;
 }

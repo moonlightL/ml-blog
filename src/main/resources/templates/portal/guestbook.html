@@ -72,7 +72,7 @@
                         </li>
                         <li th:if="${pageInfo.size == 0}" th:style="'text-align:center;'" th:text="'~~暂无数据，抢先留言吧~~'"></li>
                     </ul>
-                    <div class="pagination" th:if="${pageInfo.size > 0}">
+                    <nav class="pagination" th:if="${pageInfo.size > 0}">
                         <span th:if="${pageInfo.hasPreviousPage}">
 							<a class="prev page-numbers" th:href="@{${pageInfo.pageNum-1} == 1? '/guestbook/' : '/guestbook/page/' + ${pageInfo.pageNum-1}+'/'}" ><strong>←</strong></a>
 						</span>
@@ -87,7 +87,7 @@
                         <span th:if="${pageInfo.hasNextPage}">
 							<a class="next page-numbers" th:href="@{'/guestbook/page/' + ${pageInfo.pageNum+1}+'/'}" ><strong>→</strong></a>
 						</span>
-                    </div>
+                    </nav>
                 </div>
             </section>
         </div>

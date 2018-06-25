@@ -68,17 +68,18 @@ a:focus{outline:none;}
 	position: absolute;
 	top:3px;
 	left:3px;
+	box-shadow: 1px 1px 40px 1px #b7c6d7;
 }
 .icon-plus-sign:before,.icon-plus-sign:after{
 	content: '';
 	display: inline-block;
-	width: 3px;
-	height: 20px;
+	width: 2px;
+	height: 15px;
 	background: #fff;
 	border-radius: 1px;
 	position: absolute;
-	top:3px;
-	left:11.5px;
+	top: 5px;
+	left: 11px;
 }
 .icon-plus-sign:after{
 	-webkit-transform:rotate(90deg);
@@ -93,15 +94,16 @@ a:focus{outline:none;}
 	position: absolute;
 	top:3px;
 	left:3px;
+	box-shadow: 1px 1px 40px 1px #b7c6d7;
 }
 .icon-minus-sign:before{
 	content: '';
 	display: inline-block;
-	width: 20px;
-	height: 3px;
+	width: 15px;
+	height: 2px;
 	background: #fff;
 	border-radius: 1px;
 	position: absolute;
-	left:3px;
-	top:11.5px;
+	left: 5px;
+	top: 11px;
 }
