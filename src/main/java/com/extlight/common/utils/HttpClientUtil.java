@@ -52,7 +52,6 @@ public class HttpClientUtil {
                     synchronized (this) {
                         wait(5000);
                         // 关闭失效的连接
-                        System.out.println("======");
                         connMgr.closeExpiredConnections();
                     }
                 }

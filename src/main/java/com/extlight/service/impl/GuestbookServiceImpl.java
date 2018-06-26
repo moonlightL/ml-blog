@@ -9,9 +9,8 @@ import com.extlight.service.GuestbookService;
 import com.extlight.web.exception.GlobalException;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.util.StringUtil;
 
 import java.util.List;
@@ -68,7 +67,7 @@ public class GuestbookServiceImpl extends BaseServiceImpl<Guestbook> implements 
         Guestbook gb = this.guestbookMapper.selectByPrimaryKey(guestbook.getGuestbookId());
         if (gb != null && !StringUtil.isEmpty(gb.getEmail())) {
             try {
-                this.mailService.sendEmail(guestbook.getNickname(),gb.getEmail(),guestbook.getNickname() + "的留言回复【"+commonMap.get("blogName").toString()+"】",guestbook.getContent());
+                this.mailService.sendEmail(gb.getEmail(),guestbook.getNickname() + "的留言回复【"+commonMap.get("blogName").toString()+"】",guestbook.getContent());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -90,7 +89,9 @@ public class GuestbookServiceImpl extends BaseServiceImpl<Guestbook> implements 
 
         // 发送邮件给博主
         try {
-            this.mailService.sendEmail(guestbook.getNickname(),this.commonMap.get("email").toString(),guestbook.getNickname() + "的留言",guestbook.getContent());
+            if (!StringUtils.isEmpty(this.commonMap.get("email"))) {
+                this.mailService.sendEmail(this.commonMap.get("email").toString(),guestbook.getNickname() + "的留言",guestbook.getContent());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -100,7 +101,7 @@ public class GuestbookServiceImpl extends BaseServiceImpl<Guestbook> implements 
             Guestbook gb = this.guestbookMapper.selectByPrimaryKey(guestbook.getGuestbookId());
             if (gb != null && !StringUtil.isEmpty(gb.getEmail())) {
                 try {
-                    this.mailService.sendEmail(guestbook.getNickname(),gb.getEmail(),guestbook.getNickname() + "的留言回复【"+commonMap.get("blogName").toString()+"】",guestbook.getContent());
+                    this.mailService.sendEmail(gb.getEmail(),guestbook.getNickname() + "的留言回复【"+commonMap.get("blogName").toString()+"】",guestbook.getContent());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

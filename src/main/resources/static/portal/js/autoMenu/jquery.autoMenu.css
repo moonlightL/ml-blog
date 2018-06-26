@@ -25,7 +25,7 @@ a:focus{outline:none;}
 /*-------main---------*/
 .autoMenu{
 	position: fixed;
-	bottom: 80px;
+	bottom: 60px;
 	left: 42px;
 	z-index: 3;
 	text-align: left;

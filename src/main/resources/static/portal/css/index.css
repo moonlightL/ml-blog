@@ -2388,6 +2388,7 @@ h2.archive-title span:after {
 	min-width: 30px;
 	height: 30px;
 	line-height: 30px;
+	box-shadow: 1px 1px 25px 1px #8d9cac;
 }
 
 .page-numbers.current {

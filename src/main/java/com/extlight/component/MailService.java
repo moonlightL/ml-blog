@@ -1,5 +1,6 @@
 package com.extlight.component;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -15,6 +16,7 @@ import javax.mail.internet.MimeMessage;
 
 @Component
 @EnableConfigurationProperties(MailProperties.class)
+@Slf4j
 public class MailService {
 
     @Autowired
@@ -22,12 +24,12 @@ public class MailService {
     @Autowired
     private MailProperties mailProperties;
     @Autowired
-    protected TemplateEngine templateEngine;
+    private TemplateEngine templateEngine;
     @Autowired
     private CommonMap commonMap;
 
     @Async
-    public void sendEmail(String nickname,String email,String subject, String content) throws Exception {
+    public void sendEmail(String toEmail,String subject, String content) throws Exception {
         Context con = new Context();
         con.setVariable("content", content);
         String emailtext = templateEngine.process("portal/mail.html", con);
@@ -38,9 +40,11 @@ public class MailService {
         from.setAddress(this.mailProperties.getUsername());
         from.setPersonal(commonMap.get("blogName").toString(), "UTF-8");
         helper.setFrom(from);
-        helper.setTo(email);
+        helper.setTo(toEmail);
         helper.setSubject(subject);
         helper.setText(emailtext, true);
         this.javaMailSender.send(message);
+
+        log.info("发送邮件内容:{}",content);
     }
 }
