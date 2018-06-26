@@ -551,13 +551,13 @@ html {
 }
 
 ::-moz-selection {
-	background: rgba(204, 204, 204, .18);
-	color: #000
+	background-color: #8d9cac;
+	color: #fff;
 }
 
 ::selection {
-	background: rgba(204, 204, 204, .18);
-	color: #000
+	background-color: #8d9cac;
+	color: #fff;
 }
 
 html body {
