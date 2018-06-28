@@ -9,7 +9,6 @@
 		<meta name="description" th:content="${#servletContext.getAttribute('paramMap')['description']}" />
 		<meta name="keywords" th:content="${post.keyword}" />
 		<link th:href="@{/portal/js/highlight/styles/github.css}" rel="stylesheet" type="text/css">
-		<link th:href="@{/portal/js/toTop/toTop.css}" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" type="text/css" th:href="@{/portal/css/detail.css}" />
 		<link th:href="@{/portal/js/autoMenu/jquery.autoMenu.css}" rel="stylesheet" type="text/css">
 		<link th:href="@{/admin/assets/css/animate.css}" rel="stylesheet" type="text/css">
@@ -110,7 +109,6 @@
 					</div>
 				</div>
 			</div>
-			<a href="#0" class="cd-top">返回顶部</a>
 			<script type="text/javascript">
                 window.onscroll = function() { var scrollTop = document.body.scrollTop; if (scrollTop >= 200) { document.getElementById("NextPrevPosts").style.display = "none" } else { document.getElementById("NextPrevPosts").style.display = "block" } }
 			</script>
@@ -118,7 +116,6 @@
 			<script type='text/javascript' th:src="@{/portal/js/highlight/highlight.pack.js}"></script>
 			<script type='text/javascript' th:src="@{/portal/js/highlight.js}"></script>
 			<script type='text/javascript' th:src="@{/portal/js/autoMenu/jquery.autoMenu.js}"></script>
-			<script type='text/javascript' th:src="@{/portal/js/toTop/toTop.js}"></script>
 			<div th:if="${#strings.isEmpty(#servletContext.getAttribute('paramMap')['leancloud_app_id']) eq false}">
 				<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
 				<script th:inline="javascript">

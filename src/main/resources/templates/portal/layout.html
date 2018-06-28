@@ -10,6 +10,7 @@
     <meta name="keywords" th:content="${#servletContext.getAttribute('paramMap')['keywords']}" />
     <link rel="shortcut icon" th:href="@{/portal/images/favicon.ico}">
     <link th:href="@{/portal/css/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet">
+    <link th:href="@{/portal/js/toTop/toTop.css}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" th:href="@{/portal/css/index.css}" media="all" />
 </head>
 
@@ -141,12 +142,14 @@
             <i class="fa fa-eye"></i> 本站总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;次
         </span>
     </div>
-
+    <a href="#0" class="cd-top">返回顶部</a>
     <script type='text/javascript' th:src='@{/portal/js/jquery.min.js}'></script>
     <script type='text/javascript' th:src='@{/portal/js/plugins.js}'></script>
     <script type='text/javascript' th:src='@{/portal/js/script.js}'></script>
     <script type='text/javascript' th:src='@{/portal/js/particles.js}'></script>
     <script type='text/javascript' th:src='@{/portal/js/aos.js}'></script>
+    <script type='text/javascript' th:src='@{/portal/js/jquery.min.js}'></script>
+    <script type='text/javascript' th:src="@{/portal/js/toTop/toTop.js}"></script>
     <script type='text/javascript' th:src='@{/portal/js/baidu-push.js}'></script>
 </footer>
 

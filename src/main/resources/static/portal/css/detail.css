@@ -39,8 +39,7 @@ html {
 body {
 	width: 100%;
 	height: 100%;
-	/*font-family: PingFang SC, "Hiragino Sans GB", "Source Han Sans CN", Roboto, "Microsoft Yahei", sans-serif;*/
-	font-family: 14px/1.6 Monda,PingFang SC,Microsoft YaHei,sans-serif;
+	font-family: 14px/1.6 Play,"Microsoft YaHei";
 	font-weight: 400;
 	font-size: 16px;
 	color: rgba(2, 0, 0, .6);
@@ -653,7 +652,7 @@ textarea {
 
 .search-form input {
 	text-align: center;
-	font-family: PingFang SC, "Hiragino Sans GB", "Source Han Sans CN", Roboto, "Microsoft Yahei", sans-serif;
+	font-family: Play,"Microsoft YaHei";
 	font-size: 24px;
 	font-size: 1.5rem;
 	background: rgba(255, 255, 255, 0.6);
@@ -791,7 +790,7 @@ input[type="search"]::-webkit-search-decoration {
 	position: relative;
 	width: 100%;
 	display: block;
-	z-index: 1;
+	z-index: 2;
 	margin-top: -10px;
 }
 
@@ -1659,7 +1658,7 @@ h1.post_title {
 	height: 155px;
 	margin: 10px 0;
 	max-width: 680px;
-	font-family: Helvetica, Arial, sans-serif !important
+	font-family: Play,"Microsoft YaHei";
 }
 
 .location {
@@ -2440,7 +2439,7 @@ nav#comments-navi {
 }
 
 .comment h4 {
-	font-family: "PingFang SC", "Microsoft YaHei", Arial, Helvetica, "WenQuanYi Micro Hei", "tohoma,sans-serif";
+	font-family: Play,"Microsoft YaHei";
 	font-weight: 400;
 	margin: 0;
 	text-transform: none;
@@ -2489,7 +2488,7 @@ nav#comments-navi {
 }
 
 .comment .children a.name {
-	font-family: "PingFang SC", "Microsoft YaHei", Arial, Helvetica, "WenQuanYi Micro Hei", "tohoma,sans-serif";
+	font-family: Play,"Microsoft YaHei";
 	font-weight: bold;
 	color: #918f90;
 }
@@ -2515,7 +2514,7 @@ nav#comments-navi {
 
 .comment-respond input,
 .comment-respond textarea {
-	font-family: PingFang SC, "Hiragino Sans GB", "Source Han Sans CN", Roboto, "Microsoft Yahei", sans-serif;
+	font-family: Play,"Microsoft YaHei";
 	float: left;
 	font-size: 14px;
 	width: 29%;
@@ -2636,7 +2635,7 @@ nav#comments-navi {
 	border-radius: 3px;
 	background: #FFF;
 	color: #6F6F6F;
-	font-family: microsoft yahei;
+	font-family: Play,"Microsoft YaHei";
 	clear: both
 }
 
@@ -2708,7 +2707,7 @@ nav#comments-navi {
 
 .checkin {
 	display: inline-block;
-	font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif;
+	font-family: Play,"Microsoft YaHei";
 	font-size: 15px;
 	margin: 2% 8% 0;
 	font-weight: bold;
@@ -3759,8 +3758,7 @@ nav#comments-navi {
 
 @media screen and (max-width:760px) {
 	body {
-		/*font-family: -apple-system, BlinkMacSystemFont, opensans, Optima, "Microsoft Yahei", sans-serif;*/
-		font-family: 14px/1.6 Monda,PingFang SC,Microsoft YaHei,sans-serif;
+		font-family: 14px/1.6 Play,"Microsoft YaHei";
 		width: 100%;
 	}
 	.post-body {
@@ -5996,7 +5994,7 @@ button::-moz-focus-inner {
 	color: #FFF;
 	font-style: normal;
 	font-size: 28px;
-	font-family: Arial, Baskerville, monospace
+	font-family: Play,"Microsoft YaHei";
 }
 
 .mfp-close:hover,
@@ -6346,7 +6344,7 @@ ol li {
 
 article p {
 	color: #585454;
-	font-size: 15px;
+	font-size: 16px;
 	/*text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);*/
 }
 .module-hot-topic {
@@ -6359,7 +6357,7 @@ article p {
 	-webkit-text-size-adjust: 100%;
 	color: #333;
 	overflow: hidden;
-	font-family: "Microsoft YaHei", Helvetica, "Meiryo UI", "Malgun Gothic", "Segoe UI", "Trebuchet MS", "Monaco", monospace, Tahoma, STXihei, "华文细黑", STHeiti, "Helvetica Neue", "Droid Sans", "wenquanyi micro hei", FreeSans, Arimo, Arial, SimSun, "宋体", Heiti, "黑体", sans-serif;
+	font-family: Play,"Microsoft YaHei";
 	font-size: 16px;
 	line-height: 1.6;
 	word-wrap: break-word;
@@ -6396,7 +6394,7 @@ article p {
 .detail-boby code,
 .detail-boby kbd,
 .detail-boby pre {
-	font-family: "Meiryo UI", "YaHei Consolas Hybrid", Consolas, "Malgun Gothic", "Segoe UI", "Trebuchet MS", Helvetica, monospace, monospace;
+	font-family: Play,"Microsoft YaHei";
 	font-size: 1em;
 }
 
@@ -6532,14 +6530,14 @@ article p {
 }
 
 .detail-boby code {
-	font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+	font-family: Play,"Microsoft YaHei";
 	font-size: 12px;
 }
 
 .detail-boby pre {
 	margin-top: 0;
 	margin-bottom: 0;
-	font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+	font: 12px Play,"Microsoft YaHei";
 }
 
 .detail-boby .octicon {
@@ -6948,8 +6946,12 @@ article p {
 	border-left: 4px solid #ddd;
 	padding-left: 20px;
 	margin-left: 0;
+	margin-bottom: 20px;
 	font-size: 14px;
-	font-style: italic;
+}
+
+.editormd-preview-container blockquote p, .editormd-html-preview blockquote p {
+	font-size: 18px;
 }
 .editormd-preview-container p code, .editormd-html-preview p code {
 	margin-left: 5px;
@@ -6979,7 +6981,7 @@ article p {
 	padding: 6px;
 }
 .editormd-preview-container pre, .editormd-preview-container code, .editormd-preview-container kbd, .editormd-html-preview pre, .editormd-html-preview code, .editormd-html-preview kbd {
-	font-family: "Microsoft YaHei";
+	font-family: Play,"Microsoft YaHei";
 }
 
 .editormd-preview-container p.editormd-tex, .editormd-html-preview p.editormd-tex {
@@ -7004,7 +7006,7 @@ article p {
 }
 .editormd-preview-container .sequence-diagram text, .editormd-preview-container .flowchart text, .editormd-html-preview .sequence-diagram text, .editormd-html-preview .flowchart text {
 	font-size: 15px !important;
-	font-family: "YaHei Consolas Hybrid", Consolas, "Microsoft YaHei", "Malgun Gothic", "Segoe UI", Helvetica, Arial !important;
+	font-family: Play,"Microsoft YaHei";
 }
 
 .hljs {
@@ -7027,4 +7029,5 @@ article p {
 	padding: 3px 10px !important;
 	margin: 0 !important;
 	white-space: pre;
+	font-size: 16px;
 }

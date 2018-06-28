@@ -1,15 +1,10 @@
 @charset "UTF-8";
-@font-face {
-	font-family: hermiticon;
-	src: url(fonts/hermiticon.eot?cez6o0);
-	src: url(fonts/hermiticon.eot?#iefixcez6o0) format('embedded-opentype'), url(fonts/hermiticon.ttf?cez6o0) format('truetype'), url(fonts/hermiticon.woff?cez6o0) format('woff'), url(fonts/hermiticon.svg?cez6o0#hermiticon) format('svg');
-	font-weight: 400;
-	font-style: normal
-}
+
+@font-face{font-family:'Play';font-style:normal;font-weight:400;src:url('./fonts/Play.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2212,U+2215}
 
 html {
 	text-shadow: .01em .01em .01em #999!important;
-	font-family: "Microsoft YaHei";
+	font-family: Play,"Microsoft YaHei";
 }
 
 .hermit {
@@ -127,7 +122,7 @@ html {
 .hermit-volume {
 	speak: none;
 	cursor: pointer;
-	font-family: hermiticon;
+	font-family: Play,"Microsoft YaHei";
 	text-transform: none;
 	vertical-align: middle;
 	-webkit-font-smoothing: antialiased;
@@ -574,7 +569,7 @@ html {
 body {
 	width: 100%;
 	height: 100%;
-	font-family: PingFang SC, "Hiragino Sans GB", "Source Han Sans CN", Roboto, "Microsoft Yahei", sans-serif;
+	font-family: Play,"Microsoft YaHei";
 	font-weight: 400;
 	font-size: 16px;
 	color: rgba(2, 0, 0, .6);
@@ -1187,7 +1182,7 @@ textarea {
 
 .search-form input {
 	text-align: center;
-	font-family: PingFang SC, "Hiragino Sans GB", "Source Han Sans CN", Roboto, "Microsoft Yahei", sans-serif;
+	font-family: Play,"Microsoft YaHei";
 	font-size: 24px;
 	font-size: 1.5rem;
 	background: rgba(255, 255, 255, 0.6);
@@ -1277,7 +1272,7 @@ input[type="search"]::-webkit-search-decoration {
 #main {
 	background: #fff;
 	position: relative;
-	z-index: 2
+	z-index: 2;
 }
 
 .container {
@@ -1324,7 +1319,7 @@ input[type="search"]::-webkit-search-decoration {
 	position: relative;
 	width: 100%;
 	display: block;
-	z-index: 2
+	z-index: 2;
 }
 
 #footer .container {
@@ -2194,7 +2189,7 @@ h1.post_title {
 	height: 155px;
 	margin: 10px 0;
 	max-width: 680px;
-	font-family: Helvetica, Arial, sans-serif !important
+	font-family: Play,"Microsoft YaHei";
 }
 
 .location {
@@ -2996,7 +2991,7 @@ nav#comments-navi {
 }
 
 .comment h4 {
-	font-family: "PingFang SC", "Microsoft YaHei", Arial, Helvetica, "WenQuanYi Micro Hei", "tohoma,sans-serif";
+	font-family: Play,"Microsoft YaHei";
 	font-weight: 400;
 	margin: 0;
 	text-transform: none;
@@ -3045,7 +3040,7 @@ nav#comments-navi {
 }
 
 .comment .children a.name {
-	font-family: "PingFang SC", "Microsoft YaHei", Arial, Helvetica, "WenQuanYi Micro Hei", "tohoma,sans-serif";
+	font-family: Play,"Microsoft YaHei";
 	font-weight: bold;
 	color: #918f90;
 }
@@ -3071,7 +3066,7 @@ nav#comments-navi {
 
 .comment-respond input,
 .comment-respond textarea {
-	font-family: PingFang SC, "Hiragino Sans GB", "Source Han Sans CN", Roboto, "Microsoft Yahei", sans-serif;
+	font-family: Play,"Microsoft YaHei";
 	float: left;
 	font-size: 14px;
 	width: 27%;
@@ -3193,7 +3188,7 @@ nav#comments-navi {
 	border-radius: 3px;
 	background: #FFF;
 	color: #6F6F6F;
-	font-family: microsoft yahei;
+	font-family: Play,"Microsoft YaHei";
 	clear: both
 }
 
@@ -3266,7 +3261,7 @@ nav#comments-navi {
 
 .checkin {
 	display: inline-block;
-	font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif;
+	font-family: Play,"Microsoft YaHei";
 	font-size: 15px;
 	margin: 2% 8% 0;
 	font-weight: bold;
@@ -4327,7 +4322,7 @@ nav#comments-navi {
 
 @media screen and (max-width:760px) {
 	body {
-		font-family: -apple-system, BlinkMacSystemFont, opensans, Optima, "Microsoft Yahei", sans-serif;
+		font-family: -apple-system, Play,"Microsoft YaHei";
 	}
 	.post-body {
 		font-size: 16px;
