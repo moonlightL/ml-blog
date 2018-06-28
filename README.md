@@ -83,3 +83,5 @@ ml-blog 是基于 Spring Boot + Mybatis + Mysql 开发的一套开源博客系�
 2018-06-15 添加百度链接提交（主动推送和自动推送）
 
 2018-06-23 添加留言回复以及回复发送邮件通知功能（t_guestbook 表新增 type 和 guestbook_id 字段）
+
+2018-06-28 添加数据库 SQL 文件导出功能

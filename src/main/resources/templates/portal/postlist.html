@@ -16,7 +16,7 @@
 			<div class="container">
 				<section class="post_content" itemscope itemtype="http://schema.org/Article">
 					<header class="post_header">
-						<h1 class="post_title">[[${name}]] (<small><a th:href="@{/categories/}">分类</a></small>)</h1>
+						<h1 class="post_title">[[${name}]] (<small><a th:href="@{/categories/}" style="color:#807f83">分类</a></small>)</h1>
 					</header>
 					<div id="archives" class="post-list-container">
 						<div th:if="${#lists.size(pageInfo.list) > 0}" class="post-list">

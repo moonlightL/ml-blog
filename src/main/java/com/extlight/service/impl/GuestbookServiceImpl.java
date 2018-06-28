@@ -45,6 +45,9 @@ public class GuestbookServiceImpl extends BaseServiceImpl<Guestbook> implements 
 
     @Override
     public List<Guestbook> getListPyPage(Integer delStatus,Integer type, Integer pageNum, Integer pageSize) throws GlobalException{
+        if (pageNum < 1) {
+            pageNum = 1;
+        }
         PageHelper.startPage(pageNum,pageSize);
         return this.guestbookMapper.getList(delStatus,type);
     }

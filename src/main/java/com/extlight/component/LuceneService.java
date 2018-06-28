@@ -206,6 +206,10 @@ public class LuceneService {
             Post post;
             ScoreDoc[] scoreDocs = topDocs.scoreDocs;
 
+            if (pageNum < 1) {
+                pageNum = 1;
+            }
+
             if (scoreDocs.length == 0) {
                 return new PageVo(pageNum,pageSize,scoreDocs.length,null);
             }
