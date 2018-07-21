@@ -173,7 +173,7 @@ public class PortalController {
     public String search(String keyword, Model model) throws Exception {
         if (StringUtils.isEmpty(keyword)) {
             model.addAttribute("keyword", keyword);
-            model.addAttribute("pageInfo", null);
+            model.addAttribute("pageInfo", new PageVo(PageConstant.PAGE_NUM, PageConstant.PAGE_SIZE, 0, null));
             return render(model, "portal/search");
         }
         // 从数据库中查询
