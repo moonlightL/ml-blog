@@ -50,8 +50,13 @@ ml-blog 是基于 Spring Boot + Mybatis + Mysql 开发的一套开源博客系�
 
 # 预览效果
 
-前端效果可通过上边的网址进行浏览，下边张贴后台管理的截图：
+## 前端预览图
+![](http://images.extlight.com/portal-01.jpg)
+![](http://images.extlight.com/portal-02.jpg)
+![](http://images.extlight.com/portal-03.jpg)
+![](http://images.extlight.com/portal-04.jpg)
 
+## 后台管理预览图
 ![](http://images.extlight.com/ml-blog-01.jpg)
 
 ![](http://images.extlight.com/ml-blog-02.jpg)
