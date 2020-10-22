@@ -5,6 +5,8 @@ ml-blog 是基于 Spring Boot + Mybatis + Mysql 开发的一套开源博客系�
 [![](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/moonlightL/ml-blog/blob/master/LICENSE)
 ![](https://img.shields.io/badge/language-Java-blue.svg)
 
+**该项目已不再进行维护，最新博客系统请移步至 [Hexo Boot](https://github.com/moonlightL/hexo-boot)**
+
 # 适用对象
 
 * Spring Boot 初学者。该博客系统综合运用了作者发表的 《Spring Boot 入门》 系列的文章提及的知识内容，初学者可以阅读文章以及结合该项目学习。
