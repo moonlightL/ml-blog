@@ -1,3 +1,6 @@
+<h1 align="center">该项目已不再进行维护! :warning:</h1>
+<h1 align="center">最新博客系统请移步至 <a href="https://github.com/moonlightL/hexo-boot">Hexo Boot</a> </h1>
+
 # ml-blog
 
 ml-blog 是基于 Spring Boot + Mybatis + Mysql 开发的一套开源博客系统。作者之前使用 hexo 搭建博客网址，但是没有后台管理界面，管理文章比较麻烦，因此 ml-blog 就诞生了。
@@ -5,7 +8,6 @@ ml-blog 是基于 Spring Boot + Mybatis + Mysql 开发的一套开源博客系�
 [![](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/moonlightL/ml-blog/blob/master/LICENSE)
 ![](https://img.shields.io/badge/language-Java-blue.svg)
 
-**该项目已不再进行维护，最新博客系统请移步至 [Hexo Boot](https://github.com/moonlightL/hexo-boot)**
 
 # 适用对象
 
